@@ -4,7 +4,6 @@ about: 여러 개의 Task를 묶어 하나의 큰 목표나 기능을 관리하�
 title: "[EPIC] "
 labels: ''
 assignees: ''
-type: 'Epic'
 
 ---
 

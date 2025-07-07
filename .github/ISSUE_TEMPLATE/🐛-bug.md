@@ -4,7 +4,6 @@ about: 의도와 다르게 동작하는 오류나 문제를 추적하는 작업 
 title: "[BUG] "
 labels: ''
 assignees: ''
-type: 'Bug'
 
 ---
 
