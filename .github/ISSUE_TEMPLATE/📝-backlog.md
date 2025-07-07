@@ -4,6 +4,7 @@ about: 당장 처리하지 않아도 되는, 우선순위가 낮은 작업이나
 title: "[Backlog] "
 labels: ''
 assignees: ''
+type: 'Backlog'
 
 ---
 
