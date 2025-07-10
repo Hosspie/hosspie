@@ -1,44 +1,78 @@
-name: copy parent properties
+name: copy parent issue properties
 
 on:
   issues:
     types: [opened]
 
 jobs:
-  copy-properties:
+  copy-milestone:
     runs-on: ubuntu-latest
+    permissions:
+      issues: write # 이슈를 업데이트하기 위한 권한 필요
+
     steps:
       - name: Get parent issue number from body
         id: get_parent
         run: |
-          parent=$(echo "${{ github.event.issue.body }}" | grep -oE '#[0-9]+' | head -1 | tr -d '#')
-          echo "parent_number=$parent" >> $GITHUB_OUTPUT
+          # 이슈 본문에서 '#숫자' 형식의 부모 이슈 번호 추출
+          # 예를 들어, "This is a sub-issue for #123" 와 같은 형식에서 #123을 찾음
+          parent_number=$(echo "${{ github.event.issue.body }}" | grep -oE '#[0-9]+' | head -1 | tr -d '#')
+          echo "parent_number=$parent_number" >> "$GITHUB_OUTPUT"
 
-      - name: Get parent issue info
-        if: steps.get_parent.outputs.parent_number != ''
-        uses: actions/github-script@v7
+      - name: Check if parent issue number was found
+        if: steps.get_parent.outputs.parent_number == ''
+        run: |
+          echo "No parent issue number found in the issue body. Skipping milestone copy."
+          exit 0 # 부모 이슈 번호가 없으면 여기서 종료
+
+      - name: Get parent issue info (milestone)
         id: parent_info
-        with:
-          script: |
-            const parent = await github.rest.issues.get({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: ${{ steps.get_parent.outputs.parent_number }}
-            });
-            return {
-              labels: parent.data.labels.map(l => l.name),
-              milestone: parent.data.milestone ? parent.data.milestone.number : null
-            };
-
-      - name: Copy labels and milestone to sub-issue
-        if: steps.parent_info.outputs.labels != ''
         uses: actions/github-script@v7
         with:
           script: |
-            await github.rest.issues.update({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-              labels: ${{ steps.parent_info.outputs.labels }},
-              milestone: ${{ steps.parent_info.outputs.milestone }}
-            });
+            const parentIssueNumber = parseInt(`${{ steps.get_parent.outputs.parent_number }}`, 10);
+            if (isNaN(parentIssueNumber)) {
+              console.log("Invalid parent issue number. Skipping milestone copy.");
+              return {};
+            }
+
+            try {
+              const parent = await github.rest.issues.get({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: parentIssueNumber
+              });
+
+              const milestoneNumber = parent.data.milestone ? parent.data.milestone.number : null;
+              console.log(`Parent milestone number: ${milestoneNumber}`);
+              return { milestone: milestoneNumber };
+            } catch (error) {
+              console.error(`Error fetching parent issue info: ${error.message}`);
+              return {}; // 에러 발생 시 빈 객체 반환
+            }
+          result-encoding: json # 스크립트 결과물을 JSON으로 인코딩하여 출력
+
+      - name: Copy milestone to sub-issue
+        if: steps.parent_info.outputs.milestone != null
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const milestoneToApply = parseInt(`${{ steps.parent_info.outputs.milestone }}`, 10);
+            console.log(`Attempting to set milestone: ${milestoneToApply} for issue #${context.issue.number}`);
+
+            if (isNaN(milestoneToApply)) {
+              console.log("Milestone to apply is not a valid number. Skipping milestone update.");
+              return;
+            }
+
+            try {
+              await github.rest.issues.update({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                milestone: milestoneToApply
+              });
+              console.log(`Milestone ${milestoneToApply} successfully copied to issue #${context.issue.number}`);
+            } catch (error) {
+              console.error(`Error copying milestone: ${error.message}`);
+            }
