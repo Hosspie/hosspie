@@ -1,4 +1,4 @@
-name: Copy Issue Properties to Sub-Issue
+name: copy parent properties
 
 on:
   issues:
