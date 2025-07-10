@@ -8,7 +8,7 @@ jobs:
   copy-properties:
     runs-on: ubuntu-latest
     steps:
-      - name: Check if this is a sub-issue (예: 제목에 [sub] 포함)
+      - name: Check if this is a sub-issue
         id: check_sub
         run: |
           if [[ "${{ github.event.issue.title }}" == *"[sub]"* ]]; then
@@ -17,7 +17,7 @@ jobs:
             echo "is_sub=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Get parent issue number from body (예: 본문에 Parent: #123)
+      - name: Get parent issue number from body
         id: get_parent
         if: steps.check_sub.outputs.is_sub == 'true'
         run: |
