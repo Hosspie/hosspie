@@ -8,18 +8,8 @@ jobs:
   copy-properties:
     runs-on: ubuntu-latest
     steps:
-      - name: Check if this is a sub-issue
-        id: check_sub
-        run: |
-          if [[ "${{ github.event.issue.title }}" == *"[sub]"* ]]; then
-            echo "is_sub=true" >> $GITHUB_OUTPUT
-          else
-            echo "is_sub=false" >> $GITHUB_OUTPUT
-          fi
-
       - name: Get parent issue number from body
         id: get_parent
-        if: steps.check_sub.outputs.is_sub == 'true'
         run: |
           parent=$(echo "${{ github.event.issue.body }}" | grep -oE '#[0-9]+' | head -1 | tr -d '#')
           echo "parent_number=$parent" >> $GITHUB_OUTPUT
