@@ -1,0 +1,54 @@
+name: Copy Issue Properties to Sub-Issue
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  copy-properties:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check if this is a sub-issue (예: 제목에 [sub] 포함)
+        id: check_sub
+        run: |
+          if [[ "${{ github.event.issue.title }}" == *"[sub]"* ]]; then
+            echo "is_sub=true" >> $GITHUB_OUTPUT
+          else
+            echo "is_sub=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Get parent issue number from body (예: 본문에 Parent: #123)
+        id: get_parent
+        if: steps.check_sub.outputs.is_sub == 'true'
+        run: |
+          parent=$(echo "${{ github.event.issue.body }}" | grep -oE '#[0-9]+' | head -1 | tr -d '#')
+          echo "parent_number=$parent" >> $GITHUB_OUTPUT
+
+      - name: Get parent issue info
+        if: steps.get_parent.outputs.parent_number != ''
+        uses: actions/github-script@v7
+        id: parent_info
+        with:
+          script: |
+            const parent = await github.rest.issues.get({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: ${{ steps.get_parent.outputs.parent_number }}
+            });
+            return {
+              labels: parent.data.labels.map(l => l.name),
+              milestone: parent.data.milestone ? parent.data.milestone.number : null
+            };
+
+      - name: Copy labels and milestone to sub-issue
+        if: steps.parent_info.outputs.labels != ''
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              labels: ${{ steps.parent_info.outputs.labels }},
+              milestone: ${{ steps.parent_info.outputs.milestone }}
+            });
