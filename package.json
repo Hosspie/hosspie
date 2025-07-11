@@ -1,0 +1,23 @@
+{
+  "private": true,
+  "name": "@hosspie/monorepo",
+  "scripts": {
+    "dev": "turbo dev",
+    "dev:admin": "turbo dev --filter=\"{./apps/admin}...\"",
+    "lint": "turbo lint",
+    "test": "turbo test",
+    "build": "turbo build",
+    "build:admin": "turbo build --filter=\"...{./apps/admin}\""
+  },
+  "devDependencies": {
+    "turbo": "^1.13.4",
+    "typescript": "^5.8.3",
+    "tsup": "^8.3.5"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "tabWidth": 2,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  }
+}

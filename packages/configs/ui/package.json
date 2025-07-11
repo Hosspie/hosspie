@@ -1,0 +1,24 @@
+{
+  "name": "@hosspie/ui-config",
+  "version": "1.0.0",
+  "description": "",
+  "exports": {
+    "./tailwind": "./tailwind/tailwind.config.base.js",
+    "./tokens/color": "./token/color.ts"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "peerDependencies": {
+    "@gluestack-ui/nativewind-utils": "^1.0.0",
+    "tailwindcss": "^3.0.0"
+  },
+  "devDependencies": {
+    "@gluestack-ui/nativewind-utils": "^1.0.26",
+    "tailwindcss": "^3.4.17"
+  },
+  "packageManager": "pnpm@10.11.0"
+}
