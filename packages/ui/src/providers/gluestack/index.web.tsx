@@ -2,9 +2,9 @@
 import { setFlushStyles } from '@gluestack-ui/nativewind-utils/flush';
 import { OverlayProvider } from '@gluestack-ui/overlay';
 import { ToastProvider } from '@gluestack-ui/toast';
+import { config } from '@hosspie/ui-config/tokens/color';
 import React, { useEffect, useLayoutEffect } from 'react';
 
-import { config } from '@hosspie/ui-config/tokens/color';
 import { script } from './script';
 
 export type ModeType = 'light' | 'dark' | 'system';

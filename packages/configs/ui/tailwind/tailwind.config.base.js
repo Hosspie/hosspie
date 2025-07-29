@@ -169,9 +169,9 @@ module.exports = {
         },
       },
       fontFamily: {
-        heading: undefined,
-        body: undefined,
-        mono: undefined,
+        heading: 'Noto Sans KR',
+        body: 'sans-serif',
+        mono: 'Noto Sans KR',
         roboto: ['Roboto', 'sans-serif'],
       },
       fontWeight: {

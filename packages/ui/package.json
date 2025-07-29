@@ -5,32 +5,19 @@
   "description": "Acme UI components for React Native",
   "author": "Cedric van Putten <me@bycedric.com>",
   "license": "MIT",
-  "types": "src/index.ts",
-  "main": "src/index.ts",
-  "exports": {
-    ".": "./src/index.ts",
-    "./components": "./src/components/index.ts",
-    "./providers/*": "./src/providers/*/index.tsx"
-  },
-  "files": [
-    "src"
-  ],
+  "types": "./src/index.ts",
+  "react-native": "./src/index.ts",
   "scripts": {
-    "dev": "tsup --watch --silent",
-    "lint": "eslint --ext js,ts,tsx .",
-    "build": "tsup --clean"
+    "lint": "eslint --ext js,ts,tsx ."
   },
   "eslintConfig": {
     "extends": "@hosspie/eslint-config",
     "ignorePatterns": [
-      "node_modules",
-      "build"
+      "node_modules"
     ]
   },
-  "jest": {
-    "preset": "jest-expo"
-  },
   "dependencies": {
-    "@hosspie/ui-config": "workspace:*"
+    "@hosspie/ui-config": "workspace:*",
+    "@hosspie/eslint-config": "workspace:*"
   }
 }
