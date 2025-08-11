@@ -1,12 +1,10 @@
 {
   "private": true,
-  "name": "@hosspie/ui",
+  "name": "@hosspie/design-system",
   "version": "1.0.0",
   "description": "Acme UI components for React Native",
   "author": "Cedric van Putten <me@bycedric.com>",
   "license": "MIT",
-  "types": "./src/index.ts",
-  "react-native": "./src/index.ts",
   "scripts": {
     "lint": "eslint --ext js,ts,tsx ."
   },

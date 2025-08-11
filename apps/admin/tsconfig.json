@@ -4,7 +4,7 @@
     "strict": true,
     "paths": {
       "@/*": ["./*"],
-      "@hosspie/ui/*": ["../../packages/ui/src/*"]
+      "@hosspie/design-system/*": ["../../packages/design-system/src/*"]
     },
     "baseUrl": ".",
     "moduleResolution": "bundler"
@@ -15,6 +15,6 @@
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
     "nativewind-env.d.ts",
-    "../../packages/ui/src/**/*.tsx"
+    "../../packages/design-system/src/**/*.tsx"
   ]
 }

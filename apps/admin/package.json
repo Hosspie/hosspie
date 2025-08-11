@@ -84,7 +84,7 @@
   "devDependencies": {
     "@babel/core": "^7.25.2",
     "@hosspie/eslint-config": "workspace:*",
-    "@hosspie/ui": "workspace:*",
+    "@hosspie/design-system": "workspace:*",
     "@hosspie/ui-config": "workspace:*",
     "@testing-library/react-native": "^13.2.0",
     "@types/jest": "^29.5.12",

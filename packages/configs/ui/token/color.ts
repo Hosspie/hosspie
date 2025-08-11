@@ -1,309 +1,311 @@
 'use client';
 import { vars } from 'nativewind';
 
-export const config = {
-  light: vars({
-    '--color-primary-0': '179 179 179',
-    '--color-primary-50': '153 153 153',
-    '--color-primary-100': '128 128 128',
-    '--color-primary-200': '115 115 115',
-    '--color-primary-300': '102 102 102',
-    '--color-primary-400': '82 82 82',
-    '--color-primary-500': '51 51 51',
-    '--color-primary-600': '41 41 41',
-    '--color-primary-700': '31 31 31',
-    '--color-primary-800': '13 13 13',
-    '--color-primary-900': '10 10 10',
-    '--color-primary-950': '8 8 8',
-
-    /* Secondary  */
-    '--color-secondary-0': '253 253 253',
-    '--color-secondary-50': '251 251 251',
-    '--color-secondary-100': '246 246 246',
-    '--color-secondary-200': '242 242 242',
-    '--color-secondary-300': '237 237 237',
-    '--color-secondary-400': '230 230 231',
-    '--color-secondary-500': '217 217 219',
-    '--color-secondary-600': '198 199 199',
-    '--color-secondary-700': '189 189 189',
-    '--color-secondary-800': '177 177 177',
-    '--color-secondary-900': '165 164 164',
-    '--color-secondary-950': '157 157 157',
-
-    /* Tertiary */
-    '--color-tertiary-0': '255 250 245',
-    '--color-tertiary-50': '255 242 229',
-    '--color-tertiary-100': '255 233 213',
-    '--color-tertiary-200': '254 209 170',
-    '--color-tertiary-300': '253 180 116',
-    '--color-tertiary-400': '251 157 75',
-    '--color-tertiary-500': '231 129 40',
-    '--color-tertiary-600': '215 117 31',
-    '--color-tertiary-700': '180 98 26',
-    '--color-tertiary-800': '130 73 23',
-    '--color-tertiary-900': '108 61 19',
-    '--color-tertiary-950': '84 49 18',
-
-    /* Error */
-    '--color-error-0': '254 233 233',
-    '--color-error-50': '254 226 226',
-    '--color-error-100': '254 202 202',
-    '--color-error-200': '252 165 165',
-    '--color-error-300': '248 113 113',
-    '--color-error-400': '239 68 68',
-    '--color-error-500': '230 53 53',
-    '--color-error-600': '220 38 38',
-    '--color-error-700': '185 28 28',
-    '--color-error-800': '153 27 27',
-    '--color-error-900': '127 29 29',
-    '--color-error-950': '83 19 19',
-
-    /* Success */
-    '--color-success-0': '228 255 244',
-    '--color-success-50': '202 255 232',
-    '--color-success-100': '162 241 192',
-    '--color-success-200': '132 211 162',
-    '--color-success-300': '102 181 132',
-    '--color-success-400': '72 151 102',
-    '--color-success-500': '52 131 82',
-    '--color-success-600': '42 121 72',
-    '--color-success-700': '32 111 62',
-    '--color-success-800': '22 101 52',
-    '--color-success-900': '20 83 45',
-    '--color-success-950': '27 50 36',
-
-    /* Warning */
-    '--color-warning-0': '255 249 245',
-    '--color-warning-50': '255 244 236',
-    '--color-warning-100': '255 231 213',
-    '--color-warning-200': '254 205 170',
-    '--color-warning-300': '253 173 116',
-    '--color-warning-400': '251 149 75',
-    '--color-warning-500': '231 120 40',
-    '--color-warning-600': '215 108 31',
-    '--color-warning-700': '180 90 26',
-    '--color-warning-800': '130 68 23',
-    '--color-warning-900': '108 56 19',
-    '--color-warning-950': '84 45 18',
-
-    /* Info */
-    '--color-info-0': '236 248 254',
-    '--color-info-50': '199 235 252',
-    '--color-info-100': '162 221 250',
-    '--color-info-200': '124 207 248',
-    '--color-info-300': '87 194 246',
-    '--color-info-400': '50 180 244',
-    '--color-info-500': '13 166 242',
-    '--color-info-600': '11 141 205',
-    '--color-info-700': '9 115 168',
-    '--color-info-800': '7 90 131',
-    '--color-info-900': '5 64 93',
-    '--color-info-950': '3 38 56',
-
-    /* Typography */
-    '--color-typography-0': '254 254 255',
-    '--color-typography-50': '245 245 245',
-    '--color-typography-100': '229 229 229',
-    '--color-typography-200': '219 219 220',
-    '--color-typography-300': '212 212 212',
-    '--color-typography-400': '163 163 163',
-    '--color-typography-500': '140 140 140',
-    '--color-typography-600': '115 115 115',
-    '--color-typography-700': '82 82 82',
-    '--color-typography-800': '64 64 64',
-    '--color-typography-900': '38 38 39',
-    '--color-typography-950': '23 23 23',
-
-    /* Outline */
-    '--color-outline-0': '253 254 254',
-    '--color-outline-50': '243 243 243',
-    '--color-outline-100': '230 230 230',
-    '--color-outline-200': '221 220 219',
-    '--color-outline-300': '211 211 211',
-    '--color-outline-400': '165 163 163',
-    '--color-outline-500': '140 141 141',
-    '--color-outline-600': '115 116 116',
-    '--color-outline-700': '83 82 82',
-    '--color-outline-800': '65 65 65',
-    '--color-outline-900': '39 38 36',
-    '--color-outline-950': '26 23 23',
-
-    /* Background */
-    '--color-background-0': '255 255 255',
-    '--color-background-50': '246 246 246',
-    '--color-background-100': '242 241 241',
-    '--color-background-200': '220 219 219',
-    '--color-background-300': '213 212 212',
-    '--color-background-400': '162 163 163',
-    '--color-background-500': '142 142 142',
-    '--color-background-600': '116 116 116',
-    '--color-background-700': '83 82 82',
-    '--color-background-800': '65 64 64',
-    '--color-background-900': '39 38 37',
-    '--color-background-950': '18 18 18',
-
-    /* Background Special */
-    '--color-background-error': '254 241 241',
-    '--color-background-warning': '255 243 234',
-    '--color-background-success': '237 252 242',
-    '--color-background-muted': '247 248 247',
-    '--color-background-info': '235 248 254',
-
-    /* Focus Ring Indicator  */
-    '--color-indicator-primary': '55 55 55',
-    '--color-indicator-info': '83 153 236',
-    '--color-indicator-error': '185 28 28',
-  }),
+export const colorConfig = {
   dark: vars({
-    '--color-primary-0': '166 166 166',
-    '--color-primary-50': '175 175 175',
-    '--color-primary-100': '186 186 186',
-    '--color-primary-200': '197 197 197',
-    '--color-primary-300': '212 212 212',
-    '--color-primary-400': '221 221 221',
-    '--color-primary-500': '230 230 230',
-    '--color-primary-600': '240 240 240',
-    '--color-primary-700': '250 250 250',
-    '--color-primary-800': '253 253 253',
-    '--color-primary-900': '254 249 249',
-    '--color-primary-950': '253 252 252',
+    /* Primary Brand - Orange */
+    '--color-primary-0': '255 244 235', // 매우 연한 오렌지
+    '--color-primary-50': '255 230 204', // 연한 오렌지
+    '--color-primary-100': '255 216 173', // 밝은 오렌지
+    '--color-primary-200': '255 186 122', // 중간 밝은 오렌지
+    '--color-primary-300': '255 156 71', // 중간 오렌지
+    '--color-primary-400': '255 126 20', // 기본 오렌지
+    '--color-primary-500': '255 107 53', // 메인 브랜드 오렌지 (사진의 주요 색상)
+    '--color-primary-600': '230 95 48', // 진한 오렌지
+    '--color-primary-700': '204 84 42', // 더 진한 오렌지
+    '--color-primary-800': '153 63 32', // 매우 진한 오렌지
+    '--color-primary-900': '102 42 21', // 가장 진한 오렌지
+    '--color-primary-950': '76 32 16', // 거의 브라운
 
-    /* Secondary  */
-    '--color-secondary-0': '20 20 20',
-    '--color-secondary-50': '23 23 23',
-    '--color-secondary-100': '31 31 31',
-    '--color-secondary-200': '39 39 39',
-    '--color-secondary-300': '44 44 44',
-    '--color-secondary-400': '56 57 57',
-    '--color-secondary-500': '63 64 64',
-    '--color-secondary-600': '86 86 86',
-    '--color-secondary-700': '110 110 110',
-    '--color-secondary-800': '135 135 135',
-    '--color-secondary-900': '150 150 150',
-    '--color-secondary-950': '164 164 164',
+    /* Secondary - Dark Grays (카드 배경색) */
+    '--color-secondary-0': '15 15 15', // 가장 어두운 배경
+    '--color-secondary-50': '20 20 20', // 매우 어두운 배경
+    '--color-secondary-100': '30 30 30', // 어두운 배경
+    '--color-secondary-200': '40 40 40', // 카드 배경 (사진의 어두운 카드들)
+    '--color-secondary-300': '50 50 50', // 중간 어두운 배경
+    '--color-secondary-400': '60 60 60', // 중간 배경
+    '--color-secondary-500': '75 75 75', // 밝은 회색
+    '--color-secondary-600': '90 90 90', // 더 밝은 회색
+    '--color-secondary-700': '110 110 110', // 연한 회색
+    '--color-secondary-800': '140 140 140', // 밝은 회색
+    '--color-secondary-900': '180 180 180', // 매우 밝은 회색
+    '--color-secondary-950': '220 220 220', // 거의 화이트
 
-    /* Tertiary */
-    '--color-tertiary-0': '84 49 18',
-    '--color-tertiary-50': '108 61 19',
-    '--color-tertiary-100': '130 73 23',
-    '--color-tertiary-200': '180 98 26',
-    '--color-tertiary-300': '215 117 31',
-    '--color-tertiary-400': '231 129 40',
-    '--color-tertiary-500': '251 157 75',
-    '--color-tertiary-600': '253 180 116',
-    '--color-tertiary-700': '254 209 170',
-    '--color-tertiary-800': '255 233 213',
-    '--color-tertiary-900': '255 242 229',
-    '--color-tertiary-950': '255 250 245',
+    /* Tertiary - Brown/Gold Accent (사진의 브라운 계열) */
+    '--color-tertiary-0': '41 31 20', // 어두운 브라운
+    '--color-tertiary-50': '51 38 25', // 진한 브라운
+    '--color-tertiary-100': '71 54 35', // 브라운
+    '--color-tertiary-200': '102 77 50', // 중간 브라운
+    '--color-tertiary-300': '133 101 66', // 밝은 브라운
+    '--color-tertiary-400': '164 124 81', // 골드 브라운
+    '--color-tertiary-500': '195 148 97', // 라이트 골드
+    '--color-tertiary-600': '215 168 117', // 밝은 골드
+    '--color-tertiary-700': '235 188 137', // 연한 골드
+    '--color-tertiary-800': '245 208 167', // 매우 연한 골드
+    '--color-tertiary-900': '250 228 197', // 거의 베이지
+    '--color-tertiary-950': '253 238 217', // 베이지
 
-    /* Error */
-    '--color-error-0': '83 19 19',
-    '--color-error-50': '127 29 29',
-    '--color-error-100': '153 27 27',
-    '--color-error-200': '185 28 28',
-    '--color-error-300': '220 38 38',
-    '--color-error-400': '230 53 53',
-    '--color-error-500': '239 68 68',
-    '--color-error-600': '249 97 96',
-    '--color-error-700': '229 91 90',
-    '--color-error-800': '254 202 202',
-    '--color-error-900': '254 226 226',
-    '--color-error-950': '254 233 233',
+    /* Error - Red (다크 테마용) */
+    '--color-error-0': '60 15 15', // 어두운 빨강
+    '--color-error-50': '80 20 20', // 진한 빨강
+    '--color-error-100': '120 30 30', // 빨강
+    '--color-error-200': '160 40 40', // 중간 빨강
+    '--color-error-300': '200 50 50', // 밝은 빨강
+    '--color-error-400': '230 60 60', // 더 밝은 빨강
+    '--color-error-500': '255 75 75', // 메인 에러 빨강
+    '--color-error-600': '255 100 100', // 연한 빨강
+    '--color-error-700': '255 130 130', // 더 연한 빨강
+    '--color-error-800': '255 160 160', // 매우 연한 빨강
+    '--color-error-900': '255 190 190', // 거의 핑크
+    '--color-error-950': '255 220 220', // 핑크
 
-    /* Success */
-    '--color-success-0': '27 50 36',
-    '--color-success-50': '20 83 45',
-    '--color-success-100': '22 101 52',
-    '--color-success-200': '32 111 62',
-    '--color-success-300': '42 121 72',
-    '--color-success-400': '52 131 82',
-    '--color-success-500': '72 151 102',
-    '--color-success-600': '102 181 132',
-    '--color-success-700': '132 211 162',
-    '--color-success-800': '162 241 192',
-    '--color-success-900': '202 255 232',
-    '--color-success-950': '228 255 244',
+    /* Success - Green (다크 테마용) */
+    '--color-success-0': '15 40 25', // 어두운 초록
+    '--color-success-50': '20 50 30', // 진한 초록
+    '--color-success-100': '30 70 40', // 초록
+    '--color-success-200': '40 90 50', // 중간 초록
+    '--color-success-300': '50 110 65', // 밝은 초록
+    '--color-success-400': '60 130 80', // 더 밝은 초록
+    '--color-success-500': '75 150 95', // 메인 성공 초록
+    '--color-success-600': '100 170 120', // 연한 초록
+    '--color-success-700': '130 190 150', // 더 연한 초록
+    '--color-success-800': '160 210 180', // 매우 연한 초록
+    '--color-success-900': '190 230 210', // 거의 민트
+    '--color-success-950': '220 245 235', // 민트
 
-    /* Warning */
-    '--color-warning-0': '84 45 18',
-    '--color-warning-50': '108 56 19',
-    '--color-warning-100': '130 68 23',
-    '--color-warning-200': '180 90 26',
-    '--color-warning-300': '215 108 31',
-    '--color-warning-400': '231 120 40',
-    '--color-warning-500': '251 149 75',
-    '--color-warning-600': '253 173 116',
-    '--color-warning-700': '254 205 170',
-    '--color-warning-800': '255 231 213',
-    '--color-warning-900': '255 244 237',
-    '--color-warning-950': '255 249 245',
+    /* Warning - Yellow/Orange (다크 테마용) */
+    '--color-warning-0': '50 35 10', // 어두운 노랑
+    '--color-warning-50': '70 45 15', // 진한 노랑
+    '--color-warning-100': '90 60 20', // 노랑
+    '--color-warning-200': '120 80 25', // 중간 노랑
+    '--color-warning-300': '150 100 35', // 밝은 노랑
+    '--color-warning-400': '180 120 45', // 더 밝은 노랑
+    '--color-warning-500': '210 150 60', // 메인 경고 노랑
+    '--color-warning-600': '230 170 80', // 연한 노랑
+    '--color-warning-700': '240 190 100', // 더 연한 노랑
+    '--color-warning-800': '250 210 130', // 매우 연한 노랑
+    '--color-warning-900': '255 230 160', // 거의 크림
+    '--color-warning-950': '255 245 190', // 크림
 
-    /* Info */
-    '--color-info-0': '3 38 56',
-    '--color-info-50': '5 64 93',
-    '--color-info-100': '7 90 131',
-    '--color-info-200': '9 115 168',
-    '--color-info-300': '11 141 205',
-    '--color-info-400': '13 166 242',
-    '--color-info-500': '50 180 244',
-    '--color-info-600': '87 194 246',
-    '--color-info-700': '124 207 248',
-    '--color-info-800': '162 221 250',
-    '--color-info-900': '199 235 252',
-    '--color-info-950': '236 248 254',
+    /* Info - Blue (다크 테마용) */
+    '--color-info-0': '10 25 45', // 어두운 파랑
+    '--color-info-50': '15 35 60', // 진한 파랑
+    '--color-info-100': '20 50 80', // 파랑
+    '--color-info-200': '30 70 110', // 중간 파랑
+    '--color-info-300': '40 90 140', // 밝은 파랑
+    '--color-info-400': '50 110 170', // 더 밝은 파랑
+    '--color-info-500': '70 130 200', // 메인 정보 파랑
+    '--color-info-600': '90 150 220', // 연한 파랑
+    '--color-info-700': '120 170 235', // 더 연한 파랑
+    '--color-info-800': '150 190 245', // 매우 연한 파랑
+    '--color-info-900': '180 210 250', // 거의 하늘색
+    '--color-info-950': '210 230 255', // 하늘색
 
-    /* Typography */
-    '--color-typography-0': '23 23 23',
-    '--color-typography-50': '38 38 39',
-    '--color-typography-100': '64 64 64',
-    '--color-typography-200': '82 82 82',
-    '--color-typography-300': '115 115 115',
-    '--color-typography-400': '140 140 140',
-    '--color-typography-500': '163 163 163',
-    '--color-typography-600': '212 212 212',
-    '--color-typography-700': '219 219 220',
-    '--color-typography-800': '229 229 229',
-    '--color-typography-900': '245 245 245',
-    '--color-typography-950': '254 254 255',
+    /* Typography - Dark Theme Text (사진의 텍스트 색상들) */
+    '--color-typography-0': '255 255 255', // 순백색 (주요 제목)
+    '--color-typography-50': '250 250 250', // 거의 화이트 (메인 텍스트)
+    '--color-typography-100': '240 240 240', // 연한 회색 (서브 텍스트)
+    '--color-typography-200': '220 220 220', // 밝은 회색 (라벨)
+    '--color-typography-300': '200 200 200', // 중간 밝은 회색
+    '--color-typography-400': '180 180 180', // 중간 회색 (보조 텍스트)
+    '--color-typography-500': '160 160 160', // 회색 (비활성 텍스트)
+    '--color-typography-600': '140 140 140', // 어두운 회색
+    '--color-typography-700': '120 120 120', // 진한 회색
+    '--color-typography-800': '100 100 100', // 매우 진한 회색
+    '--color-typography-900': '80 80 80', // 거의 검은 회색
+    '--color-typography-950': '60 60 60', // 검은 회색
 
-    /* Outline */
-    '--color-outline-0': '26 23 23',
-    '--color-outline-50': '39 38 36',
-    '--color-outline-100': '65 65 65',
-    '--color-outline-200': '83 82 82',
-    '--color-outline-300': '115 116 116',
-    '--color-outline-400': '140 141 141',
-    '--color-outline-500': '165 163 163',
-    '--color-outline-600': '211 211 211',
-    '--color-outline-700': '221 220 219',
-    '--color-outline-800': '230 230 230',
-    '--color-outline-900': '243 243 243',
-    '--color-outline-950': '253 254 254',
+    /* Outline - Dark Theme Borders */
+    '--color-outline-0': '80 80 80', // 밝은 보더
+    '--color-outline-50': '70 70 70', // 중간 밝은 보더
+    '--color-outline-100': '60 60 60', // 중간 보더
+    '--color-outline-200': '50 50 50', // 어두운 보더
+    '--color-outline-300': '45 45 45', // 진한 보더
+    '--color-outline-400': '40 40 40', // 매우 진한 보더
+    '--color-outline-500': '35 35 35', // 카드 보더
+    '--color-outline-600': '30 30 30', // 섹션 보더
+    '--color-outline-700': '25 25 25', // 구분선
+    '--color-outline-800': '20 20 20', // 어두운 구분선
+    '--color-outline-900': '15 15 15', // 매우 어두운 구분선
+    '--color-outline-950': '10 10 10', // 거의 검은 구분선
 
-    /* Background */
-    '--color-background-0': '18 18 18',
-    '--color-background-50': '39 38 37',
-    '--color-background-100': '65 64 64',
-    '--color-background-200': '83 82 82',
-    '--color-background-300': '116 116 116',
-    '--color-background-400': '142 142 142',
-    '--color-background-500': '162 163 163',
-    '--color-background-600': '213 212 212',
-    '--color-background-700': '229 228 228',
-    '--color-background-800': '242 241 241',
-    '--color-background-900': '246 246 246',
-    '--color-background-950': '255 255 255',
+    /* Background - Dark Theme (사진의 배경색들) */
+    '--color-background-0': '8 8 8', // 메인 배경 (가장 어두운)
+    '--color-background-50': '12 12 12', // 앱 배경
+    '--color-background-100': '18 18 18', // 컨텐츠 배경
+    '--color-background-200': '25 25 25', // 카드 배경 (사진의 어두운 카드들)
+    '--color-background-300': '35 35 35', // 액티브 카드 배경
+    '--color-background-400': '45 45 45', // 호버 배경
+    '--color-background-500': '55 55 55', // 선택된 배경
+    '--color-background-600': '70 70 70', // 밝은 배경
+    '--color-background-700': '90 90 90', // 더 밝은 배경
+    '--color-background-800': '120 120 120', // 매우 밝은 배경
+    '--color-background-900': '180 180 180', // 거의 화이트
+    '--color-background-950': '240 240 240', // 화이트 배경
 
-    /* Background Special */
-    '--color-background-error': '66 43 43',
-    '--color-background-warning': '65 47 35',
-    '--color-background-success': '28 43 33',
-    '--color-background-muted': '51 51 51',
-    '--color-background-info': '26 40 46',
+    /* Background Special - Dark Theme */
+    '--color-background-error': '40 20 20', // 에러 배경 (어두운 빨강)
+    '--color-background-warning': '45 35 15', // 경고 배경 (어두운 노랑)
+    '--color-background-success': '20 35 25', // 성공 배경 (어두운 초록)
+    '--color-background-muted': '30 30 30', // 뮤트 배경 (회색)
+    '--color-background-info': '20 30 40', // 정보 배경 (어두운 파랑)
 
-    /* Focus Ring Indicator  */
-    '--color-indicator-primary': '247 247 247',
-    '--color-indicator-info': '161 199 245',
-    '--color-indicator-error': '232 70 69',
+    /* Focus Ring Indicator - Dark Theme (포커스 표시용) */
+    '--color-indicator-primary': '255 107 53', // 메인 오렌지 (포커스 링)
+    '--color-indicator-info': '70 130 200', // 정보 파랑 (포커스 링)
+    '--color-indicator-error': '255 75 75', // 에러 빨강 (포커스 링)
+  }),
+  light: vars({
+    /* Primary Brand - Orange */
+    '--color-primary-0': '255 244 235', // 매우 연한 오렌지
+    '--color-primary-50': '255 230 204', // 연한 오렌지
+    '--color-primary-100': '255 216 173', // 밝은 오렌지
+    '--color-primary-200': '255 186 122', // 중간 밝은 오렌지
+    '--color-primary-300': '255 156 71', // 중간 오렌지
+    '--color-primary-400': '255 126 20', // 기본 오렌지
+    '--color-primary-500': '255 107 53', // 메인 브랜드 오렌지 (사진의 주요 색상)
+    '--color-primary-600': '230 95 48', // 진한 오렌지
+    '--color-primary-700': '204 84 42', // 더 진한 오렌지
+    '--color-primary-800': '153 63 32', // 매우 진한 오렌지
+    '--color-primary-900': '102 42 21', // 가장 진한 오렌지
+    '--color-primary-950': '76 32 16', // 거의 브라운
+
+    /* Secondary - Dark Grays (카드 배경색) */
+    '--color-secondary-0': '15 15 15', // 가장 어두운 배경
+    '--color-secondary-50': '20 20 20', // 매우 어두운 배경
+    '--color-secondary-100': '30 30 30', // 어두운 배경
+    '--color-secondary-200': '40 40 40', // 카드 배경 (사진의 어두운 카드들)
+    '--color-secondary-300': '50 50 50', // 중간 어두운 배경
+    '--color-secondary-400': '60 60 60', // 중간 배경
+    '--color-secondary-500': '75 75 75', // 밝은 회색
+    '--color-secondary-600': '90 90 90', // 더 밝은 회색
+    '--color-secondary-700': '110 110 110', // 연한 회색
+    '--color-secondary-800': '140 140 140', // 밝은 회색
+    '--color-secondary-900': '180 180 180', // 매우 밝은 회색
+    '--color-secondary-950': '220 220 220', // 거의 화이트
+
+    /* Tertiary - Brown/Gold Accent (사진의 브라운 계열) */
+    '--color-tertiary-0': '41 31 20', // 어두운 브라운
+    '--color-tertiary-50': '51 38 25', // 진한 브라운
+    '--color-tertiary-100': '71 54 35', // 브라운
+    '--color-tertiary-200': '102 77 50', // 중간 브라운
+    '--color-tertiary-300': '133 101 66', // 밝은 브라운
+    '--color-tertiary-400': '164 124 81', // 골드 브라운
+    '--color-tertiary-500': '195 148 97', // 라이트 골드
+    '--color-tertiary-600': '215 168 117', // 밝은 골드
+    '--color-tertiary-700': '235 188 137', // 연한 골드
+    '--color-tertiary-800': '245 208 167', // 매우 연한 골드
+    '--color-tertiary-900': '250 228 197', // 거의 베이지
+    '--color-tertiary-950': '253 238 217', // 베이지
+
+    /* Error - Red (다크 테마용) */
+    '--color-error-0': '60 15 15', // 어두운 빨강
+    '--color-error-50': '80 20 20', // 진한 빨강
+    '--color-error-100': '120 30 30', // 빨강
+    '--color-error-200': '160 40 40', // 중간 빨강
+    '--color-error-300': '200 50 50', // 밝은 빨강
+    '--color-error-400': '230 60 60', // 더 밝은 빨강
+    '--color-error-500': '255 75 75', // 메인 에러 빨강
+    '--color-error-600': '255 100 100', // 연한 빨강
+    '--color-error-700': '255 130 130', // 더 연한 빨강
+    '--color-error-800': '255 160 160', // 매우 연한 빨강
+    '--color-error-900': '255 190 190', // 거의 핑크
+    '--color-error-950': '255 220 220', // 핑크
+
+    /* Success - Green (다크 테마용) */
+    '--color-success-0': '15 40 25', // 어두운 초록
+    '--color-success-50': '20 50 30', // 진한 초록
+    '--color-success-100': '30 70 40', // 초록
+    '--color-success-200': '40 90 50', // 중간 초록
+    '--color-success-300': '50 110 65', // 밝은 초록
+    '--color-success-400': '60 130 80', // 더 밝은 초록
+    '--color-success-500': '75 150 95', // 메인 성공 초록
+    '--color-success-600': '100 170 120', // 연한 초록
+    '--color-success-700': '130 190 150', // 더 연한 초록
+    '--color-success-800': '160 210 180', // 매우 연한 초록
+    '--color-success-900': '190 230 210', // 거의 민트
+    '--color-success-950': '220 245 235', // 민트
+
+    /* Warning - Yellow/Orange (다크 테마용) */
+    '--color-warning-0': '50 35 10', // 어두운 노랑
+    '--color-warning-50': '70 45 15', // 진한 노랑
+    '--color-warning-100': '90 60 20', // 노랑
+    '--color-warning-200': '120 80 25', // 중간 노랑
+    '--color-warning-300': '150 100 35', // 밝은 노랑
+    '--color-warning-400': '180 120 45', // 더 밝은 노랑
+    '--color-warning-500': '210 150 60', // 메인 경고 노랑
+    '--color-warning-600': '230 170 80', // 연한 노랑
+    '--color-warning-700': '240 190 100', // 더 연한 노랑
+    '--color-warning-800': '250 210 130', // 매우 연한 노랑
+    '--color-warning-900': '255 230 160', // 거의 크림
+    '--color-warning-950': '255 245 190', // 크림
+
+    /* Info - Blue (다크 테마용) */
+    '--color-info-0': '10 25 45', // 어두운 파랑
+    '--color-info-50': '15 35 60', // 진한 파랑
+    '--color-info-100': '20 50 80', // 파랑
+    '--color-info-200': '30 70 110', // 중간 파랑
+    '--color-info-300': '40 90 140', // 밝은 파랑
+    '--color-info-400': '50 110 170', // 더 밝은 파랑
+    '--color-info-500': '70 130 200', // 메인 정보 파랑
+    '--color-info-600': '90 150 220', // 연한 파랑
+    '--color-info-700': '120 170 235', // 더 연한 파랑
+    '--color-info-800': '150 190 245', // 매우 연한 파랑
+    '--color-info-900': '180 210 250', // 거의 하늘색
+    '--color-info-950': '210 230 255', // 하늘색
+
+    /* Typography - Dark Theme Text (사진의 텍스트 색상들) */
+    '--color-typography-0': '255 255 255', // 순백색 (주요 제목)
+    '--color-typography-50': '250 250 250', // 거의 화이트 (메인 텍스트)
+    '--color-typography-100': '240 240 240', // 연한 회색 (서브 텍스트)
+    '--color-typography-200': '220 220 220', // 밝은 회색 (라벨)
+    '--color-typography-300': '200 200 200', // 중간 밝은 회색
+    '--color-typography-400': '180 180 180', // 중간 회색 (보조 텍스트)
+    '--color-typography-500': '160 160 160', // 회색 (비활성 텍스트)
+    '--color-typography-600': '140 140 140', // 어두운 회색
+    '--color-typography-700': '120 120 120', // 진한 회색
+    '--color-typography-800': '100 100 100', // 매우 진한 회색
+    '--color-typography-900': '80 80 80', // 거의 검은 회색
+    '--color-typography-950': '60 60 60', // 검은 회색
+
+    /* Outline - Dark Theme Borders */
+    '--color-outline-0': '80 80 80', // 밝은 보더
+    '--color-outline-50': '70 70 70', // 중간 밝은 보더
+    '--color-outline-100': '60 60 60', // 중간 보더
+    '--color-outline-200': '50 50 50', // 어두운 보더
+    '--color-outline-300': '45 45 45', // 진한 보더
+    '--color-outline-400': '40 40 40', // 매우 진한 보더
+    '--color-outline-500': '35 35 35', // 카드 보더
+    '--color-outline-600': '30 30 30', // 섹션 보더
+    '--color-outline-700': '25 25 25', // 구분선
+    '--color-outline-800': '20 20 20', // 어두운 구분선
+    '--color-outline-900': '15 15 15', // 매우 어두운 구분선
+    '--color-outline-950': '10 10 10', // 거의 검은 구분선
+
+    /* Background - Dark Theme (사진의 배경색들) */
+    '--color-background-0': '8 8 8', // 메인 배경 (가장 어두운)
+    '--color-background-50': '12 12 12', // 앱 배경
+    '--color-background-100': '18 18 18', // 컨텐츠 배경
+    '--color-background-200': '25 25 25', // 카드 배경 (사진의 어두운 카드들)
+    '--color-background-300': '35 35 35', // 액티브 카드 배경
+    '--color-background-400': '45 45 45', // 호버 배경
+    '--color-background-500': '55 55 55', // 선택된 배경
+    '--color-background-600': '70 70 70', // 밝은 배경
+    '--color-background-700': '90 90 90', // 더 밝은 배경
+    '--color-background-800': '120 120 120', // 매우 밝은 배경
+    '--color-background-900': '180 180 180', // 거의 화이트
+    '--color-background-950': '240 240 240', // 화이트 배경
+
+    /* Background Special - Dark Theme */
+    '--color-background-error': '40 20 20', // 에러 배경 (어두운 빨강)
+    '--color-background-warning': '45 35 15', // 경고 배경 (어두운 노랑)
+    '--color-background-success': '20 35 25', // 성공 배경 (어두운 초록)
+    '--color-background-muted': '30 30 30', // 뮤트 배경 (회색)
+    '--color-background-info': '20 30 40', // 정보 배경 (어두운 파랑)
+
+    /* Focus Ring Indicator - Dark Theme (포커스 표시용) */
+    '--color-indicator-primary': '255 107 53', // 메인 오렌지 (포커스 링)
+    '--color-indicator-info': '70 130 200', // 정보 파랑 (포커스 링)
+    '--color-indicator-error': '255 75 75', // 에러 빨강 (포커스 링)
   }),
 };

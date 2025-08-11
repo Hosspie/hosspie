@@ -1,3 +1,4 @@
+import { X } from 'lucide-react-native';
 import { useMemo } from 'react';
 
 import {
@@ -18,7 +19,7 @@ import {
 } from '../../components/action-sheet';
 import { Button, ButtonText } from '../../components/button';
 import { Heading } from '../../components/header';
-import { Icon, CloseIcon } from '../../components/icon';
+import { Icon } from '../../components/icon';
 import { Text } from '../../components/text';
 
 type IModalProps =
@@ -67,7 +68,7 @@ export const useModal = () => {
               </Heading>
               <ModalCloseButton>
                 <Icon
-                  as={CloseIcon}
+                  as={X}
                   size="md"
                   className="stroke-background-400 group-[:hover]/modal-close-button:stroke-background-700 group-[:active]/modal-close-button:stroke-background-900 group-[:focus-visible]/modal-close-button:stroke-background-900"
                 />
