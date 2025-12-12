@@ -109,7 +109,7 @@ const fabIconStyle = tva({
   },
 });
 
-type IFabProps = Omit<React.ComponentPropsWithoutRef<typeof UIFab>, 'context'> &
+export type IFabProps = Omit<React.ComponentPropsWithoutRef<typeof UIFab>, 'context'> &
   VariantProps<typeof fabStyle>;
 
 const Fab = React.forwardRef<React.ComponentRef<typeof UIFab>, IFabProps>(function Fab(
@@ -126,7 +126,7 @@ const Fab = React.forwardRef<React.ComponentRef<typeof UIFab>, IFabProps>(functi
   );
 });
 
-type IFabLabelProps = React.ComponentPropsWithoutRef<typeof UIFab.Label> &
+export type IFabLabelProps = React.ComponentPropsWithoutRef<typeof UIFab.Label> &
   VariantProps<typeof fabLabelStyle>;
 
 const FabLabel = React.forwardRef<React.ComponentRef<typeof UIFab.Label>, IFabLabelProps>(
@@ -163,7 +163,7 @@ const FabLabel = React.forwardRef<React.ComponentRef<typeof UIFab.Label>, IFabLa
   }
 );
 
-type IFabIconProps = React.ComponentPropsWithoutRef<typeof UIFab.Icon> &
+export type IFabIconProps = React.ComponentPropsWithoutRef<typeof UIFab.Icon> &
   VariantProps<typeof fabIconStyle> & {
     height?: number;
     width?: number;

@@ -2,6 +2,12 @@
   "private": true,
   "name": "@hosspie/design-system",
   "version": "1.0.0",
+  "main": "index.js",
+  "exports": {
+    "./organisms/*": "./src/organisms/*",
+    "./hooks/*": "./src/hooks/*",
+    "./providers/*": "./src/providers/*"
+  },
   "description": "Acme UI components for React Native",
   "author": "Cedric van Putten <me@bycedric.com>",
   "license": "MIT",

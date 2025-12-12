@@ -4,7 +4,13 @@
     "strict": true,
     "paths": {
       "@/*": ["./*"],
-      "@hosspie/design-system/*": ["../../packages/design-system/src/*"]
+      "@hosspie/design-system/organisms/*": ["../../packages/design-system/src/organisms/*"],
+      "@hosspie/design-system/providers/*": ["../../packages/design-system/src/providers/*"],
+      "@hosspie/design-system/components/*": ["../../packages/design-system/src/components/*"],
+      "@hosspie/design-system/hooks/*": ["../../packages/design-system/src/hooks/*"],
+      "@hosspie/utils/*": ["../../packages/utils/src/*"],
+      "@hosspie/services": ["../../packages/services/frontend/src/index.ts"],
+      "@hosspie/services/form": ["../../packages/services/frontend/src/form/index.tsx"]
     },
     "baseUrl": ".",
     "moduleResolution": "bundler"
@@ -15,6 +21,10 @@
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
     "nativewind-env.d.ts",
-    "../../packages/design-system/src/**/*.tsx"
+    "../../packages/design-system/src/**/*.ts",
+    "../../packages/design-system/src/**/*.tsx",
+    "../../packages/utils/src/**/*.ts",
+    "../../packages/services/frontend/src/**/*.ts",
+    "../../packages/services/frontend/src/**/*.tsx"
   ]
 }

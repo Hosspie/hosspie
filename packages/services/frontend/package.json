@@ -1,0 +1,29 @@
+{
+  "name": "@hosspie/services",
+  "version": "1.0.0",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "exports": {
+    "./form": {
+      "types": "./src/form/index.tsx",
+      "default": "./src/form/index.tsx"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-hook-form": "^7.48.2"
+  },
+  "devDependencies": {
+    "@hosspie/design-system": "workspace:*",
+    "@types/react": "^18.2.45",
+    "typescript": "^5.3.3"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-hook-form": "^7.48.2"
+  }
+}

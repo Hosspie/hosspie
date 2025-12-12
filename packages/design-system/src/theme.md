@@ -1,0 +1,342 @@
+# Complete Theme Color Reference
+
+## Light Mode Colors
+
+### Primary Colors (Grayscale)
+
+- primary-0: rgb(179, 179, 179)
+- primary-50: rgb(153, 153, 153)
+- primary-100: rgb(128, 128, 128)
+- primary-200: rgb(115, 115, 115)
+- primary-300: rgb(102, 102, 102)
+- primary-400: rgb(82, 82, 82)
+- primary-500: rgb(51, 51, 51)
+- primary-600: rgb(41, 41, 41)
+- primary-700: rgb(31, 31, 31)
+- primary-800: rgb(13, 13, 13)
+- primary-900: rgb(10, 10, 10)
+- primary-950: rgb(8, 8, 8)
+
+### Secondary Colors (Light Grays)
+
+- secondary-0: rgb(253, 253, 253)
+- secondary-50: rgb(251, 251, 251)
+- secondary-100: rgb(246, 246, 246)
+- secondary-200: rgb(242, 242, 242)
+- secondary-300: rgb(237, 237, 237)
+- secondary-400: rgb(230, 230, 231)
+- secondary-500: rgb(217, 217, 219)
+- secondary-600: rgb(198, 199, 199)
+- secondary-700: rgb(189, 189, 189)
+- secondary-800: rgb(177, 177, 177)
+- secondary-900: rgb(165, 164, 164)
+- secondary-950: rgb(157, 157, 157)
+
+### Tertiary Colors (Orange)
+
+- tertiary-0: rgb(255, 250, 245)
+- tertiary-50: rgb(255, 242, 229)
+- tertiary-100: rgb(255, 233, 213)
+- tertiary-200: rgb(254, 209, 170)
+- tertiary-300: rgb(253, 180, 116)
+- tertiary-400: rgb(251, 157, 75)
+- tertiary-500: rgb(231, 129, 40)
+- tertiary-600: rgb(215, 117, 31)
+- tertiary-700: rgb(180, 98, 26)
+- tertiary-800: rgb(130, 73, 23)
+- tertiary-900: rgb(108, 61, 19)
+- tertiary-950: rgb(84, 49, 18)
+
+### Error Colors (Red)
+
+- error-0: rgb(254, 233, 233)
+- error-50: rgb(254, 226, 226)
+- error-100: rgb(254, 202, 202)
+- error-200: rgb(252, 165, 165)
+- error-300: rgb(248, 113, 113)
+- error-400: rgb(239, 68, 68)
+- error-500: rgb(230, 53, 53)
+- error-600: rgb(220, 38, 38)
+- error-700: rgb(185, 28, 28)
+- error-800: rgb(153, 27, 27)
+- error-900: rgb(127, 29, 29)
+- error-950: rgb(83, 19, 19)
+
+### Success Colors (Green)
+
+- success-0: rgb(228, 255, 244)
+- success-50: rgb(202, 255, 232)
+- success-100: rgb(162, 241, 192)
+- success-200: rgb(132, 211, 162)
+- success-300: rgb(102, 181, 132)
+- success-400: rgb(72, 151, 102)
+- success-500: rgb(52, 131, 82)
+- success-600: rgb(42, 121, 72)
+- success-700: rgb(32, 111, 62)
+- success-800: rgb(22, 101, 52)
+- success-900: rgb(20, 83, 45)
+- success-950: rgb(27, 50, 36)
+
+### Warning Colors (Orange)
+
+- warning-0: rgb(255, 249, 245)
+- warning-50: rgb(255, 244, 236)
+- warning-100: rgb(255, 231, 213)
+- warning-200: rgb(254, 205, 170)
+- warning-300: rgb(253, 173, 116)
+- warning-400: rgb(251, 149, 75)
+- warning-500: rgb(231, 120, 40)
+- warning-600: rgb(215, 108, 31)
+- warning-700: rgb(180, 90, 26)
+- warning-800: rgb(130, 68, 23)
+- warning-900: rgb(108, 56, 19)
+- warning-950: rgb(84, 45, 18)
+
+### Info Colors (Blue)
+
+- info-0: rgb(236, 248, 254)
+- info-50: rgb(199, 235, 252)
+- info-100: rgb(162, 221, 250)
+- info-200: rgb(124, 207, 248)
+- info-300: rgb(87, 194, 246)
+- info-400: rgb(50, 180, 244)
+- info-500: rgb(13, 166, 242)
+- info-600: rgb(11, 141, 205)
+- info-700: rgb(9, 115, 168)
+- info-800: rgb(7, 90, 131)
+- info-900: rgb(5, 64, 93)
+- info-950: rgb(3, 38, 56)
+
+### Typography Colors
+
+- typography-0: rgb(254, 254, 255)
+- typography-50: rgb(245, 245, 245)
+- typography-100: rgb(229, 229, 229)
+- typography-200: rgb(219, 219, 220)
+- typography-300: rgb(212, 212, 212)
+- typography-400: rgb(163, 163, 163)
+- typography-500: rgb(140, 140, 140)
+- typography-600: rgb(115, 115, 115)
+- typography-700: rgb(82, 82, 82)
+- typography-800: rgb(64, 64, 64)
+- typography-900: rgb(38, 38, 39)
+- typography-950: rgb(23, 23, 23)
+
+### Outline Colors
+
+- outline-0: rgb(253, 254, 254)
+- outline-50: rgb(243, 243, 243)
+- outline-100: rgb(230, 230, 230)
+- outline-200: rgb(221, 220, 219)
+- outline-300: rgb(211, 211, 211)
+- outline-400: rgb(165, 163, 163)
+- outline-500: rgb(140, 141, 141)
+- outline-600: rgb(115, 116, 116)
+- outline-700: rgb(83, 82, 82)
+- outline-800: rgb(65, 65, 65)
+- outline-900: rgb(39, 38, 36)
+- outline-950: rgb(26, 23, 23)
+
+### Background Colors
+
+- background-0: rgb(255, 255, 255)
+- background-50: rgb(246, 246, 246)
+- background-100: rgb(242, 241, 241)
+- background-200: rgb(220, 219, 219)
+- background-300: rgb(213, 212, 212)
+- background-400: rgb(162, 163, 163)
+- background-500: rgb(142, 142, 142)
+- background-600: rgb(116, 116, 116)
+- background-700: rgb(83, 82, 82)
+- background-800: rgb(65, 64, 64)
+- background-900: rgb(39, 38, 37)
+- background-950: rgb(18, 18, 18)
+
+### Special Background Colors
+
+- background-error: rgb(254, 241, 241)
+- background-warning: rgb(255, 243, 234)
+- background-success: rgb(237, 252, 242)
+- background-muted: rgb(247, 248, 247)
+- background-info: rgb(235, 248, 254)
+
+### Focus Ring Indicators
+
+- indicator-primary: rgb(55, 55, 55)
+- indicator-info: rgb(83, 153, 236)
+- indicator-error: rgb(185, 28, 28)
+
+## Dark Mode Colors
+
+### Primary Colors (Inverted Grayscale)
+
+- primary-0: rgb(166, 166, 166)
+- primary-50: rgb(175, 175, 175)
+- primary-100: rgb(186, 186, 186)
+- primary-200: rgb(197, 197, 197)
+- primary-300: rgb(212, 212, 212)
+- primary-400: rgb(221, 221, 221)
+- primary-500: rgb(230, 230, 230)
+- primary-600: rgb(240, 240, 240)
+- primary-700: rgb(250, 250, 250)
+- primary-800: rgb(253, 253, 253)
+- primary-900: rgb(254, 249, 249)
+- primary-950: rgb(253, 252, 252)
+
+### Secondary Colors (Dark Grays)
+
+- secondary-0: rgb(20, 20, 20)
+- secondary-50: rgb(23, 23, 23)
+- secondary-100: rgb(31, 31, 31)
+- secondary-200: rgb(39, 39, 39)
+- secondary-300: rgb(44, 44, 44)
+- secondary-400: rgb(56, 57, 57)
+- secondary-500: rgb(63, 64, 64)
+- secondary-600: rgb(86, 86, 86)
+- secondary-700: rgb(110, 110, 110)
+- secondary-800: rgb(135, 135, 135)
+- secondary-900: rgb(150, 150, 150)
+- secondary-950: rgb(164, 164, 164)
+
+### Tertiary Colors (Inverted Orange)
+
+- tertiary-0: rgb(84, 49, 18)
+- tertiary-50: rgb(108, 61, 19)
+- tertiary-100: rgb(130, 73, 23)
+- tertiary-200: rgb(180, 98, 26)
+- tertiary-300: rgb(215, 117, 31)
+- tertiary-400: rgb(231, 129, 40)
+- tertiary-500: rgb(251, 157, 75)
+- tertiary-600: rgb(253, 180, 116)
+- tertiary-700: rgb(254, 209, 170)
+- tertiary-800: rgb(255, 233, 213)
+- tertiary-900: rgb(255, 242, 229)
+- tertiary-950: rgb(255, 250, 245)
+
+### Error Colors (Inverted Red)
+
+- error-0: rgb(83, 19, 19)
+- error-50: rgb(127, 29, 29)
+- error-100: rgb(153, 27, 27)
+- error-200: rgb(185, 28, 28)
+- error-300: rgb(220, 38, 38)
+- error-400: rgb(230, 53, 53)
+- error-500: rgb(239, 68, 68)
+- error-600: rgb(249, 97, 96)
+- error-700: rgb(229, 91, 90)
+- error-800: rgb(254, 202, 202)
+- error-900: rgb(254, 226, 226)
+- error-950: rgb(254, 233, 233)
+
+### Success Colors (Inverted Green)
+
+- success-0: rgb(27, 50, 36)
+- success-50: rgb(20, 83, 45)
+- success-100: rgb(22, 101, 52)
+- success-200: rgb(32, 111, 62)
+- success-300: rgb(42, 121, 72)
+- success-400: rgb(52, 131, 82)
+- success-500: rgb(72, 151, 102)
+- success-600: rgb(102, 181, 132)
+- success-700: rgb(132, 211, 162)
+- success-800: rgb(162, 241, 192)
+- success-900: rgb(202, 255, 232)
+- success-950: rgb(228, 255, 244)
+
+### Warning Colors (Inverted Orange)
+
+- warning-0: rgb(84, 45, 18)
+- warning-50: rgb(108, 56, 19)
+- warning-100: rgb(130, 68, 23)
+- warning-200: rgb(180, 90, 26)
+- warning-300: rgb(215, 108, 31)
+- warning-400: rgb(231, 120, 40)
+- warning-500: rgb(251, 149, 75)
+- warning-600: rgb(253, 173, 116)
+- warning-700: rgb(254, 205, 170)
+- warning-800: rgb(255, 231, 213)
+- warning-900: rgb(255, 244, 237)
+- warning-950: rgb(255, 249, 245)
+
+### Info Colors (Inverted Blue)
+
+- info-0: rgb(3, 38, 56)
+- info-50: rgb(5, 64, 93)
+- info-100: rgb(7, 90, 131)
+- info-200: rgb(9, 115, 168)
+- info-300: rgb(11, 141, 205)
+- info-400: rgb(13, 166, 242)
+- info-500: rgb(50, 180, 244)
+- info-600: rgb(87, 194, 246)
+- info-700: rgb(124, 207, 248)
+- info-800: rgb(162, 221, 250)
+- info-900: rgb(199, 235, 252)
+- info-950: rgb(236, 248, 254)
+
+### Typography Colors (Inverted)
+
+- typography-0: rgb(23, 23, 23)
+- typography-50: rgb(38, 38, 39)
+- typography-100: rgb(64, 64, 64)
+- typography-200: rgb(82, 82, 82)
+- typography-300: rgb(115, 115, 115)
+- typography-400: rgb(140, 140, 140)
+- typography-500: rgb(163, 163, 163)
+- typography-600: rgb(212, 212, 212)
+- typography-700: rgb(219, 219, 220)
+- typography-800: rgb(229, 229, 229)
+- typography-900: rgb(245, 245, 245)
+- typography-950: rgb(254, 254, 255)
+
+### Outline Colors (Inverted)
+
+- outline-0: rgb(26, 23, 23)
+- outline-50: rgb(39, 38, 36)
+- outline-100: rgb(65, 65, 65)
+- outline-200: rgb(83, 82, 82)
+- outline-300: rgb(115, 116, 116)
+- outline-400: rgb(140, 141, 141)
+- outline-500: rgb(165, 163, 163)
+- outline-600: rgb(211, 211, 211)
+- outline-700: rgb(221, 220, 219)
+- outline-800: rgb(230, 230, 230)
+- outline-900: rgb(243, 243, 243)
+- outline-950: rgb(253, 254, 254)
+
+### Background Colors (Inverted)
+
+- background-0: rgb(18, 18, 18)
+- background-50: rgb(39, 38, 37)
+- background-100: rgb(65, 64, 64)
+- background-200: rgb(83, 82, 82)
+- background-300: rgb(116, 116, 116)
+- background-400: rgb(142, 142, 142)
+- background-500: rgb(162, 163, 163)
+- background-600: rgb(213, 212, 212)
+- background-700: rgb(229, 228, 228)
+- background-800: rgb(242, 241, 241)
+- background-900: rgb(246, 246, 246)
+- background-950: rgb(255, 255, 255)
+
+### Special Background Colors (Dark Mode)
+
+- background-error: rgb(66, 43, 43)
+- background-warning: rgb(65, 47, 35)
+- background-success: rgb(28, 43, 33)
+- background-muted: rgb(51, 51, 51)
+- background-info: rgb(26, 40, 46)
+
+### Focus Ring Indicators (Dark Mode)
+
+- indicator-primary: rgb(247, 247, 247)
+- indicator-info: rgb(161, 199, 245)
+- indicator-error: rgb(232, 70, 69)
+
+## Usage in Tailwind Classes
+
+Colors can be used with standard Tailwind patterns, some examples shown below:
+
+- `bg-primary-500`: Background with primary color
+- `text-typography-900`: Text with typography color
+- `border-outline-200`: Border with outline color
+- `bg-background-error`: Background for error states

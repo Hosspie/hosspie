@@ -153,21 +153,21 @@
 
 #### 📝 Typography - Text Colors
 
-텍스트에 사용되는 흰색부터 회색까지의 색상 스케일입니다.
+텍스트에 사용되는 흰색부터 회색까지의 색상 스케일입니다. (일관된 그라데이션으로 조정)
 
 | 색상 이름                | RGB 값        | Hex 값    |
 | :----------------------- | :------------ | :-------- |
 | `--color-typography-0`   | `255 255 255` | `#FFFFFF` |
-| `--color-typography-50`  | `250 250 250` | `#FAFAFA` |
-| `--color-typography-100` | `240 240 240` | `#F0F0F0` |
-| `--color-typography-200` | `220 220 220` | `#DCDCDC` |
-| `--color-typography-300` | `200 200 200` | `#C8C8C8` |
-| `--color-typography-400` | `180 180 180` | `#B4B4B4` |
-| `--color-typography-500` | `160 160 160` | `#A0A0A0` |
-| `--color-typography-600` | `140 140 140` | `#8C8C8C` |
-| `--color-typography-700` | `120 120 120` | `#787878` |
-| `--color-typography-800` | `100 100 100` | `#646464` |
-| `--color-typography-900` | `80 80 80`    | `#505050` |
+| `--color-typography-50`  | `255 255 255` | `#FFFFFF` |
+| `--color-typography-100` | `250 250 250` | `#FAFAFA` |
+| `--color-typography-200` | `250 250 250` | `#FAFAFA` |
+| `--color-typography-300` | `245 245 245` | `#F5F5F5` |
+| `--color-typography-400` | `245 245 245` | `#F5F5F5` |
+| `--color-typography-500` | `245 245 245` | `#F5F5F5` |
+| `--color-typography-600` | `245 245 245` | `#F5F5F5` |
+| `--color-typography-700` | `245 245 245` | `#F5F5F5` |
+| `--color-typography-800` | `170 170 170` | `#AAAAAA` |
+| `--color-typography-900` | `115 115 115` | `#737373` |
 | `--color-typography-950` | `60 60 60`    | `#3C3C3C` |
 
 ---

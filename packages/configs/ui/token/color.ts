@@ -103,16 +103,16 @@ export const colorConfig = {
 
     /* Typography - Dark Theme Text (사진의 텍스트 색상들) */
     '--color-typography-0': '255 255 255', // 순백색 (주요 제목)
-    '--color-typography-50': '250 250 250', // 거의 화이트 (메인 텍스트)
-    '--color-typography-100': '240 240 240', // 연한 회색 (서브 텍스트)
-    '--color-typography-200': '220 220 220', // 밝은 회색 (라벨)
-    '--color-typography-300': '200 200 200', // 중간 밝은 회색
-    '--color-typography-400': '180 180 180', // 중간 회색 (보조 텍스트)
-    '--color-typography-500': '160 160 160', // 회색 (비활성 텍스트)
-    '--color-typography-600': '140 140 140', // 어두운 회색
-    '--color-typography-700': '120 120 120', // 진한 회색
-    '--color-typography-800': '100 100 100', // 매우 진한 회색
-    '--color-typography-900': '80 80 80', // 거의 검은 회색
+    '--color-typography-50': '255 255 255', // 화이트 (메인 텍스트)
+    '--color-typography-100': '250 250 250', // 거의 화이트 (서브 텍스트)
+    '--color-typography-200': '250 250 250', // 연한 회색 (라벨)
+    '--color-typography-300': '245 245 245', // 밝은 회색
+    '--color-typography-400': '245 245 245', // 중간 밝은 회색 (보조 텍스트)
+    '--color-typography-500': '245 245 245', // 연한 회색 (비활성 텍스트)
+    '--color-typography-600': '245 245 245', // 중간 회색
+    '--color-typography-700': '245 245 245', // 연한 회색 (기본 텍스트)
+    '--color-typography-800': '170 170 170', // 진한 회색
+    '--color-typography-900': '115 115 115', // 매우 진한 회색
     '--color-typography-950': '60 60 60', // 검은 회색
 
     /* Outline - Dark Theme Borders */
@@ -256,16 +256,16 @@ export const colorConfig = {
 
     /* Typography - Dark Theme Text (사진의 텍스트 색상들) */
     '--color-typography-0': '255 255 255', // 순백색 (주요 제목)
-    '--color-typography-50': '250 250 250', // 거의 화이트 (메인 텍스트)
-    '--color-typography-100': '240 240 240', // 연한 회색 (서브 텍스트)
-    '--color-typography-200': '220 220 220', // 밝은 회색 (라벨)
-    '--color-typography-300': '200 200 200', // 중간 밝은 회색
-    '--color-typography-400': '180 180 180', // 중간 회색 (보조 텍스트)
-    '--color-typography-500': '160 160 160', // 회색 (비활성 텍스트)
-    '--color-typography-600': '140 140 140', // 어두운 회색
-    '--color-typography-700': '120 120 120', // 진한 회색
-    '--color-typography-800': '100 100 100', // 매우 진한 회색
-    '--color-typography-900': '80 80 80', // 거의 검은 회색
+    '--color-typography-50': '255 255 255', // 화이트 (메인 텍스트)
+    '--color-typography-100': '250 250 250', // 거의 화이트 (서브 텍스트)
+    '--color-typography-200': '250 250 250', // 연한 회색 (라벨)
+    '--color-typography-300': '245 245 245', // 밝은 회색
+    '--color-typography-400': '245 245 245', // 중간 밝은 회색 (보조 텍스트)
+    '--color-typography-500': '245 245 245', // 연한 회색 (비활성 텍스트)
+    '--color-typography-600': '245 245 245', // 중간 회색
+    '--color-typography-700': '245 245 245', // 연한 회색 (기본 텍스트)
+    '--color-typography-800': '170 170 170', // 진한 회색
+    '--color-typography-900': '115 115 115', // 매우 진한 회색
     '--color-typography-950': '60 60 60', // 검은 회색
 
     /* Outline - Dark Theme Borders */

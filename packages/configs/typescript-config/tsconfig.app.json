@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "expo/tsconfig.base",
+  "compilerOptions": {
+    "strict": true,
+    "paths": {
+      "@/*": ["./*"],
+      "@hosspie/design-system/*": ["../../packages/design-system/src/*"]
+    },
+    "baseUrl": ".",
+    "moduleResolution": "bundler"
+  },
+  "include": [
+    "../../packages/design-system/src/**/*.ts",
+    "../../packages/design-system/src/**/*.tsx"
+  ]
+}

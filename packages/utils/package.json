@@ -1,0 +1,35 @@
+{
+  "private": true,
+  "name": "@hosspie/utils",
+  "version": "1.0.0",
+  "exports": {
+    "./types": "./src/types/type.ts",
+    "./enums": "./src/types/enums.ts"
+  },
+  "description": "Shared utilities and types for Hosspie project",
+  "author": "Hosspie Team",
+  "license": "MIT",
+  "scripts": {
+    "lint": "eslint --ext js,ts,tsx .",
+    "type-check": "tsc --noEmit"
+  },
+  "eslintConfig": {
+    "extends": "@hosspie/eslint-config",
+    "ignorePatterns": [
+      "node_modules"
+    ]
+  },
+  "dependencies": {
+    "@hosspie/eslint-config": "workspace:*",
+    "@hosspie/typescript-config": "workspace:*"
+  },
+  "devDependencies": {
+    "@types/react": "~19.0.14",
+    "@types/react-native": "^0.73.0",
+    "typescript": "^5.8.3"
+  },
+  "peerDependencies": {
+    "react": "19.0.0",
+    "react-native": "0.79.5"
+  }
+}

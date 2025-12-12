@@ -1,0 +1,11 @@
+{
+  "private": true,
+  "name": "@hosspie/typescript-config",
+  "version": "1.0.0",
+  "description": "Acme typescript configuration for React Native",
+  "author": "Cedric van Putten <me@bycedric.com>",
+  "license": "MIT",
+  "files": [
+    "tsconfig.app.json"
+  ]
+}
