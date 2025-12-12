@@ -1,19 +1,19 @@
 'use client';
-import React from 'react';
 import { createButton } from '@gluestack-ui/button';
+import { PrimitiveIcon, UIIcon } from '@gluestack-ui/icon';
+import type { VariantProps } from '@gluestack-ui/nativewind-utils';
 import { tva } from '@gluestack-ui/nativewind-utils/tva';
 import { withStyleContext, useStyleContext } from '@gluestack-ui/nativewind-utils/withStyleContext';
 import { cssInterop } from 'nativewind';
+import React from 'react';
 import { ActivityIndicator, Pressable, Text, View } from 'react-native';
-import type { VariantProps } from '@gluestack-ui/nativewind-utils';
-import { PrimitiveIcon, UIIcon } from '@gluestack-ui/icon';
 
 const SCOPE = 'BUTTON';
 
 const Root = withStyleContext(Pressable, SCOPE);
 
 const UIButton = createButton({
-  Root: Root,
+  Root,
   Text,
   Group: View,
   Spinner: ActivityIndicator,

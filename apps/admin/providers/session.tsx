@@ -16,12 +16,12 @@ const AuthContext = createContext<{
 
 // This hook can be used to access the user info.
 export function useSession() {
-  const value = useContext(AuthContext);
-  if (!value) {
+  const context = useContext(AuthContext);
+  if (!context) {
     throw new Error('useSession must be wrapped in a <SessionProvider />');
   }
 
-  return value;
+  return context;
 }
 
 export function SessionProvider({ children }: PropsWithChildren) {

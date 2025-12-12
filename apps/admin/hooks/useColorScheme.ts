@@ -3,7 +3,7 @@ import { useColorScheme as useNativewindColorScheme } from 'nativewind';
 import * as React from 'react';
 import { Platform } from 'react-native';
 
-function useColorScheme() {
+const useColorScheme = () => {
   const { colorScheme, setColorScheme: setNativewindColorScheme } = useNativewindColorScheme();
 
   async function setColorScheme(colorScheme: 'light' | 'dark') {
@@ -26,12 +26,12 @@ function useColorScheme() {
     setColorScheme,
     toggleColorScheme,
   };
-}
+};
 
 /**
  * Set the Android navigation bar color based on the color scheme.
  */
-function useInitialAndroidBarSync() {
+const useInitialAndroidBarSync = () => {
   const { colorScheme } = useColorScheme();
   React.useEffect(() => {
     if (Platform.OS !== 'android') return;
@@ -39,7 +39,7 @@ function useInitialAndroidBarSync() {
       console.error('useColorScheme.tsx", "useInitialColorScheme', error);
     });
   }, []);
-}
+};
 
 export { useColorScheme, useInitialAndroidBarSync };
 

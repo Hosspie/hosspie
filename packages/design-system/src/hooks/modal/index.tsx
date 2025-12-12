@@ -21,6 +21,7 @@ import { Button, ButtonText } from '../../components/button';
 import { Heading } from '../../components/header';
 import { Icon } from '../../components/icon';
 import { Text } from '../../components/text';
+import { Box } from '../../components/box';
 
 type IModalProps =
   | {
@@ -51,7 +52,7 @@ export const useModal = () => {
               <ActionsheetDragIndicatorWrapper>
                 <ActionsheetDragIndicator />
               </ActionsheetDragIndicatorWrapper>
-              {children}
+              <Box className="w-full">{children}</Box>
             </ActionsheetContent>
           </Actionsheet>
         );
