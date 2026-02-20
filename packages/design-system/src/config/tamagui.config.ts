@@ -22,75 +22,47 @@ const animations = createAnimations({
 
 const tokens = createTokens({
   color: {
-    // --- Brand Primary — Orange scale ---
-    primary0: '#FFF4EB',
-    primary50: '#FFE6CC',
-    primary100: '#FFD8AD',
-    primary200: '#FFBA7A',
-    primary300: '#FF9C47',
-    primary400: '#FF7E14',
-    primary500: '#FF6B35', // main brand orange
-    primary600: '#E65F30',
-    primary700: '#CC542A',
-    primary800: '#993F20',
-    primary900: '#662A15',
-    primary950: '#4C2010',
+    // --- Brand Primary (원본: #FF8A3D) ---
+    brandPrimary: '#FF8A3D',
+    brandGradientStart: '#FF8A3D',
+    brandGradientEnd: '#FFB366',
 
-    // --- Secondary — Dark Grays ---
-    secondary0: '#0F0F0F',
-    secondary50: '#141414',
-    secondary100: '#1E1E1E',
-    secondary200: '#282828',
-    secondary300: '#323232',
-    secondary400: '#3C3C3C',
-    secondary500: '#4B4B4B',
-    secondary600: '#5A5A5A',
-    secondary700: '#6E6E6E',
-    secondary800: '#8C8C8C',
-    secondary900: '#B4B4B4',
-    secondary950: '#DCDCDC',
+    // --- Accent (원본: #10B981) ---
+    accentPrimary: '#10B981',
 
-    // --- Background ---
-    background0: '#080808',
-    background50: '#0C0C0C',
-    background100: '#121212',
-    background200: '#191919',
-    background300: '#232323',
-    background400: '#2D2D2D',
-    background500: '#373737',
-    background600: '#464646',
-    background700: '#5A5A5A',
-    background800: '#787878',
-    background900: '#B4B4B4',
-    background950: '#F0F0F0',
+    // --- Surface (원본 디자인 토큰) ---
+    surfaceBase: '#0A0A0F',
+    surfaceCard: '#1A1A24',
+    surfaceElevated: '#242433',
 
-    // --- Typography ---
-    typography0: '#FFFFFF',
-    typography50: '#FFFFFF',
-    typography100: '#FAFAFA',
-    typography200: '#FAFAFA',
-    typography300: '#F5F5F5',
-    typography400: '#F5F5F5',
-    typography500: '#F5F5F5',
-    typography600: '#F5F5F5',
-    typography700: '#F5F5F5',
-    typography800: '#AAAAAA',
-    typography900: '#737373',
-    typography950: '#3C3C3C',
+    // --- Text (원본 디자인 토큰) ---
+    textPrimary: '#FFFFFF',
+    textSecondary: '#B8B8C8',
+    textOnBrand: '#FFFFFF',
+    textOnAccent: '#0A0A0F',
 
-    // --- Outline / Border ---
-    outline0: '#505050',
-    outline100: '#3C3C3C',
-    outline200: '#323232',
-    outline300: '#2D2D2D',
-    outline400: '#282828',
-    outline500: '#232323',
+    // --- Border (원본 디자인 토큰) ---
+    borderNormal: '#2A2A3A',
 
     // --- Status ---
-    error: '#FF4B4B',
-    success: '#4B965F',
-    warning: '#D2963C',
-    info: '#4682C8',
+    error: '#EF4444',
+    success: '#10B981',
+    warning: '#F59E0B',
+    info: '#3B82F6',
+
+    // --- Grayscale (12-step scale based on surfaces) ---
+    gray1: '#0A0A0F',     // surface.base
+    gray2: '#1A1A24',     // surface.card
+    gray3: '#242433',     // surface.elevated
+    gray4: '#2A2A3A',     // border.normal
+    gray5: '#3A3A4A',
+    gray6: '#5A5A6A',
+    gray7: '#7A7A8A',
+    gray8: '#9A9AAA',
+    gray9: '#B8B8C8',     // text.secondary
+    gray10: '#D8D8E8',
+    gray11: '#E8E8F8',
+    gray12: '#FFFFFF',    // text.primary
 
     // --- Base ---
     white: '#FFFFFF',
@@ -158,55 +130,55 @@ const tokens = createTokens({
 // ---------------------------------------------------------------------------
 
 const darkTheme = {
-  background: tokens.color.background0,
-  backgroundHover: tokens.color.background200,
-  backgroundPress: tokens.color.background300,
-  backgroundFocus: tokens.color.background200,
-  color: tokens.color.typography0,
-  colorHover: tokens.color.typography0,
-  colorPress: tokens.color.typography800,
-  borderColor: tokens.color.outline200,
-  borderColorHover: tokens.color.outline0,
+  background: tokens.color.surfaceBase,       // #0A0A0F
+  backgroundHover: tokens.color.surfaceCard,  // #1A1A24
+  backgroundPress: tokens.color.surfaceElevated, // #242433
+  backgroundFocus: tokens.color.surfaceCard,
+  color: tokens.color.textPrimary,            // #FFFFFF
+  colorHover: tokens.color.textPrimary,
+  colorPress: tokens.color.textSecondary,     // #B8B8C8
+  borderColor: tokens.color.borderNormal,     // #2A2A3A
+  borderColorHover: tokens.color.gray5,
   shadowColor: tokens.color.black,
-  // 12-step background scale
-  color1: tokens.color.background0,
-  color2: tokens.color.background100,
-  color3: tokens.color.background200,
-  color4: tokens.color.background300,
-  color5: tokens.color.background400,
-  color6: tokens.color.background500,
-  color7: tokens.color.background600,
-  color8: tokens.color.background700,
-  color9: tokens.color.primary500,  // brand accent
-  color10: tokens.color.typography800,
-  color11: tokens.color.typography700,
-  color12: tokens.color.typography0,
+  // 12-step scale
+  color1: tokens.color.gray1,   // #0A0A0F (surfaceBase)
+  color2: tokens.color.gray2,   // #1A1A24 (surfaceCard)
+  color3: tokens.color.gray3,   // #242433 (surfaceElevated)
+  color4: tokens.color.gray4,   // #2A2A3A (borderNormal)
+  color5: tokens.color.gray5,
+  color6: tokens.color.gray6,
+  color7: tokens.color.gray7,
+  color8: tokens.color.gray8,
+  color9: tokens.color.brandPrimary,  // #FF8A3D
+  color10: tokens.color.gray9,  // #B8B8C8 (textSecondary)
+  color11: tokens.color.gray10,
+  color12: tokens.color.gray12, // #FFFFFF (textPrimary)
 }
 
 const lightTheme = {
-  background: tokens.color.background950,
-  backgroundHover: tokens.color.background900,
-  backgroundPress: tokens.color.background800,
-  backgroundFocus: tokens.color.background900,
-  color: tokens.color.typography950,
-  colorHover: tokens.color.typography950,
-  colorPress: tokens.color.typography900,
-  borderColor: tokens.color.outline0,
-  borderColorHover: tokens.color.outline100,
+  background: tokens.color.gray12,            // #FFFFFF
+  backgroundHover: tokens.color.gray11,       // #E8E8F8
+  backgroundPress: tokens.color.gray10,       // #D8D8E8
+  backgroundFocus: tokens.color.gray11,
+  color: tokens.color.gray1,                  // #0A0A0F
+  colorHover: tokens.color.gray1,
+  colorPress: tokens.color.gray3,             // #242433
+  borderColor: tokens.color.gray10,           // #D8D8E8
+  borderColorHover: tokens.color.gray9,
   shadowColor: 'rgba(0,0,0,0.1)',
-  // 12-step scale inverted
-  color1: tokens.color.background950,
-  color2: tokens.color.background900,
-  color3: tokens.color.background800,
-  color4: tokens.color.background700,
-  color5: tokens.color.background600,
-  color6: tokens.color.background500,
-  color7: tokens.color.background400,
-  color8: tokens.color.background300,
-  color9: tokens.color.primary500,  // same brand accent
-  color10: tokens.color.typography800,
-  color11: tokens.color.typography900,
-  color12: tokens.color.typography950,
+  // 12-step scale (반전)
+  color1: tokens.color.gray12,  // #FFFFFF
+  color2: tokens.color.gray11,  // #E8E8F8
+  color3: tokens.color.gray10,  // #D8D8E8
+  color4: tokens.color.gray9,   // #B8B8C8
+  color5: tokens.color.gray8,   // #9A9AAA
+  color6: tokens.color.gray7,   // #7A7A8A
+  color7: tokens.color.gray6,   // #5A5A6A
+  color8: tokens.color.gray5,   // #3A3A4A
+  color9: tokens.color.brandPrimary,  // #FF8A3D
+  color10: tokens.color.gray4,  // #2A2A3A
+  color11: tokens.color.gray2,  // #1A1A24
+  color12: tokens.color.gray1,  // #0A0A0F
 }
 
 // ---------------------------------------------------------------------------

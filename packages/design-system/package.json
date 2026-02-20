@@ -21,17 +21,17 @@
     ]
   },
   "dependencies": {
-    "tamagui": "latest",
-    "@tamagui/config": "latest",
-    "@tamagui/animations-react-native": "latest",
-    "@tamagui/font-inter": "latest",
-    "@tamagui/shorthands": "latest",
-    "@tamagui/themes": "latest",
+    "tamagui": "2.0.0-rc.16",
+    "@tamagui/config": "2.0.0-rc.16",
+    "@tamagui/animations-react-native": "2.0.0-rc.16",
+    "@tamagui/font-inter": "2.0.0-rc.16",
+    "@tamagui/shorthands": "2.0.0-rc.16",
+    "@tamagui/themes": "2.0.0-rc.16",
     "react-native-reanimated": "~3.16.0"
   },
   "devDependencies": {
     "@hosspie/eslint-config": "workspace:*",
-    "@tamagui/babel-plugin": "latest"
+    "@tamagui/babel-plugin": "2.0.0-rc.16"
   },
   "peerDependencies": {
     "expo": "*",

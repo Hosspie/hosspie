@@ -303,19 +303,19 @@ importers:
   packages/design-system:
     dependencies:
       '@tamagui/animations-react-native':
-        specifier: latest
+        specifier: 2.0.0-rc.16
         version: 2.0.0-rc.16(react-dom@19.0.0(react@18.3.1))(react-native-gesture-handler@2.24.0(react-native@0.79.6(@babel/core@7.28.3)(@types/react@19.0.14)(react@18.3.1))(react@18.3.1))(react-native-safe-area-context@5.4.0(react-native@0.79.6(@babel/core@7.28.3)(@types/react@19.0.14)(react@18.3.1))(react@18.3.1))(react-native@0.79.6(@babel/core@7.28.3)(@types/react@19.0.14)(react@18.3.1))(react@18.3.1)(sf-symbols-typescript@2.1.0)
       '@tamagui/config':
-        specifier: latest
+        specifier: 2.0.0-rc.16
         version: 2.0.0-rc.16(react-dom@19.0.0(react@18.3.1))(react-native-gesture-handler@2.24.0(react-native@0.79.6(@babel/core@7.28.3)(@types/react@19.0.14)(react@18.3.1))(react@18.3.1))(react-native-reanimated@3.16.7(@babel/core@7.28.3)(react-native@0.79.6(@babel/core@7.28.3)(@types/react@19.0.14)(react@18.3.1))(react@18.3.1))(react-native-safe-area-context@5.4.0(react-native@0.79.6(@babel/core@7.28.3)(@types/react@19.0.14)(react@18.3.1))(react@18.3.1))(react-native@0.79.6(@babel/core@7.28.3)(@types/react@19.0.14)(react@18.3.1))(react@18.3.1)(sf-symbols-typescript@2.1.0)
       '@tamagui/font-inter':
-        specifier: latest
+        specifier: 2.0.0-rc.16
         version: 2.0.0-rc.16(react-dom@19.0.0(react@18.3.1))(react-native-gesture-handler@2.24.0(react-native@0.79.6(@babel/core@7.28.3)(@types/react@19.0.14)(react@18.3.1))(react@18.3.1))(react-native-safe-area-context@5.4.0(react-native@0.79.6(@babel/core@7.28.3)(@types/react@19.0.14)(react@18.3.1))(react@18.3.1))(react-native@0.79.6(@babel/core@7.28.3)(@types/react@19.0.14)(react@18.3.1))(react@18.3.1)(sf-symbols-typescript@2.1.0)
       '@tamagui/shorthands':
-        specifier: latest
+        specifier: 2.0.0-rc.16
         version: 2.0.0-rc.16(react-dom@19.0.0(react@18.3.1))(react-native-gesture-handler@2.24.0(react-native@0.79.6(@babel/core@7.28.3)(@types/react@19.0.14)(react@18.3.1))(react@18.3.1))(react-native-safe-area-context@5.4.0(react-native@0.79.6(@babel/core@7.28.3)(@types/react@19.0.14)(react@18.3.1))(react@18.3.1))(react-native@0.79.6(@babel/core@7.28.3)(@types/react@19.0.14)(react@18.3.1))(react@18.3.1)(sf-symbols-typescript@2.1.0)
       '@tamagui/themes':
-        specifier: latest
+        specifier: 2.0.0-rc.16
         version: 2.0.0-rc.16(react-dom@19.0.0(react@18.3.1))(react-native-gesture-handler@2.24.0(react-native@0.79.6(@babel/core@7.28.3)(@types/react@19.0.14)(react@18.3.1))(react@18.3.1))(react-native-safe-area-context@5.4.0(react-native@0.79.6(@babel/core@7.28.3)(@types/react@19.0.14)(react@18.3.1))(react@18.3.1))(react-native@0.79.6(@babel/core@7.28.3)(@types/react@19.0.14)(react@18.3.1))(react@18.3.1)(sf-symbols-typescript@2.1.0)
       expo:
         specifier: '*'
@@ -330,14 +330,14 @@ importers:
         specifier: ~3.16.0
         version: 3.16.7(@babel/core@7.28.3)(react-native@0.79.6(@babel/core@7.28.3)(@types/react@19.0.14)(react@18.3.1))(react@18.3.1)
       tamagui:
-        specifier: latest
+        specifier: 2.0.0-rc.16
         version: 2.0.0-rc.16(react-dom@19.0.0(react@18.3.1))(react-native-gesture-handler@2.24.0(react-native@0.79.6(@babel/core@7.28.3)(@types/react@19.0.14)(react@18.3.1))(react@18.3.1))(react-native-safe-area-context@5.4.0(react-native@0.79.6(@babel/core@7.28.3)(@types/react@19.0.14)(react@18.3.1))(react@18.3.1))(react-native@0.79.6(@babel/core@7.28.3)(@types/react@19.0.14)(react@18.3.1))(react@18.3.1)(sf-symbols-typescript@2.1.0)
     devDependencies:
       '@hosspie/eslint-config':
         specifier: workspace:*
         version: link:../configs/eslint-config
       '@tamagui/babel-plugin':
-        specifier: latest
+        specifier: 2.0.0-rc.16
         version: 2.0.0-rc.16(react-dom@19.0.0(react@18.3.1))(react-native-gesture-handler@2.24.0(react-native@0.79.6(@babel/core@7.28.3)(@types/react@19.0.14)(react@18.3.1))(react@18.3.1))(react-native-safe-area-context@5.4.0(react-native@0.79.6(@babel/core@7.28.3)(@types/react@19.0.14)(react@18.3.1))(react@18.3.1))(react-native@0.79.6(@babel/core@7.28.3)(@types/react@19.0.14)(react@18.3.1))(react@18.3.1)(sf-symbols-typescript@2.1.0)
 
   packages/services/frontend:
@@ -10410,9 +10410,7 @@ snapshots:
       metro-runtime: 0.83.1
     transitivePeerDependencies:
       - '@babel/core'
-      - bufferutil
       - supports-color
-      - utf-8-validate
 
   '@react-native/normalize-color@2.1.0': {}
 
