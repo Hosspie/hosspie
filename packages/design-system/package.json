@@ -12,7 +12,9 @@
   "description": "Hosspie design system built on Tamagui",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint --ext js,ts,tsx ."
+    "lint": "eslint --ext js,ts,tsx .",
+    "storybook": "TAMAGUI_TARGET=web storybook dev -p 6006",
+    "storybook:build": "storybook build"
   },
   "eslintConfig": {
     "extends": "@hosspie/eslint-config",
@@ -21,17 +23,26 @@
     ]
   },
   "dependencies": {
-    "tamagui": "2.0.0-rc.16",
-    "@tamagui/config": "2.0.0-rc.16",
     "@tamagui/animations-react-native": "2.0.0-rc.16",
+    "@tamagui/config": "2.0.0-rc.16",
     "@tamagui/font-inter": "2.0.0-rc.16",
     "@tamagui/shorthands": "2.0.0-rc.16",
     "@tamagui/themes": "2.0.0-rc.16",
-    "react-native-reanimated": "~3.16.0"
+    "react-native-reanimated": "~3.16.0",
+    "tamagui": "2.0.0-rc.16"
   },
   "devDependencies": {
     "@hosspie/eslint-config": "workspace:*",
-    "@tamagui/babel-plugin": "2.0.0-rc.16"
+    "@storybook/addon-docs": "^10.2.10",
+    "@storybook/react-vite": "^10.2.10",
+    "@tamagui/animations-css": "2.0.0-rc.16",
+    "@tamagui/babel-plugin": "2.0.0-rc.16",
+    "@tamagui/vite-plugin": "2.0.0-rc.16",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "react-native-web": "~0.20.0",
+    "storybook": "^10.2.10",
+    "vite": "^7.3.1"
   },
   "peerDependencies": {
     "expo": "*",
