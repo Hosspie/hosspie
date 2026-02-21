@@ -1,10 +1,9 @@
-import { ChevronDownIcon, ChevronUpIcon, type LucideIcon } from 'lucide-react-native';
+import { ChevronDown, ChevronUp, type LucideIcon } from 'lucide-react-native';
 import React, { useState } from 'react';
 import { Pressable, TouchableHighlight } from 'react-native';
 import Animated, { FadeInDown, FadeOutDown } from 'react-native-reanimated';
 
-import { Box } from '../../components/box';
-import { Icon } from '../../components/icon';
+import { XStack, YStack } from '../../components/stacks';
 import { Text } from '../../components/text';
 
 interface FabProps {
@@ -21,28 +20,36 @@ interface FabsOrganismProps {
 
 const FabsOrganism = ({ isFoldable = false, placement = 'right', fabs }: FabsOrganismProps) => {
   const [isFolded, setIsFolded] = useState<boolean>(true);
+  const itemsAlignment = placement === 'right' ? 'flex-end' : 'flex-start';
 
   if (!isFoldable) {
     const hasOnlyOneFab = fabs.length === 1;
-    const itemsAlignment = placement === 'right' ? 'items-end' : 'items-start';
+
     return (
-      <Box className={`flex-1 ${itemsAlignment} justify-end gap-4 p-4`}>
+      <YStack flex={1} alignItems={itemsAlignment} justifyContent="flex-end" gap="$4" padding="$4">
         {fabs.map((fab, index) => {
           const hasOnlyIcon = !fab.label && fab.icon;
-          const bgColor = hasOnlyOneFab ? 'bg-primary-500' : 'bg-secondary-500';
-          const rounded = hasOnlyIcon ? 'rounded-full' : 'rounded-lg';
+          const bgColor = hasOnlyOneFab ? '$brandPrimary' : '$surfaceElevated';
+          const borderRadius = hasOnlyIcon ? 999 : '$3';
+          const FabIcon = fab.icon;
+
           return (
-            <TouchableHighlight key={index} className={itemsAlignment} onPress={fab.onPress}>
-              <Box
-                className={`${bgColor} flex-row items-center justify-center gap-2 ${rounded} p-2`}
+            <TouchableHighlight key={index} onPress={fab.onPress}>
+              <XStack
+                backgroundColor={bgColor}
+                alignItems="center"
+                justifyContent="center"
+                gap="$2"
+                borderRadius={borderRadius}
+                padding="$2"
               >
-                {fab.icon && <Icon size="xl" className="text-typography-500" as={fab.icon} />}
-                {fab.label && <Text>{fab.label}</Text>}
-              </Box>
+                {FabIcon && <FabIcon size={24} color="white" />}
+                {fab.label && <Text color="$textPrimary">{fab.label}</Text>}
+              </XStack>
             </TouchableHighlight>
           );
         })}
-      </Box>
+      </YStack>
     );
   }
 
@@ -50,18 +57,25 @@ const FabsOrganism = ({ isFoldable = false, placement = 'right', fabs }: FabsOrg
     setIsFolded(!isFolded);
   };
 
-  const itemsAlignment = placement === 'right' ? 'items-end' : 'items-start';
   return (
-    <Box className={`flex-1 ${itemsAlignment} justify-end gap-4 p-4`}>
+    <YStack flex={1} alignItems={itemsAlignment} justifyContent="flex-end" gap="$4" padding="$4">
       {!isFolded && (
-        <Animated.View className="gap-4" entering={FadeInDown} exiting={FadeOutDown}>
+        <Animated.View style={{ gap: 16 }} entering={FadeInDown} exiting={FadeOutDown}>
           {fabs.map((fab, index) => {
+            const FabIcon = fab.icon;
             return (
               <TouchableHighlight key={index} onPress={fab.onPress}>
-                <Box className="bg-secondary-500 flex-row items-center justify-center gap-2 rounded-lg p-2">
-                  {fab.icon && <Icon size="xl" className="text-typography-500" as={fab.icon} />}
-                  {fab.label && <Text>{fab.label}</Text>}
-                </Box>
+                <XStack
+                  backgroundColor="$surfaceElevated"
+                  alignItems="center"
+                  justifyContent="center"
+                  gap="$2"
+                  borderRadius="$3"
+                  padding="$2"
+                >
+                  {FabIcon && <FabIcon size={24} color="white" />}
+                  {fab.label && <Text color="$textPrimary">{fab.label}</Text>}
+                </XStack>
               </TouchableHighlight>
             );
           })}
@@ -69,11 +83,22 @@ const FabsOrganism = ({ isFoldable = false, placement = 'right', fabs }: FabsOrg
       )}
       <Pressable
         onPress={handlePressFoldButton}
-        className="bg-primary-500 h-10 w-10 items-center justify-center rounded-full"
+        style={{
+          backgroundColor: '#FF8A3D',
+          height: 40,
+          width: 40,
+          alignItems: 'center',
+          justifyContent: 'center',
+          borderRadius: 20,
+        }}
       >
-        <Icon size="xl" color="white" as={isFolded ? ChevronUpIcon : ChevronDownIcon} />
+        {isFolded ? (
+          <ChevronUp size={24} color="white" />
+        ) : (
+          <ChevronDown size={24} color="white" />
+        )}
       </Pressable>
-    </Box>
+    </YStack>
   );
 };
 

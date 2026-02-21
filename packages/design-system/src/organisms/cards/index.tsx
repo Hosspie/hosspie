@@ -1,33 +1,16 @@
-import { ChevronDownIcon, ChevronUpIcon, type LucideIcon } from 'lucide-react-native';
+import { ChevronDown, ChevronUp } from 'lucide-react-native';
 import React from 'react';
 
-import {
-  Accordion,
-  AccordionItem,
-  AccordionHeader,
-  AccordionTrigger,
-  AccordionTitleText,
-  AccordionIcon,
-  AccordionContent,
-  AccordionContentText,
-} from '../../components/accordion';
-import {
-  Badge,
-  BadgeIcon,
-  BadgeText,
-  type IBadgeIconProps,
-  type IBadgeProps,
-} from '../../components/badge';
+import { Accordion } from '../../components/accordion';
+import { Badge, BadgeText } from '../../components/badge';
 import { Card } from '../../components/card';
-import { HStack } from '../../components/h-stack';
-import { Heading } from '../../components/header';
-import { Text } from '../../components/text';
-import { VStack } from '../../components/v-stack';
+import { XStack, YStack } from '../../components/stacks';
+import { H3, Text } from '../../components/text';
 
 export type CardOption = {
   title: string;
   description: string;
-  badges?: (IBadgeProps & { icon?: IBadgeIconProps['as']; label?: string })[];
+  badges?: { variant?: 'success' | 'error' | 'warning' | 'info'; label?: string }[];
   expandable?: {
     type: 'text';
     label: string;
@@ -41,55 +24,61 @@ export interface CardsOrganismProps {
 
 export function CardsOrganism({ options }: CardsOrganismProps) {
   return (
-    <VStack className="p-3" space="xl">
+    <YStack padding="$3" gap="$6">
       {options.map((option, index) => (
-        <Card key={index} variant="outline">
-          <VStack space="md">
-            <VStack space="xs">
-              <HStack space="sm">
-                <Heading size="lg">{option.title}</Heading>
+        <Card key={index} bordered padding="$4">
+          <YStack gap="$4">
+            <YStack gap="$1">
+              <XStack gap="$2" alignItems="center">
+                <H3>{option.title}</H3>
                 {option.badges && (
-                  <HStack space="xs">
+                  <XStack gap="$1">
                     {option.badges.map((badge, badgeIndex) => (
                       <Badge
                         key={badgeIndex}
-                        action={badge.action || 'success'}
-                        variant="solid"
-                        size="sm"
+                        variant={badge.variant || 'success'}
                       >
                         <BadgeText>{badge.label}</BadgeText>
-                        {badge.icon && <BadgeIcon as={badge.icon} className="ml-2" />}
                       </Badge>
                     ))}
-                  </HStack>
+                  </XStack>
                 )}
-              </HStack>
-              <Text size="sm">{option.description}</Text>
-            </VStack>
+              </XStack>
+              <Text fontSize="$1" color="$textSecondary">{option.description}</Text>
+            </YStack>
 
-            {/* Expandable section */}
             {option.expandable && (
-              <Accordion variant="unfilled" className="bg-secondary-0" type="single">
-                <AccordionItem value={`item-${index}`}>
-                  <AccordionHeader>
-                    <AccordionTrigger>
-                      {({ isExpanded }) => (
-                        <HStack>
-                          <AccordionTitleText>{option.expandable.label}</AccordionTitleText>
-                          <AccordionIcon as={isExpanded ? ChevronUpIcon : ChevronDownIcon} />
-                        </HStack>
+              <Accordion type="single" collapsible>
+                <Accordion.Item value={`item-${index}`}>
+                  <Accordion.Header>
+                    <Accordion.Trigger
+                      flexDirection="row"
+                      justifyContent="space-between"
+                      backgroundColor="$surfaceCard"
+                      padding="$3"
+                      borderRadius="$2"
+                    >
+                      {({ open }: { open: boolean }) => (
+                        <XStack flex={1} justifyContent="space-between" alignItems="center">
+                          <Text>{option.expandable!.label}</Text>
+                          {open ? (
+                            <ChevronUp size={16} color="#B8B8C8" />
+                          ) : (
+                            <ChevronDown size={16} color="#B8B8C8" />
+                          )}
+                        </XStack>
                       )}
-                    </AccordionTrigger>
-                  </AccordionHeader>
-                  <AccordionContent>
-                    <AccordionContentText>{option.expandable.content}</AccordionContentText>
-                  </AccordionContent>
-                </AccordionItem>
+                    </Accordion.Trigger>
+                  </Accordion.Header>
+                  <Accordion.Content padding="$3">
+                    <Text color="$textSecondary">{option.expandable.content}</Text>
+                  </Accordion.Content>
+                </Accordion.Item>
               </Accordion>
             )}
-          </VStack>
+          </YStack>
         </Card>
       ))}
-    </VStack>
+    </YStack>
   );
 }
