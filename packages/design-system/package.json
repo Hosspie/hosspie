@@ -2,14 +2,14 @@
   "private": true,
   "name": "@hosspie/design-system",
   "version": "1.0.0",
-  "main": "index.js",
   "exports": {
+    "./components/*": "./src/components/*",
     "./organisms/*": "./src/organisms/*",
     "./hooks/*": "./src/hooks/*",
-    "./providers/*": "./src/providers/*"
+    "./providers/*": "./src/providers/*",
+    "./config": "./src/config/tamagui.config.ts"
   },
-  "description": "Acme UI components for React Native",
-  "author": "Cedric van Putten <me@bycedric.com>",
+  "description": "Hosspie design system built on Tamagui",
   "license": "MIT",
   "scripts": {
     "lint": "eslint --ext js,ts,tsx ."
@@ -21,7 +21,21 @@
     ]
   },
   "dependencies": {
-    "@hosspie/ui-config": "workspace:*",
-    "@hosspie/eslint-config": "workspace:*"
+    "tamagui": "2.0.0-rc.16",
+    "@tamagui/config": "2.0.0-rc.16",
+    "@tamagui/animations-react-native": "2.0.0-rc.16",
+    "@tamagui/font-inter": "2.0.0-rc.16",
+    "@tamagui/shorthands": "2.0.0-rc.16",
+    "@tamagui/themes": "2.0.0-rc.16",
+    "react-native-reanimated": "~3.16.0"
+  },
+  "devDependencies": {
+    "@hosspie/eslint-config": "workspace:*",
+    "@tamagui/babel-plugin": "2.0.0-rc.16"
+  },
+  "peerDependencies": {
+    "expo": "*",
+    "react": "*",
+    "react-native": "*"
   }
 }
