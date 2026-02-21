@@ -1,34 +1,16 @@
-import { ChevronDownIcon, ChevronUpIcon, CircleAlert } from 'lucide-react-native';
+import { AlertCircle, ChevronDown, ChevronUp } from 'lucide-react-native';
 import React from 'react';
 import { Controller, type Control, type FieldValues, type Path } from 'react-hook-form';
+import { TextArea, View } from 'tamagui';
 
-import {
-  Accordion,
-  AccordionItem,
-  AccordionHeader,
-  AccordionTrigger,
-  AccordionTitleText,
-  AccordionIcon,
-  AccordionContent,
-  AccordionContentText,
-} from '../../components/accordion';
-import { Badge, BadgeIcon, BadgeText, IBadgeIconProps, IBadgeProps } from '../../components/badge';
+import { Accordion } from '../../components/accordion';
+import { Badge, BadgeText } from '../../components/badge';
 import { Card } from '../../components/card';
-import {
-  FormControl,
-  FormControlError,
-  FormControlErrorIcon,
-  FormControlErrorText,
-  FormControlLabel,
-  FormControlLabelText,
-} from '../../components/form-control';
-import { HStack } from '../../components/h-stack';
-import { Heading } from '../../components/header';
-import { Input, InputField } from '../../components/input';
-import { Radio, RadioGroup, RadioIndicator, RadioIcon, RadioLabel } from '../../components/radio';
-import { Text } from '../../components/text';
-import { Textarea, TextareaInput } from '../../components/text-area';
-import { VStack } from '../../components/v-stack';
+import { Input } from '../../components/input';
+import { Label } from '../../components/label';
+import { RadioGroup } from '../../components/radio';
+import { XStack, YStack } from '../../components/stacks';
+import { H3, Text } from '../../components/text';
 
 export type FormFieldType = 'input' | 'textarea' | 'card' | 'radio';
 
@@ -65,7 +47,7 @@ export type FormField<T extends FieldValues = FieldValues> =
         value: T[keyof T];
         label: string;
         description?: string;
-        badges?: (IBadgeProps & { icon?: IBadgeIconProps['as']; label?: string })[];
+        badges?: { variant?: 'success' | 'error' | 'warning' | 'info'; label?: string }[];
         expandable?:
           | { type: 'text'; label: string; content: string }
           | {
@@ -101,14 +83,77 @@ export interface FormFieldsProps<T extends FieldValues> {
   fields: FormField<T>[];
 }
 
+function ErrorMessage({ message }: { message: string }) {
+  return (
+    <XStack gap="$2" alignItems="center" marginTop="$2">
+      <AlertCircle size={16} color="#EF4444" />
+      <Text color="$error" fontSize="$1">{message}</Text>
+    </XStack>
+  );
+}
+
+function ExpandableSection({
+  expandable,
+  index,
+}: {
+  expandable: {
+    type: 'text' | 'input';
+    label: string;
+    content?: string;
+    placeholder?: string;
+    value?: string;
+    onChange?: (value: string) => void;
+  };
+  index: number;
+}) {
+  return (
+    <Accordion type="single" collapsible>
+      <Accordion.Item value={`item-${index}`}>
+        <Accordion.Header>
+          <Accordion.Trigger
+            flexDirection="row"
+            justifyContent="space-between"
+            backgroundColor="$surfaceCard"
+            padding="$3"
+            borderRadius="$2"
+          >
+            {({ open }: { open: boolean }) => (
+              <XStack flex={1} justifyContent="space-between" alignItems="center">
+                <Text>{expandable.label}</Text>
+                {open ? (
+                  <ChevronUp size={16} color="#B8B8C8" />
+                ) : (
+                  <ChevronDown size={16} color="#B8B8C8" />
+                )}
+              </XStack>
+            )}
+          </Accordion.Trigger>
+        </Accordion.Header>
+        <Accordion.Content padding="$3">
+          {expandable.type === 'input' && expandable.onChange && (
+            <Input
+              placeholder={expandable.placeholder}
+              value={expandable.value}
+              onChangeText={expandable.onChange}
+            />
+          )}
+          {expandable.type === 'text' && (
+            <Text color="$textSecondary">{expandable.content}</Text>
+          )}
+        </Accordion.Content>
+      </Accordion.Item>
+    </Accordion>
+  );
+}
+
 export function FormFieldsOrganism<T extends FieldValues>({
   control,
   title,
   fields,
 }: FormFieldsProps<T>) {
   return (
-    <VStack className="w-full p-3" space="lg">
-      {title && <Heading size="xl">{title}</Heading>}
+    <YStack width="100%" padding="$3" gap="$6">
+      {title && <H3>{title}</H3>}
       {fields.map((field) => (
         <Controller
           key={field.name}
@@ -116,180 +161,149 @@ export function FormFieldsOrganism<T extends FieldValues>({
           name={field.name as Path<T>}
           rules={field.rules}
           render={({ field: { onChange, value = '' }, fieldState: { error } }) => (
-            <FormControl isInvalid={!!error} isRequired={field.required}>
-              <FormControlLabel>
-                {field.description && (
-                  <FormControlLabelText>{field.description}</FormControlLabelText>
-                )}
-              </FormControlLabel>
+            <YStack gap="$2">
+              {field.description && <Label>{field.description}</Label>}
+
               {field.type === 'input' && (
-                <Input>
-                  <InputField
-                    placeholder={field.placeholder}
-                    value={value}
-                    onChangeText={onChange}
-                  />
-                </Input>
+                <Input
+                  placeholder={field.placeholder}
+                  value={value}
+                  onChangeText={onChange}
+                  borderColor={error ? '$error' : '$borderNormal'}
+                />
               )}
+
               {field.type === 'textarea' && (
-                <Textarea size="md">
-                  <TextareaInput
-                    placeholder={field.placeholder}
-                    value={value}
-                    onChangeText={onChange}
-                  />
-                </Textarea>
+                <TextArea
+                  placeholder={field.placeholder}
+                  value={value}
+                  onChangeText={onChange}
+                  borderColor={error ? '$error' : '$borderNormal'}
+                />
               )}
+
               {field.type === 'card' && (
-                <VStack space="xl">
-                  {field.options.map((option, index) => (
-                    <Card key={index} variant="outline">
-                      <VStack space="md">
-                        <VStack space="xs" className="relative">
-                          {/* Right checkbox - fixed to top right */}
-                          <RadioGroup
-                            className="absolute right-0 top-0"
-                            value={value as string}
-                            onChange={onChange}
-                          >
-                            <Radio value={option.value as string}>
-                              <RadioIndicator>
-                                <RadioIcon />
-                              </RadioIndicator>
-                            </Radio>
-                          </RadioGroup>
+                <RadioGroup
+                  value={value as string}
+                  onValueChange={onChange}
+                >
+                  <YStack gap="$6">
+                    {field.options.map((option, index) => (
+                      <Card key={index} bordered padding="$4">
+                        <YStack gap="$4">
+                          <YStack gap="$1" position="relative">
+                            <View position="absolute" right={0} top={0} zIndex={1}>
+                              <RadioGroup.Item
+                                value={option.value as string}
+                                id={`${field.name}-card-${index}`}
+                              >
+                                <RadioGroup.Indicator />
+                              </RadioGroup.Item>
+                            </View>
 
-                          {/* Left content with right margin to avoid overlap */}
-                          <VStack space="xs" className="pr-8">
-                            <HStack space="sm">
-                              <Heading size="lg">{option.label}</Heading>
-                              {option.badges && (
-                                <HStack space="xs">
-                                  {option.badges.map((badge, badgeIndex) => (
-                                    <Badge
-                                      key={badgeIndex}
-                                      action={badge.action || 'success'}
-                                      variant="solid"
-                                      size="sm"
-                                    >
-                                      <BadgeText>{badge.label}</BadgeText>
-                                      {badge.icon && <BadgeIcon as={badge.icon} className="ml-2" />}
-                                    </Badge>
-                                  ))}
-                                </HStack>
+                            <YStack gap="$1" paddingRight="$8">
+                              <XStack gap="$2" alignItems="center">
+                                <H3>{option.label}</H3>
+                                {option.badges && (
+                                  <XStack gap="$1">
+                                    {option.badges.map((badge, badgeIndex) => (
+                                      <Badge
+                                        key={badgeIndex}
+                                        variant={badge.variant || 'success'}
+                                      >
+                                        <BadgeText>{badge.label}</BadgeText>
+                                      </Badge>
+                                    ))}
+                                  </XStack>
+                                )}
+                              </XStack>
+                              {option.description && (
+                                <Text fontSize="$1" color="$textSecondary">
+                                  {option.description}
+                                </Text>
                               )}
-                            </HStack>
-                            {option.description && <Text size="sm">{option.description}</Text>}
-                          </VStack>
-                        </VStack>
+                            </YStack>
+                          </YStack>
 
-                        {/* Expandable section */}
-                        {option.expandable && (
-                          <Accordion variant="unfilled" className="bg-secondary-0" type="single">
-                            <AccordionItem value={`item-${index}`}>
-                              <AccordionHeader>
-                                <AccordionTrigger>
-                                  {({ isExpanded }) => (
-                                    <HStack>
-                                      <AccordionTitleText>
-                                        {option.expandable.label}
-                                      </AccordionTitleText>
-                                      <AccordionIcon
-                                        as={isExpanded ? ChevronUpIcon : ChevronDownIcon}
-                                      />
-                                    </HStack>
-                                  )}
-                                </AccordionTrigger>
-                              </AccordionHeader>
-                              <AccordionContent>
-                                {option.expandable.type === 'input' && (
-                                  <FormControl>
-                                    <Input>
-                                      <InputField
-                                        placeholder={option.expandable.placeholder}
-                                        value={option.expandable.value}
-                                        onChangeText={option.expandable.onChange}
-                                      />
-                                    </Input>
-                                  </FormControl>
-                                )}
-                                {option.expandable.type === 'text' && (
-                                  <AccordionContentText>
-                                    {option.expandable.content}
-                                  </AccordionContentText>
-                                )}
-                              </AccordionContent>
-                            </AccordionItem>
-                          </Accordion>
-                        )}
-                      </VStack>
-                    </Card>
-                  ))}
-                </VStack>
+                          {option.expandable && (
+                            <ExpandableSection expandable={option.expandable} index={index} />
+                          )}
+                        </YStack>
+                      </Card>
+                    ))}
+                  </YStack>
+                </RadioGroup>
               )}
+
               {field.type === 'radio' && (
-                <VStack space="md">
-                  <RadioGroup value={value as string} onChange={onChange}>
-                    <VStack space={field.direction === 'horizontal' ? 'xs' : 'sm'}>
-                      {field.direction === 'horizontal' ? (
-                        <HStack space="lg">
-                          {field.options.map((option, index) => (
-                            <Radio key={index} value={option.value as string}>
-                              <RadioIndicator>
-                                <RadioIcon />
-                              </RadioIndicator>
-                              <RadioLabel>{option.label}</RadioLabel>
-                            </Radio>
-                          ))}
-                        </HStack>
-                      ) : (
-                        field.options.map((option, index) => (
-                          <Radio key={index} value={option.value as string}>
-                            <RadioIndicator>
-                              <RadioIcon />
-                            </RadioIndicator>
-                            <RadioLabel>{option.label}</RadioLabel>
-                          </Radio>
-                        ))
-                      )}
-                    </VStack>
+                <YStack gap="$4">
+                  <RadioGroup
+                    value={value as string}
+                    onValueChange={onChange}
+                  >
+                    {field.direction === 'horizontal' ? (
+                      <XStack gap="$6">
+                        {field.options.map((option, index) => (
+                          <XStack key={index} gap="$2" alignItems="center">
+                            <RadioGroup.Item
+                              value={option.value as string}
+                              id={`${field.name}-radio-${index}`}
+                            >
+                              <RadioGroup.Indicator />
+                            </RadioGroup.Item>
+                            <Label htmlFor={`${field.name}-radio-${index}`}>
+                              {option.label}
+                            </Label>
+                          </XStack>
+                        ))}
+                      </XStack>
+                    ) : (
+                      <YStack gap="$2">
+                        {field.options.map((option, index) => (
+                          <XStack key={index} gap="$2" alignItems="center">
+                            <RadioGroup.Item
+                              value={option.value as string}
+                              id={`${field.name}-radio-${index}`}
+                            >
+                              <RadioGroup.Indicator />
+                            </RadioGroup.Item>
+                            <Label htmlFor={`${field.name}-radio-${index}`}>
+                              {option.label}
+                            </Label>
+                          </XStack>
+                        ))}
+                      </YStack>
+                    )}
                   </RadioGroup>
 
-                  {/* Expandable sections for selected options */}
                   {field.options.map(
                     (option, index) =>
                       option.expandable &&
                       value === option.value && (
-                        <VStack key={`expandable-${index}`} space="xs">
-                          {option.expandable.type === 'input' && (
-                            <FormControl>
-                              <Input>
-                                <InputField
-                                  placeholder={option.expandable.placeholder}
-                                  value={option.expandable.value}
-                                  onChangeText={option.expandable.onChange}
-                                />
-                              </Input>
-                            </FormControl>
+                        <YStack key={`expandable-${index}`} gap="$1">
+                          {option.expandable.type === 'input' && option.expandable.onChange && (
+                            <Input
+                              placeholder={option.expandable.placeholder}
+                              value={option.expandable.value}
+                              onChangeText={option.expandable.onChange}
+                            />
                           )}
                           {option.expandable.type === 'text' && (
-                            <Text size="sm">{option.expandable.content}</Text>
+                            <Text fontSize="$1" color="$textSecondary">
+                              {option.expandable.content}
+                            </Text>
                           )}
-                        </VStack>
+                        </YStack>
                       )
                   )}
-                </VStack>
+                </YStack>
               )}
-              <FormControlError>
-                <FormControlErrorIcon as={CircleAlert} className="text-red-500" />
-                <FormControlErrorText className="text-red-500">
-                  {error?.message}
-                </FormControlErrorText>
-              </FormControlError>
-            </FormControl>
+
+              {error && <ErrorMessage message={error.message ?? ''} />}
+            </YStack>
           )}
         />
       ))}
-    </VStack>
+    </YStack>
   );
 }
