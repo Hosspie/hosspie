@@ -1,7 +1,7 @@
 import React from 'react';
 import { useSafeAreaInsets, type Edge } from 'react-native-safe-area-context';
 
-import { Box } from '../../components/box';
+import { YStack } from '../../components/stacks';
 
 interface SafeAreaViewProps {
   children: React.ReactNode;
@@ -33,9 +33,9 @@ const BackgroundLayout = ({ children, edges = ['top', 'bottom'] }: SafeAreaViewP
   const paddings = getPadding();
 
   return (
-    <Box style={paddings} className="flex-1">
+    <YStack flex={1} style={paddings}>
       {children}
-    </Box>
+    </YStack>
   );
 };
 

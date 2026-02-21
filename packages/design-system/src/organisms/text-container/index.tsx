@@ -1,6 +1,6 @@
-import { Heading } from '../../components/header';
+import { H2 } from '../../components/text';
 import { Text } from '../../components/text';
-import { VStack } from '../../components/v-stack';
+import { YStack } from '../../components/stacks';
 
 interface TextContainerProps {
   title?: string;
@@ -8,12 +8,18 @@ interface TextContainerProps {
   align?: 'start' | 'center' | 'end';
 }
 
+const alignMap = {
+  start: 'flex-start',
+  center: 'center',
+  end: 'flex-end',
+} as const;
+
 const TextContainer = ({ title, description, align = 'start' }: TextContainerProps) => {
   return (
-    <VStack space="md" className={`p-3 items-${align}`}>
-      {title && <Heading size="2xl">{title}</Heading>}
-      {description && <Text size="md">{description}</Text>}
-    </VStack>
+    <YStack gap="$4" padding="$3" alignItems={alignMap[align]}>
+      {title && <H2>{title}</H2>}
+      {description && <Text fontSize="$3">{description}</Text>}
+    </YStack>
   );
 };
 

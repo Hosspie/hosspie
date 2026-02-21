@@ -1,6 +1,6 @@
-import { Progress, ProgressFilledTrack } from '../../components/progress';
+import { Progress } from '../../components/progress';
 import { Text } from '../../components/text';
-import { VStack } from '../../components/v-stack';
+import { YStack } from '../../components/stacks';
 
 interface ProgressBarProps {
   value: number;
@@ -9,12 +9,15 @@ interface ProgressBarProps {
 
 const ProgressBar = ({ value, caption }: ProgressBarProps) => {
   return (
-    <VStack space="md" className="p-3">
-      <Progress value={value} size="md" orientation="horizontal">
-        <ProgressFilledTrack />
+    <YStack gap="$4" padding="$3">
+      <Progress value={value} size="$1">
+        <Progress.Indicator
+          animation="fast"
+          backgroundColor="$brandPrimary"
+        />
       </Progress>
-      {caption && <Text size="md">{caption}</Text>}
-    </VStack>
+      {caption && <Text fontSize="$3">{caption}</Text>}
+    </YStack>
   );
 };
 
