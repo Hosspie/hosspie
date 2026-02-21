@@ -1,22 +1,77 @@
-import { createToastHook } from '@gluestack-ui/toast';
+import { useToastController, useToastState, Toast, ToastViewport } from '@tamagui/toast';
 import React from 'react';
-import { Pressable, View, type ViewStyle } from 'react-native';
-import { Motion, AnimatePresence, MotionComponentProps } from '@legendapp/motion';
 
-import { HStack } from '../../components/h-stack';
-import { CloseIcon, HelpCircleIcon, Icon } from '../../components/icon';
-import { VStack } from '../../components/v-stack';
-import { Toast, ToastTitle, ToastDescription } from './toast';
+import { YStack } from '../../components/stacks';
+import { Text } from '../../components/text';
 
 export type ModeType = 'light' | 'dark' | 'system';
 
-type IMotionViewProps = React.ComponentProps<typeof View> &
-  MotionComponentProps<typeof View, ViewStyle, unknown, unknown, unknown>;
+/**
+ * Toast 뷰포트 컴포넌트 — 앱 루트에 배치해야 합니다.
+ *
+ * 사용법:
+ * ```tsx
+ * import { ToastProvider } from '@tamagui/toast'
+ * import { ToastViewportComponent } from '@hosspie/design-system/hooks/toast'
+ *
+ * <ToastProvider>
+ *   <App />
+ *   <ToastViewportComponent />
+ * </ToastProvider>
+ * ```
+ */
+export function ToastViewportComponent() {
+  return <ToastViewport top={60} left={0} right={0} />;
+}
 
-const MotionView = Motion.View as React.ComponentType<IMotionViewProps>;
+/**
+ * 현재 활성화된 Toast를 렌더링하는 컴포넌트 — 앱 루트에 배치해야 합니다.
+ */
+export function CurrentToast() {
+  const currentToast = useToastState();
+
+  if (!currentToast || currentToast.isHandledNatively) return null;
+
+  const isError = currentToast.customData?.type === 'error';
+
+  return (
+    <Toast
+      key={currentToast.id}
+      duration={currentToast.duration}
+      enterStyle={{ opacity: 0, scale: 0.5, y: -25 }}
+      exitStyle={{ opacity: 0, scale: 1, y: -20 }}
+      y={0}
+      opacity={1}
+      scale={1}
+      animation="fast"
+      backgroundColor={isError ? '$error' : '$surfaceElevated'}
+      borderWidth={isError ? 1 : 0}
+      borderColor={isError ? '$error' : undefined}
+      padding="$4"
+      borderRadius="$3"
+    >
+      <YStack gap="$1">
+        {currentToast.title && (
+          <Toast.Title>
+            <Text fontWeight="600" color="$textPrimary">
+              {currentToast.title}
+            </Text>
+          </Toast.Title>
+        )}
+        {currentToast.message && (
+          <Toast.Description>
+            <Text fontSize="$1" color="$textSecondary">
+              {currentToast.message}
+            </Text>
+          </Toast.Description>
+        )}
+      </YStack>
+    </Toast>
+  );
+}
 
 export const useToast = () => {
-  const toast = createToastHook(MotionView, AnimatePresence)();
+  const toast = useToastController();
 
   const showToast = ({
     type = 'default',
@@ -27,48 +82,10 @@ export const useToast = () => {
     message: string;
     title?: string;
   }) => {
-    const newId = Math.random().toString();
-
-    toast.show({
-      id: newId,
-      placement: 'top',
+    toast.show(title ?? '', {
+      message,
       duration: 3000,
-      render: ({ id }) => {
-        const uniqueToastId = 'toast-' + id;
-        if (type === 'default') {
-          return (
-            <Toast nativeID={uniqueToastId} action="muted" variant="solid">
-              <ToastTitle>{title}</ToastTitle>
-              <ToastDescription>{message}</ToastDescription>
-            </Toast>
-          );
-        }
-        if (type === 'error') {
-          return (
-            <Toast
-              action="error"
-              variant="outline"
-              nativeID={uniqueToastId}
-              className="bg-background-950 border-error-500 shadow-hard-5 w-full max-w-[443px] flex-row justify-between gap-6 p-4"
-            >
-              <HStack space="md">
-                <Icon as={HelpCircleIcon} className="text-error-500" />
-                <VStack space="xs">
-                  <ToastTitle className="text-error-500 font-semibold">{title}</ToastTitle>
-                  <ToastDescription className="text-typography-50" size="sm">
-                    {message}
-                  </ToastDescription>
-                </VStack>
-              </HStack>
-              <HStack className="gap-1 min-[450px]:gap-3">
-                <Pressable onPress={() => toast.close(id)}>
-                  <Icon className="text-typography-50" as={CloseIcon} />
-                </Pressable>
-              </HStack>
-            </Toast>
-          );
-        }
-      },
+      customData: { type },
     });
   };
 
