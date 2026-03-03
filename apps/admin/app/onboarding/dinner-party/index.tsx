@@ -1,24 +1,21 @@
-import { Box } from '@hosspie/design-system/components/box';
-import { IButtonProps, Buttons } from '@hosspie/design-system/organisms/buttons';
-import { FormFieldOrganism } from '@hosspie/design-system/organisms/form-field';
-import { TextContainer } from '@hosspie/design-system/organisms/text-container';
+import { ButtonGroup, ButtonGroupItemProps } from '@hosspie/design-system/organisms/button-group';
+import { FormField } from '@hosspie/design-system/organisms/form-field';
+import { TextBlock } from '@hosspie/design-system/organisms/text-block';
 import { Field, useForm } from '@hosspie/services/form';
 import { router } from 'expo-router';
+import { View, StyleSheet } from 'react-native';
 
 import { IOnboardingFormData } from '../_layout';
 
 export default function OnboardingDinnerPartyScreen() {
-  console.log('OnboardingDinnerPartyScreen');
-
   const { handleSubmit } = useForm<IOnboardingFormData>();
 
   const handlePressNext = handleSubmit(
-    (data) => {
-      console.log('Form data:', data);
+    () => {
       router.push('/onboarding/rooms');
     },
-    (errors) => {
-      console.log('error', errors);
+    () => {
+      // 유효성 검사 실패 시 폼이 에러 표시 처리
     }
   );
 
@@ -26,24 +23,22 @@ export default function OnboardingDinnerPartyScreen() {
     router.back();
   };
 
-  const buttons: IButtonProps[] = [
+  const buttons: ButtonGroupItemProps[] = [
     {
       text: '이전',
       variant: 'outline',
-      action: 'secondary',
       onPress: handlePressBack,
     },
     {
       text: '다음 단계',
-      variant: 'solid',
-      action: 'primary',
+      variant: 'primary',
       onPress: handlePressNext,
     },
   ];
 
   return (
-    <Box className="flex-1">
-      <TextContainer
+    <View style={styles.container}>
+      <TextBlock
         title={`저녁 파티 방식을\n선택해 주세요`}
         description="게스트들과 함께하는 특별한 시간을 만들어보세요"
       />
@@ -52,7 +47,7 @@ export default function OnboardingDinnerPartyScreen() {
         rules={{ required: '저녁 파티 방식을 선택해주세요' }}
         render={({ field: { onChange, value }, fieldState: { error, isRequired } }) => {
           return (
-            <FormFieldOrganism
+            <FormField
               type="card"
               title="저녁 파티 방식을 선택해 주세요"
               value={value}
@@ -92,7 +87,13 @@ export default function OnboardingDinnerPartyScreen() {
           );
         }}
       />
-      <Buttons placement="bottom" direction="vertical" buttons={buttons} />
-    </Box>
+      <ButtonGroup placement="bottom" direction="vertical" buttons={buttons} />
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});

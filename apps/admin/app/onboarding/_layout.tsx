@@ -1,7 +1,7 @@
 import { BackgroundLayout } from '@hosspie/design-system/organisms/background-layout';
 import { ProgressBar } from '@hosspie/design-system/organisms/progress-bar';
 import { FormProvider } from '@hosspie/services/form';
-import { IDinnerParty, IRoom } from '@hosspie/utils/types';
+import { DinnerPartyType, CreateRoomInput } from '@hosspie/types';
 import { Stack, usePathname } from 'expo-router';
 import React from 'react';
 
@@ -25,8 +25,8 @@ export interface IOnboardingFormData {
   phone: string;
   email: string;
   website?: string;
-  dinnerParty: { type: IDinnerParty; description?: string };
-  rooms: Record<string, IRoom>;
+  dinnerParty: { type: DinnerPartyType; description?: string };
+  rooms: Record<string, CreateRoomInput>;
 }
 
 const OnboardingLayout = () => {
