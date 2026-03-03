@@ -59,7 +59,7 @@ export default function SigninScreen() {
 
   return (
     <BackgroundLayout edges={['top', 'bottom']}>
-      <VStack className="flex-1 justify-center">
+      <VStack style={{ flex: 1, justifyContent: 'center' }}>
         <ImageContainer size="2xl" src={Logo} alt="image" />
         <Buttons direction="vertical" buttons={buttons} />
       </VStack>

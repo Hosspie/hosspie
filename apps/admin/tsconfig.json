@@ -20,7 +20,6 @@
     "**/*.tsx",
     ".expo/types/**/*.ts",
     "expo-env.d.ts",
-    "nativewind-env.d.ts",
     "../../packages/design-system/src/**/*.ts",
     "../../packages/design-system/src/**/*.tsx",
     "../../packages/utils/src/**/*.ts",

@@ -1,7 +1,5 @@
 import React from 'react'
 import type { Preview } from '@storybook/react'
-import { TamaguiProvider, Theme } from 'tamagui'
-import config from '../src/config/tamagui.config.web'
 
 const preview: Preview = {
   parameters: {
@@ -14,11 +12,18 @@ const preview: Preview = {
   },
   decorators: [
     (Story) => (
-      <TamaguiProvider config={config} defaultTheme="dark">
-        <Theme name="dark">
-          <Story />
-        </Theme>
-      </TamaguiProvider>
+      <div
+        style={{
+          display: 'flex',
+          flexDirection: 'column',
+          padding: 16,
+          minHeight: '100vh',
+          backgroundColor: '#080808',
+          fontFamily: 'system-ui, -apple-system, sans-serif',
+        }}
+      >
+        <Story />
+      </div>
     ),
   ],
 }
