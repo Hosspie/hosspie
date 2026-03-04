@@ -1,56 +1,82 @@
+import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-import { YStack, XStack, Text } from 'tamagui'
+import { View, Text, StyleSheet } from 'react-native'
+import { VStack, HStack } from '.'
 
-const meta: Meta<typeof YStack> = {
+const meta: Meta<typeof VStack> = {
   title: 'Components/Stacks',
-  component: YStack,
+  component: VStack,
+  args: {
+    gap: 'md',
+  },
+  argTypes: {
+    gap: {
+      control: 'select',
+      options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl'],
+    },
+    padding: {
+      control: 'select',
+      options: ['xs', 'sm', 'md', 'lg', 'xl', '2xl'],
+    },
+    align: {
+      control: 'select',
+      options: ['flex-start', 'center', 'flex-end', 'stretch'],
+    },
+    justify: {
+      control: 'select',
+      options: ['flex-start', 'center', 'flex-end', 'space-between', 'space-around'],
+    },
+  },
 }
+
 export default meta
+type Story = StoryObj<typeof VStack>
 
-type Story = StoryObj<typeof YStack>
+function Box({ label }: { label: string }) {
+  return (
+    <View style={s.box}>
+      <Text style={s.boxText}>{label}</Text>
+    </View>
+  )
+}
 
-const Box = ({ children }: { children: string }) => (
-  <YStack padding="$3" backgroundColor="$color5" borderRadius="$2">
-    <Text color="$color12">{children}</Text>
-  </YStack>
-)
+export const Default: Story = {
+  render: (args) => (
+    <VStack gap="lg">
+      <Text style={s.label}>VStack</Text>
+      <VStack {...args}>
+        <Box label="1" />
+        <Box label="2" />
+        <Box label="3" />
+      </VStack>
 
-export const Vertical: Story = {
-  render: () => (
-    <YStack gap="$3">
-      <Box>항목 1</Box>
-      <Box>항목 2</Box>
-      <Box>항목 3</Box>
-    </YStack>
+      <Text style={s.label}>HStack</Text>
+      <HStack {...args}>
+        <Box label="1" />
+        <Box label="2" />
+        <Box label="3" />
+      </HStack>
+    </VStack>
   ),
 }
 
-export const Horizontal: Story = {
-  render: () => (
-    <XStack gap="$3">
-      <Box>항목 1</Box>
-      <Box>항목 2</Box>
-      <Box>항목 3</Box>
-    </XStack>
-  ),
-}
-
-export const VerticalGapVariations: Story = {
-  name: 'Gap 변형',
-  render: () => (
-    <XStack gap="$6">
-      <YStack gap="$1">
-        <Text color="$color10" fontSize="$1">gap=$1</Text>
-        <Box>A</Box><Box>B</Box>
-      </YStack>
-      <YStack gap="$3">
-        <Text color="$color10" fontSize="$1">gap=$3</Text>
-        <Box>A</Box><Box>B</Box>
-      </YStack>
-      <YStack gap="$6">
-        <Text color="$color10" fontSize="$1">gap=$6</Text>
-        <Box>A</Box><Box>B</Box>
-      </YStack>
-    </XStack>
-  ),
-}
+const s = StyleSheet.create({
+  box: {
+    width: 60,
+    height: 60,
+    backgroundColor: '#FF6B35',
+    borderRadius: 12,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  boxText: {
+    color: '#FFFFFF',
+    fontWeight: '700',
+    fontSize: 16,
+  },
+  label: {
+    fontSize: 14,
+    color: '#AAAAAA',
+    fontWeight: '600',
+  },
+})

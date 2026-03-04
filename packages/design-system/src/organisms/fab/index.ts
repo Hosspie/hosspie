@@ -5,10 +5,12 @@ import {
   Animated,
   StyleSheet,
 } from 'react-native'
+import { Icon } from '../../components/icon'
 import { colors } from '../../tokens/colors'
 import { spacing } from '../../tokens/spacing'
 import { radius } from '../../tokens/radius'
 import { typography } from '../../tokens/typography'
+import { sizing } from '../../tokens/sizing'
 
 // ---------------------------------------------------------------------------
 // Types
@@ -138,23 +140,20 @@ export function Fab({
         accessibilityRole: 'button' as const,
       },
       React.createElement(
-        Animated.Text,
+        Animated.View,
         {
-          style: [
-            styles.toggleIcon,
-            {
-              transform: [
-                {
-                  rotateZ: fadeAnim.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: ['0deg', '45deg'],
-                  }),
-                },
-              ],
-            },
-          ],
+          style: {
+            transform: [
+              {
+                rotateZ: fadeAnim.interpolate({
+                  inputRange: [0, 1],
+                  outputRange: ['0deg', '45deg'],
+                }),
+              },
+            ],
+          },
         },
-        '+',
+        React.createElement(Icon, { name: 'add', color: 'onBrand' }),
       ),
     ),
   )
@@ -164,7 +163,7 @@ export function Fab({
 // Styles
 // ---------------------------------------------------------------------------
 
-const FAB_SIZE = 48
+const FAB_SIZE = sizing.fabSize
 
 const styles = StyleSheet.create({
   container: {
@@ -210,11 +209,5 @@ const styles = StyleSheet.create({
   },
   foldableItems: {
     gap: spacing.md,
-  },
-  toggleIcon: {
-    color: colors.text.onBrand,
-    fontSize: typography.sizes.h1,
-    fontWeight: typography.weights.bold,
-    lineHeight: typography.sizes.h1,
   },
 })

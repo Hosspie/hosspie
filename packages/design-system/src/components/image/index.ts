@@ -1,2 +1,2 @@
-export { Image } from 'tamagui'
-export type { ImageProps } from 'tamagui'
+export { Image } from 'react-native'
+export type { ImageProps } from 'react-native'

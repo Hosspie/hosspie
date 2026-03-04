@@ -71,14 +71,14 @@ type TextareaFieldProps = BaseFormField & {
 
 type CardFieldProps<T> = BaseFormField & {
   type: 'card'
-  value: T
+  value?: T
   onChange: (value: T) => void
   options: CardOption<T>[]
 }
 
 type RadioFieldProps<T> = BaseFormField & {
   type: 'radio'
-  value: T
+  value?: T
   onChange: (value: T) => void
   options: RadioOption<T>[]
   direction?: 'horizontal' | 'vertical'
@@ -100,6 +100,26 @@ function isEqual<T>(a: T, b: T): boolean {
     return JSON.stringify(a) === JSON.stringify(b)
   }
   return false
+}
+
+/**
+ * 옵션의 키 기준으로 부분 일치 검사.
+ * 현재 value가 option.value의 모든 키를 동일한 값으로 포함하면 선택된 것으로 판정.
+ * (expandable input이 value에 추가 키를 넣어도 선택 상태 유지)
+ */
+function isPartialMatch<T>(value: T, optionValue: T): boolean {
+  if (value === optionValue) return true
+  if (
+    typeof optionValue === 'object' &&
+    typeof value === 'object' &&
+    optionValue !== null &&
+    value !== null
+  ) {
+    return Object.keys(optionValue as object).every(
+      (key) => (value as any)[key] === (optionValue as any)[key],
+    )
+  }
+  return isEqual(value, optionValue)
 }
 
 // ---------------------------------------------------------------------------
@@ -126,14 +146,19 @@ function renderTitle(title: string | undefined, isRequired: boolean | undefined)
 }
 
 /**
- * 에러 메시지
+ * 에러 메시지 (항상 영역 확보하여 높이 안정성 유지)
  */
 function renderError(error: { message?: string } | undefined) {
-  if (!error?.message) return null
   return React.createElement(
-    RNText,
-    { style: styles.errorText },
-    error.message,
+    View,
+    { style: styles.errorContainer },
+    error?.message
+      ? React.createElement(
+          RNText,
+          { style: styles.errorText },
+          error.message,
+        )
+      : null,
   )
 }
 
@@ -182,7 +207,7 @@ function renderInputField(props: InputFieldProps) {
     renderTitle(props.title, props.isRequired),
     React.createElement(
       View,
-      { style: hasError ? styles.inputErrorBorder : undefined },
+      { style: [styles.inputBorderWrapper, hasError && styles.inputErrorBorderActive] },
       React.createElement(Input, {
         placeholder: props.placeholder,
         value: props.value,
@@ -206,14 +231,13 @@ function renderTextareaField(props: TextareaFieldProps) {
     renderTitle(props.title, props.isRequired),
     React.createElement(
       View,
-      { style: hasError ? styles.inputErrorBorder : undefined },
+      { style: [styles.inputBorderWrapper, hasError && styles.inputErrorBorderActive] },
       React.createElement(Input, {
         placeholder: props.placeholder,
         value: props.value,
         onChangeText: props.onChange,
         multiline: true,
         numberOfLines: 4,
-        textAlignVertical: 'top',
       }),
     ),
     renderError(props.error),
@@ -233,7 +257,7 @@ function renderCardField<T>(props: CardFieldProps<T>) {
       View,
       { style: styles.optionsVertical },
       ...props.options.map((option, index) => {
-        const selected = isEqual(props.value, option.value)
+        const selected = isPartialMatch(props.value, option.value)
         return React.createElement(
           Pressable,
           {
@@ -242,10 +266,10 @@ function renderCardField<T>(props: CardFieldProps<T>) {
             accessibilityRole: 'button' as const,
             accessibilityState: { selected },
           },
-          // 카드를 감싸는 View (선택 시 border override 적용)
+          // 카드를 감싸는 View (항상 border 공간 확보, 선택 시 색상 변경)
           React.createElement(
             View,
-            { style: selected ? styles.cardSelectedWrapper : undefined },
+            { style: [styles.cardWrapper, selected && styles.cardWrapperSelected] },
             React.createElement(
               Card,
               { padding: 'md' },
@@ -395,6 +419,7 @@ export function FormField<T = any>(props: FormFieldProps<T>) {
 const styles = StyleSheet.create({
   wrapper: {
     gap: spacing.sm,
+    paddingVertical: spacing.xs,
   },
   titleRow: {
     flexDirection: 'row',
@@ -405,22 +430,31 @@ const styles = StyleSheet.create({
     fontSize: typography.sizes.body,
     fontWeight: typography.weights.semibold,
   },
+  errorContainer: {
+    minHeight: typography.sizes.xs * typography.lineHeights.normal,
+  },
   errorText: {
     color: colors.status.errorText,
     fontSize: typography.sizes.xs,
   },
 
-  // Input error 상태 - border override
-  inputErrorBorder: {
+  // Input border wrapper (항상 border 공간 확보, 에러 시 색상 변경)
+  inputBorderWrapper: {
     borderWidth: sizing.borderWidth * 2,
-    borderColor: colors.border.error,
+    borderColor: 'transparent',
     borderRadius: radius.md,
   },
+  inputErrorBorderActive: {
+    borderColor: colors.border.error,
+  },
 
-  // Card field
-  cardSelectedWrapper: {
+  // Card field (항상 border 공간 확보, 선택 시 색상 변경)
+  cardWrapper: {
     borderRadius: radius.lg,
     borderWidth: sizing.borderWidth * 2,
+    borderColor: 'transparent',
+  },
+  cardWrapperSelected: {
     borderColor: colors.brand.primary,
   },
   cardInner: {

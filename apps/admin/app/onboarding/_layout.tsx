@@ -37,7 +37,7 @@ const OnboardingLayout = () => {
   return (
     <BackgroundLayout>
       <FormProvider<IOnboardingFormData>>
-        <ProgressBar value={progress} caption={pathname} />
+        <ProgressBar value={progress} />
         <Stack screenOptions={{ headerShown: false, contentStyle: { backgroundColor: 'black' } }} />
       </FormProvider>
     </BackgroundLayout>

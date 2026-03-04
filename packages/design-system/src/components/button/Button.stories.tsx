@@ -1,35 +1,36 @@
+import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-import { Button, XStack, YStack } from 'tamagui'
+import { fn } from 'storybook/test'
+import { Button } from '.'
 
 const meta: Meta<typeof Button> = {
   title: 'Components/Button',
   component: Button,
+  args: {
+    title: '버튼',
+    variant: 'primary',
+    size: 'md',
+    loading: false,
+    disabled: false,
+    onPress: fn(),
+  },
+  argTypes: {
+    title: { control: 'text' },
+    variant: {
+      control: 'select',
+      options: ['primary', 'secondary', 'outline', 'ghost'],
+    },
+    size: {
+      control: 'select',
+      options: ['sm', 'md', 'lg'],
+    },
+    loading: { control: 'boolean' },
+    disabled: { control: 'boolean' },
+    onPress: { table: { disable: true } },
+  },
 }
-export default meta
 
+export default meta
 type Story = StoryObj<typeof Button>
 
-export const Default: Story = {
-  render: () => <Button>기본 버튼</Button>,
-}
-
-export const Sizes: Story = {
-  name: '크기별',
-  render: () => (
-    <XStack gap="$3" alignItems="center">
-      <Button size="$2">Small</Button>
-      <Button size="$4">Medium</Button>
-      <Button size="$6">Large</Button>
-    </XStack>
-  ),
-}
-
-export const Themes: Story = {
-  name: '색상별',
-  render: () => (
-    <YStack gap="$3">
-      <Button theme="active">Active</Button>
-      <Button disabled>Disabled</Button>
-    </YStack>
-  ),
-}
+export const Default: Story = {}

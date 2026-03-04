@@ -6,10 +6,10 @@ import {
   type PathValue,
   type DefaultValues,
   Controller,
-  ControllerRenderProps,
+  type ControllerRenderProps,
   type ControllerFieldState,
   type FieldPath,
-  RegisterOptions,
+  type RegisterOptions,
 } from 'react-hook-form';
 import { type ReactNode } from 'react';
 
@@ -27,17 +27,20 @@ export const FormProvider = <T extends FieldValues>({
   return <ReactFormProvider {...methods}>{children}</ReactFormProvider>;
 };
 
-export const Field = <FieldValues, FieldName extends FieldPath<FieldValues>>({
+export const Field = <
+  TFieldValues extends FieldValues,
+  FieldName extends FieldPath<TFieldValues>,
+>({
   name,
   render,
   rules,
 }: {
   name: FieldName;
-  rules?: RegisterOptions<FieldValues, FieldName>;
+  rules?: RegisterOptions<TFieldValues, FieldName>;
   render: (props: {
     field: {
-      value: ControllerRenderProps<FieldValues, FieldName>['value'];
-      onChange: (value: PathValue<FieldValues, FieldName>) => void;
+      value: ControllerRenderProps<TFieldValues, FieldName>['value'];
+      onChange: (value: PathValue<TFieldValues, FieldName>) => void;
     };
     fieldState: Omit<ControllerFieldState, 'error'> & {
       isRequired: boolean;
@@ -45,24 +48,26 @@ export const Field = <FieldValues, FieldName extends FieldPath<FieldValues>>({
     };
   }) => React.ReactElement;
 }) => {
-  const { control } = useFormContext<FieldValues>();
+  const { control } = useFormContext<TFieldValues>();
   const isRequired = Boolean(rules?.required);
 
   return (
     <Controller
-      control={control}
-      name={name}
-      rules={rules}
+      control={control as any}
+      name={name as any}
+      rules={rules as any}
       render={({ field, fieldState }) =>
         render({
-          field,
+          field: field as any,
           fieldState: {
             ...fieldState,
             isRequired,
-            error: fieldState.error && {
-              message: fieldState.error.message,
-              type: fieldState.error.type,
-            },
+            error: fieldState.error
+              ? {
+                  message: fieldState.error.message ?? '',
+                  type: fieldState.error.type,
+                }
+              : undefined,
           },
         })
       }

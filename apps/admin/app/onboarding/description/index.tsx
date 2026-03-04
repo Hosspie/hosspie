@@ -1,9 +1,9 @@
 import { ButtonGroup, ButtonGroupItemProps } from '@hosspie/design-system/organisms/button-group';
 import { FormField } from '@hosspie/design-system/organisms/form-field';
+import { ScrollArea } from '@hosspie/design-system/organisms/scroll-area';
 import { TextBlock } from '@hosspie/design-system/organisms/text-block';
 import { Field, useForm } from '@hosspie/services/form';
 import { router } from 'expo-router';
-import { View, StyleSheet } from 'react-native';
 
 import { IOnboardingFormData } from '../_layout';
 
@@ -28,7 +28,7 @@ export default function OnboardingDescriptionScreen() {
   ];
 
   return (
-    <View style={styles.container}>
+    <ScrollArea>
       <TextBlock
         title={`게스트하우스 정보를\n등록해 주세요`}
         description="기본적인 정보부터 시작해보겠습니다"
@@ -87,12 +87,6 @@ export default function OnboardingDescriptionScreen() {
       />
 
       <ButtonGroup placement="bottom" direction="vertical" buttons={buttons} />
-    </View>
+    </ScrollArea>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

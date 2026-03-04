@@ -1,9 +1,21 @@
 {
   "private": true,
   "name": "@hosspie/monorepo",
+  "packageManager": "pnpm@10.11.0",
   "scripts": {
     "dev": "turbo dev",
-    "dev:admin": "turbo dev --filter=\"{./apps/admin}...\"",
+    "dev:admin": "turbo dev --filter=@hosspie/admin",
+    "dev:api": "turbo dev --filter=\"{./apps/api}...\"",
+    "dev:all": "turbo dev --filter=\"{./apps/admin}...\" --filter=\"{./apps/api}...\"",
+    "supabase:start": "supabase start",
+    "supabase:stop": "supabase stop",
+    "db:generate": "turbo db:generate",
+    "db:push": "turbo db:push",
+    "db:migrate:dev": "turbo db:migrate:dev",
+    "db:studio": "pnpm --filter @hosspie/database db:studio",
+    "db:seed": "pnpm --filter @hosspie/database db:seed",
+    "codegen": "pnpm --filter @hosspie/admin codegen",
+    "codegen:watch": "pnpm --filter @hosspie/admin codegen --watch",
     "lint": "turbo lint",
     "test": "turbo test",
     "build": "turbo build",
@@ -11,20 +23,32 @@
   },
   "devDependencies": {
     "tsup": "^8.5.0",
-    "turbo": "^1.13.4",
+    "turbo": "^2.8.12",
     "typescript": "^5.9.2"
   },
   "prettier": {
     "printWidth": 100,
     "tabWidth": 2,
     "singleQuote": true,
-    "trailingComma": "es5",
-    "plugins": [
-      "prettier-plugin-tailwindcss"
-    ]
+    "trailingComma": "es5"
   },
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "pnpm": {
+    "overrides": {
+      "expo": "~53.0.23",
+      "react-native": "0.79.6",
+      "react-docgen-typescript": "2.2.2"
+    },
+    "onlyBuiltDependencies": [
+      "@prisma/client",
+      "@prisma/engines",
+      "prisma",
+      "esbuild",
+      "@apollo/protobufjs",
+      "@nestjs/core"
+    ]
+  }
 }

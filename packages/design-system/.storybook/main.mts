@@ -2,6 +2,7 @@ export default {
   stories: [
     '../src/components/**/*.@(mdx|stories.@(ts|tsx))',
     '../src/organisms/**/*.@(mdx|stories.@(ts|tsx))',
+    '../src/screens/**/*.@(mdx|stories.@(ts|tsx))',
   ],
   addons: ['@storybook/addon-docs'],
   viteFinal: async (config) => {

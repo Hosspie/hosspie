@@ -1,23 +1,25 @@
+import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-import { Input } from 'tamagui'
+import { fn } from 'storybook/test'
+import { Input } from '.'
 
 const meta: Meta<typeof Input> = {
   title: 'Components/Input',
   component: Input,
+  args: {
+    placeholder: '입력하세요',
+    editable: true,
+    onChangeText: fn(),
+  },
+  argTypes: {
+    placeholder: { control: 'text' },
+    editable: { control: 'boolean' },
+    secureTextEntry: { control: 'boolean' },
+    onChangeText: { table: { disable: true } },
+  },
 }
-export default meta
 
+export default meta
 type Story = StoryObj<typeof Input>
 
-export const Default: Story = {
-  render: () => <Input />,
-}
-
-export const WithPlaceholder: Story = {
-  name: 'Placeholder',
-  render: () => <Input placeholder="이메일을 입력하세요" />,
-}
-
-export const Disabled: Story = {
-  render: () => <Input placeholder="비활성화" disabled />,
-}
+export const Default: Story = {}

@@ -1,9 +1,10 @@
 import { ButtonGroup, ButtonGroupItemProps } from '@hosspie/design-system/organisms/button-group';
 import { FormField } from '@hosspie/design-system/organisms/form-field';
+import { ScrollArea } from '@hosspie/design-system/organisms/scroll-area';
 import { TextBlock } from '@hosspie/design-system/organisms/text-block';
 import { Field, useForm } from '@hosspie/services/form';
+import { DinnerPartyType } from '@hosspie/types';
 import { router } from 'expo-router';
-import { View, StyleSheet } from 'react-native';
 
 import { IOnboardingFormData } from '../_layout';
 
@@ -37,7 +38,7 @@ export default function OnboardingDinnerPartyScreen() {
   ];
 
   return (
-    <View style={styles.container}>
+    <ScrollArea>
       <TextBlock
         title={`저녁 파티 방식을\n선택해 주세요`}
         description="게스트들과 함께하는 특별한 시간을 만들어보세요"
@@ -56,17 +57,17 @@ export default function OnboardingDinnerPartyScreen() {
               isRequired={isRequired}
               options={[
                 {
-                  value: { type: 'POT_LUCK' },
+                  value: { type: DinnerPartyType.POT_LUCK },
                   label: '포틀럭 파티',
                   description: '게스트들이 자유롭게 참여하는 파티',
                 },
                 {
-                  value: { type: 'HOST_SERVED' },
+                  value: { type: DinnerPartyType.HOST_SERVED },
                   label: '호스트 제공',
                   description: '호스트가 제공하는 식사',
                 },
                 {
-                  value: { type: 'CUSTOM' },
+                  value: { type: DinnerPartyType.CUSTOM },
                   label: '기타',
                   description: '직접 입력하여 커스텀 파티를 만들어보세요',
                   expandable: {
@@ -88,12 +89,6 @@ export default function OnboardingDinnerPartyScreen() {
         }}
       />
       <ButtonGroup placement="bottom" direction="vertical" buttons={buttons} />
-    </View>
+    </ScrollArea>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

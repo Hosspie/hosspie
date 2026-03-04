@@ -1,20 +1,27 @@
 import { Sheet } from '@hosspie/design-system/components/sheet';
-import { type ButtonGroupItemProps, ButtonGroup } from '@hosspie/design-system/organisms/button-group';
+import {
+  type ButtonGroupItemProps,
+  ButtonGroup,
+} from '@hosspie/design-system/organisms/button-group';
 import { CardList, type CardListItem } from '@hosspie/design-system/organisms/card-list';
 import { Fab } from '@hosspie/design-system/organisms/fab';
 import { FormField } from '@hosspie/design-system/organisms/form-field';
+import { ScrollArea } from '@hosspie/design-system/organisms/scroll-area';
 import { TextBlock } from '@hosspie/design-system/organisms/text-block';
 import { Field, useForm } from '@hosspie/services/form';
 import { Gender, type CreateRoomInput } from '@hosspie/types';
 import { router } from 'expo-router';
 import { PlusIcon } from 'lucide-react-native';
 import React, { useRef, useState } from 'react';
-import { View, StyleSheet } from 'react-native';
+import { Alert } from 'react-native';
 
 import { IOnboardingFormData } from '../_layout';
 
+import { useCreateOnboardingMutation } from '@/lib/graphql/operations/createOnboarding.generated';
+
 export default function OnboardingRoomsScreen() {
   const { handleSubmit } = useForm<IOnboardingFormData>();
+  const [createOnboarding, { loading: submitting }] = useCreateOnboardingMutation();
 
   const [showModal, setShowModal] = useState(false);
   const [roomList, setRoomList] = useState<CreateRoomInput[]>([]);
@@ -28,8 +35,29 @@ export default function OnboardingRoomsScreen() {
   };
 
   const handlePressNext = handleSubmit(
-    () => {
-      router.push('/(authenticated)/(tabs)');
+    async (data) => {
+      try {
+        const rooms = Object.values(data.rooms || {});
+        await createOnboarding({
+          variables: {
+            input: {
+              name: data.name,
+              description: data.description,
+              address: data.address,
+              phone: data.phone,
+              email: data.email,
+              website: data.website,
+              dinnerPartyType: data.dinnerParty.type,
+              dinnerPartyDescription: data.dinnerParty.description,
+              rooms,
+            },
+          },
+        });
+        router.replace('/(authenticated)/(tabs)');
+      } catch (error) {
+        Alert.alert('오류', '온보딩을 완료할 수 없습니다.');
+        console.error(error);
+      }
     },
     () => {
       // 유효성 검사 실패 시 폼이 에러 표시 처리
@@ -47,9 +75,10 @@ export default function OnboardingRoomsScreen() {
       variant: 'outline',
     },
     {
-      text: '온보딩 완료',
+      text: submitting ? '저장 중...' : '온보딩 완료',
       onPress: handlePressNext,
       variant: 'primary',
+      disabled: submitting,
     },
   ];
 
@@ -68,11 +97,11 @@ export default function OnboardingRoomsScreen() {
 
   const items: CardListItem[] = roomList.map((room) => ({
     title: room.name,
-    description: `정원: ${room.capacity}명, 성별: ${genderLabel(room.gender)}, 욕실: ${room.hasBathroom ? '있음' : '없음'}`,
+    description: `정원: ${room.capacity}명, 성별: ${genderLabel(room.gender as Gender)}, 욕실: ${room.hasBathroom ? '있음' : '없음'}`,
   }));
 
   return (
-    <View style={styles.container}>
+    <ScrollArea>
       <TextBlock
         title={`방 구성을\n등록해 주세요`}
         description="게스트들이 머물 방의 정보를 입력해주세요"
@@ -94,7 +123,10 @@ export default function OnboardingRoomsScreen() {
       <Field<IOnboardingFormData, 'rooms'>
         name="rooms"
         render={({ field: { onChange, value = {} } }) => {
-          const handlePressField = (key: keyof CreateRoomInput, selectedValue: CreateRoomInput[typeof key]) => {
+          const handlePressField = (
+            key: keyof CreateRoomInput,
+            selectedValue: CreateRoomInput[typeof key]
+          ) => {
             setEditingRoom((prev) => {
               if (!prev) {
                 return { [key]: selectedValue };
@@ -216,12 +248,6 @@ export default function OnboardingRoomsScreen() {
           );
         }}
       />
-    </View>
+    </ScrollArea>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-  },
-});

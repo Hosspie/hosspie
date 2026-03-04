@@ -58,6 +58,7 @@ export function ButtonGroup({
 const styles = StyleSheet.create({
   container: {
     gap: spacing.sm,
+    paddingVertical: spacing.sm,
   },
   horizontal: {
     flexDirection: 'row',

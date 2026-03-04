@@ -8,6 +8,7 @@
       "@hosspie/design-system/providers/*": ["../../packages/design-system/src/providers/*"],
       "@hosspie/design-system/components/*": ["../../packages/design-system/src/components/*"],
       "@hosspie/design-system/hooks/*": ["../../packages/design-system/src/hooks/*"],
+      "@hosspie/design-system/tokens/*": ["../../packages/design-system/src/tokens/*"],
       "@hosspie/utils/*": ["../../packages/utils/src/*"],
       "@hosspie/services": ["../../packages/services/frontend/src/index.ts"],
       "@hosspie/services/form": ["../../packages/services/frontend/src/form/index.tsx"]

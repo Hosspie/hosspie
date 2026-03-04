@@ -5,6 +5,7 @@ import { StatusBar } from 'expo-status-bar';
 import 'react-native-reanimated';
 
 import { useInitialAndroidBarSync } from '@/hooks/useColorScheme';
+import { ApolloProvider } from '@/providers/apollo';
 import { SessionProvider, useSession } from '@/providers/session';
 
 SplashScreen.preventAutoHideAsync();
@@ -13,10 +14,12 @@ const RootLayout = () => {
   useInitialAndroidBarSync();
 
   return (
-    <SessionProvider>
-      <StatusBar key="root-status-bar-light" style="light" />
-      <RootNavigator />
-    </SessionProvider>
+    <ApolloProvider>
+      <SessionProvider>
+        <StatusBar key="root-status-bar-light" style="light" />
+        <RootNavigator />
+      </SessionProvider>
+    </ApolloProvider>
   );
 };
 

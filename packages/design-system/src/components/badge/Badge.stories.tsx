@@ -1,31 +1,27 @@
+import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-import { XStack } from 'tamagui'
-import { Badge, BadgeText } from './index'
+import { fn } from 'storybook/test'
+import { Badge } from '.'
 
 const meta: Meta<typeof Badge> = {
   title: 'Components/Badge',
   component: Badge,
+  args: {
+    label: '배지',
+    variant: 'default',
+    onPress: fn(),
+  },
+  argTypes: {
+    label: { control: 'text' },
+    variant: {
+      control: 'select',
+      options: ['default', 'success', 'error', 'warning', 'info'],
+    },
+    onPress: { table: { disable: true } },
+  },
 }
-export default meta
 
+export default meta
 type Story = StoryObj<typeof Badge>
 
-export const Default: Story = {
-  render: () => (
-    <Badge>
-      <BadgeText>Default</BadgeText>
-    </Badge>
-  ),
-}
-
-export const Variants: Story = {
-  name: '변형',
-  render: () => (
-    <XStack gap="$3">
-      <Badge variant="success"><BadgeText>Success</BadgeText></Badge>
-      <Badge variant="error"><BadgeText>Error</BadgeText></Badge>
-      <Badge variant="warning"><BadgeText>Warning</BadgeText></Badge>
-      <Badge variant="info"><BadgeText>Info</BadgeText></Badge>
-    </XStack>
-  ),
-}
+export const Default: Story = {}

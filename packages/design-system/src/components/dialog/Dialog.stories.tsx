@@ -1,45 +1,57 @@
+import React, { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-import { Button, Dialog, XStack } from 'tamagui'
+import { fn } from 'storybook/test'
+import { Dialog, DialogActions } from '.'
+import { Button } from '../button'
 
 const meta: Meta<typeof Dialog> = {
   title: 'Components/Dialog',
   component: Dialog,
+  args: {
+    title: '제목',
+    description: '다이얼로그 설명 텍스트입니다.',
+    onClose: fn(),
+  },
+  argTypes: {
+    title: { control: 'text' },
+    description: { control: 'text' },
+    onClose: { table: { disable: true } },
+  },
 }
-export default meta
 
+export default meta
 type Story = StoryObj<typeof Dialog>
 
+function DialogWithState(props: { title?: string; description?: string; onClose?: () => void }) {
+  const [visible, setVisible] = useState(false)
+  const handleClose = () => {
+    setVisible(false)
+    props.onClose?.()
+  }
+  return (
+    <>
+      <Button title="다이얼로그 열기" onPress={() => setVisible(true)} />
+      <Dialog
+        visible={visible}
+        onClose={handleClose}
+        title={props.title}
+        description={props.description}
+      >
+        <DialogActions>
+          <Button title="닫기" variant="secondary" size="sm" onPress={handleClose} />
+          <Button title="확인" variant="primary" size="sm" onPress={handleClose} />
+        </DialogActions>
+      </Dialog>
+    </>
+  )
+}
+
 export const Default: Story = {
-  render: () => (
-    <Dialog modal>
-      <Dialog.Trigger asChild>
-        <Button>다이얼로그 열기</Button>
-      </Dialog.Trigger>
-      <Dialog.Portal>
-        <Dialog.Overlay
-          key="overlay"
-          opacity={0.5}
-          enterStyle={{ opacity: 0 }}
-          exitStyle={{ opacity: 0 }}
-        />
-        <Dialog.Content
-          bordered
-          elevate
-          key="content"
-          padding="$4"
-          gap="$3"
-        >
-          <Dialog.Title>제목</Dialog.Title>
-          <Dialog.Description>
-            다이얼로그 설명 텍스트입니다.
-          </Dialog.Description>
-          <XStack gap="$3" justifyContent="flex-end">
-            <Dialog.Close asChild>
-              <Button>닫기</Button>
-            </Dialog.Close>
-          </XStack>
-        </Dialog.Content>
-      </Dialog.Portal>
-    </Dialog>
+  render: (args) => (
+    <DialogWithState
+      title={args.title}
+      description={args.description}
+      onClose={args.onClose}
+    />
   ),
 }

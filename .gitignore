@@ -5,3 +5,20 @@ node_modules
 .turbo
 
 .expo
+
+.worktrees
+
+# Build outputs
+apps/admin/build/
+dist/
+
+# Environment files
+.env*.local
+
+# Local configs
+.mcp.json
+.vscode/
+
+# Claude auto-generated
+.claude/plans/
+.claude/memory/

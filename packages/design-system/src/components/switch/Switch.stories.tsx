@@ -1,30 +1,38 @@
+import React, { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
-import { Switch, XStack, Text } from 'tamagui'
+import { fn } from 'storybook/test'
+import { Switch } from '.'
 
 const meta: Meta<typeof Switch> = {
   title: 'Components/Switch',
   component: Switch,
+  args: {
+    disabled: false,
+    onValueChange: fn(),
+  },
+  argTypes: {
+    disabled: { control: 'boolean' },
+    onValueChange: { table: { disable: true } },
+  },
 }
-export default meta
 
+export default meta
 type Story = StoryObj<typeof Switch>
 
-export const Default: Story = {
-  render: () => (
-    <Switch>
-      <Switch.Thumb />
-    </Switch>
-  ),
+function SwitchWithState(props: React.ComponentProps<typeof Switch>) {
+  const [value, setValue] = useState(false)
+  return (
+    <Switch
+      {...props}
+      value={value}
+      onValueChange={(v) => {
+        setValue(v)
+        props.onValueChange?.(v)
+      }}
+    />
+  )
 }
 
-export const WithLabel: Story = {
-  name: '라벨 포함',
-  render: () => (
-    <XStack gap="$3" alignItems="center">
-      <Text>알림 설정</Text>
-      <Switch>
-        <Switch.Thumb />
-      </Switch>
-    </XStack>
-  ),
+export const Default: Story = {
+  render: (args) => <SwitchWithState {...args} />,
 }

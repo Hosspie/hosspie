@@ -1,12 +1,9 @@
 import React from 'react'
 import type { Meta, StoryObj } from '@storybook/react'
 import { fn } from 'storybook/test'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import { Fab } from '.'
-
-const PlusText = () => (
-  <Text style={{ color: '#FFFFFF', fontSize: 20, fontWeight: 'bold' }}>+</Text>
-)
+import { Icon } from '../../components/icon'
 
 const meta: Meta<typeof Fab> = {
   title: 'Organisms/Fab',
@@ -19,7 +16,7 @@ const meta: Meta<typeof Fab> = {
     ),
   ],
   args: {
-    items: [{ icon: <PlusText />, onPress: fn() }],
+    items: [{ icon: <Icon name="add" color="onBrand" />, onPress: fn() }],
     isFoldable: false,
     placement: 'right',
   },
@@ -47,12 +44,20 @@ export const WithLabel: Story = {
   },
 }
 
+export const IconWithLabel: Story = {
+  args: {
+    items: [
+      { icon: <Icon name="add" color="onBrand" />, label: '방 추가', onPress: fn() },
+    ],
+  },
+}
+
 export const MultipleFabs: Story = {
   args: {
     items: [
       { label: '삭제', onPress: fn() },
       { label: '수정', onPress: fn() },
-      { icon: <PlusText />, onPress: fn() },
+      { icon: <Icon name="add" color="onBrand" />, onPress: fn() },
     ],
   },
 }
@@ -61,8 +66,18 @@ export const Foldable: Story = {
   args: {
     isFoldable: true,
     items: [
-      { label: '방 추가', onPress: fn() },
-      { label: '설정', onPress: fn() },
+      { icon: <Icon name="add" color="onBrand" />, label: '방 추가', onPress: fn() },
+      { icon: <Icon name="close" color="onBrand" />, label: '설정', onPress: fn() },
+    ],
+  },
+}
+
+export const FoldableIconOnly: Story = {
+  args: {
+    isFoldable: true,
+    items: [
+      { icon: <Icon name="add" color="onBrand" />, onPress: fn() },
+      { icon: <Icon name="checkmark" color="onBrand" />, onPress: fn() },
     ],
   },
 }

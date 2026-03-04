@@ -89,7 +89,7 @@ export function FormFields<T extends FieldValues>({
         render: ({
           field: controllerField,
           fieldState,
-        }) => {
+        }): React.ReactElement => {
           const baseProps = {
             title: field.title,
             isRequired: field.isRequired,
@@ -116,18 +116,15 @@ export function FormFields<T extends FieldValues>({
             } as FormFieldProps)
           }
 
-          if (field.type === 'radio') {
-            return React.createElement(FormField, {
-              ...baseProps,
-              type: 'radio',
-              value: controllerField.value,
-              onChange: controllerField.onChange,
-              options: field.options,
-              direction: field.direction,
-            } as FormFieldProps)
-          }
-
-          return null
+          // radio (default)
+          return React.createElement(FormField, {
+            ...baseProps,
+            type: 'radio',
+            value: controllerField.value,
+            onChange: controllerField.onChange,
+            options: (field as RadioFieldConfig<T>).options,
+            direction: (field as RadioFieldConfig<T>).direction,
+          } as FormFieldProps)
         },
       }),
     ),

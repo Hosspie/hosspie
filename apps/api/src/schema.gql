@@ -1,0 +1,100 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+input CreateGuesthouseInput {
+  address: String!
+  description: String!
+  dinnerPartyDescription: String
+  dinnerPartyType: DinnerPartyType!
+  email: String!
+  name: String!
+  phone: String!
+  rooms: [CreateRoomInput!]!
+  website: String
+}
+
+input CreateRoomInput {
+  capacity: Int!
+  gender: Gender!
+  hasBathroom: Boolean!
+  name: String!
+}
+
+"""
+A date-time string at UTC, such as 2019-12-03T09:54:33Z, compliant with the date-time format.
+"""
+scalar DateTime
+
+"""Type of dinner party offered"""
+enum DinnerPartyType {
+  CUSTOM
+  HOST_SERVED
+  POT_LUCK
+}
+
+"""Gender restriction for room"""
+enum Gender {
+  FEMALE
+  MALE
+  REGARDLESS
+}
+
+type Guesthouse {
+  address: String!
+  createdAt: DateTime!
+  description: String!
+  dinnerPartyDescription: String
+  dinnerPartyType: DinnerPartyType!
+  email: String!
+  id: ID!
+  name: String!
+  onboardingStatus: OnboardingStatus!
+  phone: String!
+  rooms: [Room!]!
+  updatedAt: DateTime!
+  website: String
+}
+
+type Mutation {
+  createOnboarding(input: CreateGuesthouseInput!): Guesthouse!
+  updateGuesthouse(id: ID!, input: UpdateGuesthouseInput!): Guesthouse!
+}
+
+"""Onboarding completion status"""
+enum OnboardingStatus {
+  COMPLETED
+  PENDING
+}
+
+type OnboardingStatusResponse {
+  isCompleted: Boolean!
+}
+
+type Query {
+  guesthouse(id: ID!): Guesthouse!
+  myGuesthouse: Guesthouse
+  onboardingStatus: OnboardingStatusResponse!
+}
+
+type Room {
+  capacity: Int!
+  createdAt: DateTime!
+  gender: Gender!
+  hasBathroom: Boolean!
+  id: ID!
+  name: String!
+  updatedAt: DateTime!
+}
+
+input UpdateGuesthouseInput {
+  address: String
+  description: String
+  dinnerPartyDescription: String
+  dinnerPartyType: DinnerPartyType
+  email: String
+  name: String
+  phone: String
+  rooms: [CreateRoomInput!]
+  website: String
+}

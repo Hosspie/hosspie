@@ -1,0 +1,92 @@
+// Prisma Schema for Hosspie
+// 📚 참고: https://www.prisma.io/docs/orm/prisma-schema
+// 📚 Supabase 통합: https://supabase.com/docs/guides/integrations/prisma
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
+}
+
+// ==================== ENUMS ====================
+
+enum Gender {
+  MALE
+  FEMALE
+  REGARDLESS
+}
+
+enum DinnerPartyType {
+  POT_LUCK
+  HOST_SERVED
+  CUSTOM
+}
+
+enum OnboardingStatus {
+  PENDING
+  COMPLETED
+}
+
+// ==================== MODELS ====================
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  guesthouse Guesthouse?
+
+  @@map("users")
+}
+
+model Guesthouse {
+  id          String @id @default(cuid())
+  name        String @db.VarChar(50)
+  description String @db.VarChar(500)
+
+  // Contact Information
+  address String  @db.VarChar(100)
+  phone   String  @db.VarChar(20)
+  email   String  @db.VarChar(100)
+  website String? @db.VarChar(200)
+
+  // Dinner Party
+  dinnerPartyType        DinnerPartyType @map("dinner_party_type")
+  dinnerPartyDescription String?         @map("dinner_party_description") @db.VarChar(500)
+
+  // Status
+  onboardingStatus OnboardingStatus @default(PENDING) @map("onboarding_status")
+
+  // Relations
+  userId String @unique @map("user_id")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  rooms Room[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("guesthouses")
+}
+
+model Room {
+  id          String  @id @default(cuid())
+  name        String  @db.VarChar(50)
+  capacity    Int     @db.SmallInt
+  gender      Gender
+  hasBathroom Boolean @default(false) @map("has_bathroom")
+
+  // Relations
+  guesthouseId String     @map("guesthouse_id")
+  guesthouse   Guesthouse @relation(fields: [guesthouseId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("rooms")
+}

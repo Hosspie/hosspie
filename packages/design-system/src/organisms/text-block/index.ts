@@ -41,5 +41,6 @@ export function TextBlock({
 const styles = StyleSheet.create({
   container: {
     gap: spacing.sm,
+    paddingVertical: spacing.sm,
   },
 })
