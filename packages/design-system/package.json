@@ -2,17 +2,18 @@
   "private": true,
   "name": "@hosspie/design-system",
   "version": "1.0.0",
-  "main": "index.js",
   "exports": {
+    "./components/*": "./src/components/*",
     "./organisms/*": "./src/organisms/*",
-    "./hooks/*": "./src/hooks/*",
-    "./providers/*": "./src/providers/*"
+    "./providers/*": "./src/providers/*",
+    "./tokens/*": "./src/tokens/*"
   },
-  "description": "Acme UI components for React Native",
-  "author": "Cedric van Putten <me@bycedric.com>",
+  "description": "Hosspie design system",
   "license": "MIT",
   "scripts": {
-    "lint": "eslint --ext js,ts,tsx ."
+    "lint": "eslint --ext js,ts,tsx .",
+    "storybook": "storybook dev -p 6006",
+    "storybook:build": "storybook build"
   },
   "eslintConfig": {
     "extends": "@hosspie/eslint-config",
@@ -20,8 +21,21 @@
       "node_modules"
     ]
   },
-  "dependencies": {
-    "@hosspie/ui-config": "workspace:*",
-    "@hosspie/eslint-config": "workspace:*"
+  "dependencies": {},
+  "devDependencies": {
+    "@hosspie/eslint-config": "workspace:*",
+    "@storybook/addon-docs": "^10.2.10",
+    "@storybook/react-vite": "^10.2.10",
+    "react": "19.0.0",
+    "react-dom": "19.0.0",
+    "react-native-web": "~0.21.2",
+    "storybook": "^10.2.10",
+    "vite": "^7.3.1"
+  },
+  "peerDependencies": {
+    "expo": "*",
+    "react": "*",
+    "react-native": "*",
+    "@expo/vector-icons": "*"
   }
 }

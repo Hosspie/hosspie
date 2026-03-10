@@ -1,24 +1,24 @@
-import { Box } from '@hosspie/design-system/components/box';
-import { type IButtonProps, Buttons } from '@hosspie/design-system/organisms/buttons';
-import { FormFieldOrganism } from '@hosspie/design-system/organisms/form-field';
-import { TextContainer } from '@hosspie/design-system/organisms/text-container';
+import {
+  ButtonGroup,
+  type ButtonGroupItemProps,
+} from '@hosspie/design-system/organisms/button-group';
+import { FormField } from '@hosspie/design-system/organisms/form-field';
+import { ScrollArea } from '@hosspie/design-system/organisms/scroll-area';
+import { TextBlock } from '@hosspie/design-system/organisms/text-block';
 import { Field, useForm } from '@hosspie/services/form';
 import { router } from 'expo-router';
 
 import { type IOnboardingFormData } from '../_layout';
 
 export default function OnboardingInformationScreen() {
-  console.log('onboarding information screen');
-
-  const { handleSubmit } = useForm<FormData>();
+  const { handleSubmit } = useForm<IOnboardingFormData>();
 
   const handleNext = handleSubmit(
-    (data) => {
-      console.log('Form data:', data);
+    () => {
       router.push('/onboarding/dinner-party');
     },
-    (errors) => {
-      console.log('error', errors);
+    () => {
+      // 유효성 검사 실패 시 폼이 에러 표시 처리
     }
   );
 
@@ -26,24 +26,22 @@ export default function OnboardingInformationScreen() {
     router.back();
   };
 
-  const buttons: IButtonProps[] = [
+  const buttons: ButtonGroupItemProps[] = [
     {
       text: '이전',
       onPress: handleBack,
       variant: 'outline',
-      action: 'secondary',
     },
     {
       text: '다음 단계',
       onPress: handleNext,
-      variant: 'solid',
-      action: 'primary',
+      variant: 'primary',
     },
   ];
 
   return (
-    <Box className="flex-1">
-      <TextContainer
+    <ScrollArea>
+      <TextBlock
         title={`연락처 정보를\n입력해 주세요`}
         description="고객들이 쉽게 연락할 수 있도록 정보를 입력해주세요"
       />
@@ -62,7 +60,7 @@ export default function OnboardingInformationScreen() {
           },
         }}
         render={({ field: { onChange, value }, fieldState: { error, isRequired } }) => (
-          <FormFieldOrganism
+          <FormField
             type="input"
             title="주소"
             placeholder="예: 서울시 마포구 홍대입구역 2번 출구"
@@ -84,7 +82,7 @@ export default function OnboardingInformationScreen() {
           },
         }}
         render={({ field: { onChange, value }, fieldState: { error, isRequired } }) => (
-          <FormFieldOrganism
+          <FormField
             type="input"
             title="연락처"
             placeholder="예: 02-1234-5678"
@@ -106,7 +104,7 @@ export default function OnboardingInformationScreen() {
           },
         }}
         render={({ field: { onChange, value }, fieldState: { error, isRequired } }) => (
-          <FormFieldOrganism
+          <FormField
             type="input"
             title="이메일"
             placeholder="예: contact@guesthouse.com"
@@ -127,7 +125,7 @@ export default function OnboardingInformationScreen() {
           },
         }}
         render={({ field: { onChange, value }, fieldState: { error, isRequired } }) => (
-          <FormFieldOrganism
+          <FormField
             type="input"
             title="웹사이트 (선택사항)"
             placeholder="예: https://guesthouse.com"
@@ -139,7 +137,7 @@ export default function OnboardingInformationScreen() {
         )}
       />
 
-      <Buttons placement="bottom" direction="vertical" buttons={buttons} />
-    </Box>
+      <ButtonGroup placement="bottom" direction="vertical" buttons={buttons} />
+    </ScrollArea>
   );
 }

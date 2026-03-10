@@ -1,0 +1,23 @@
+mutation CreateOnboarding($input: CreateGuesthouseInput!) {
+  createOnboarding(input: $input) {
+    id
+    name
+    description
+    address
+    phone
+    email
+    website
+    dinnerPartyType
+    dinnerPartyDescription
+    onboardingStatus
+    rooms {
+      id
+      name
+      capacity
+      gender
+      hasBathroom
+    }
+    createdAt
+    updatedAt
+  }
+}

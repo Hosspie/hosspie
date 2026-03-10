@@ -1,39 +1,35 @@
-import { Box } from '@hosspie/design-system/components/box';
-import { IButtonProps, Buttons } from '@hosspie/design-system/organisms/buttons';
-import { FormFieldOrganism } from '@hosspie/design-system/organisms/form-field';
-import { TextContainer } from '@hosspie/design-system/organisms/text-container';
+import { ButtonGroup, ButtonGroupItemProps } from '@hosspie/design-system/organisms/button-group';
+import { FormField } from '@hosspie/design-system/organisms/form-field';
+import { ScrollArea } from '@hosspie/design-system/organisms/scroll-area';
+import { TextBlock } from '@hosspie/design-system/organisms/text-block';
 import { Field, useForm } from '@hosspie/services/form';
-import { router, Stack } from 'expo-router';
+import { router } from 'expo-router';
 
 import { IOnboardingFormData } from '../_layout';
 
 export default function OnboardingDescriptionScreen() {
   const { handleSubmit } = useForm<IOnboardingFormData>();
 
-  console.log('OnboardingDescriptionScreen');
-
   const handlePressNext = handleSubmit(
-    (data) => {
-      console.log('Form data:', data);
+    () => {
       router.push('/onboarding/information');
     },
-    (errors) => {
-      console.log('error', errors);
+    () => {
+      // 유효성 검사 실패 시 폼이 에러 표시 처리
     }
   );
 
-  const buttons: IButtonProps[] = [
+  const buttons: ButtonGroupItemProps[] = [
     {
       text: '다음 단계',
       onPress: handlePressNext,
-      variant: 'solid',
-      action: 'primary',
+      variant: 'primary',
     },
   ];
 
   return (
-    <Box className="flex-1">
-      <TextContainer
+    <ScrollArea>
+      <TextBlock
         title={`게스트하우스 정보를\n등록해 주세요`}
         description="기본적인 정보부터 시작해보겠습니다"
       />
@@ -52,7 +48,7 @@ export default function OnboardingDescriptionScreen() {
           },
         }}
         render={({ field: { onChange, value }, fieldState: { error, isRequired } }) => (
-          <FormFieldOrganism
+          <FormField
             type="input"
             title="게스트하우스 이름"
             placeholder="예: 홍대 게스트하우스"
@@ -78,7 +74,7 @@ export default function OnboardingDescriptionScreen() {
           },
         }}
         render={({ field: { onChange, value }, fieldState: { error, isRequired } }) => (
-          <FormFieldOrganism
+          <FormField
             type="textarea"
             title="게스트하우스에 대한 설명을 적어주세요"
             placeholder="ex. 안락한 소규모 게스트하우스입니다."
@@ -90,7 +86,7 @@ export default function OnboardingDescriptionScreen() {
         )}
       />
 
-      <Buttons placement="bottom" direction="vertical" buttons={buttons} />
-    </Box>
+      <ButtonGroup placement="bottom" direction="vertical" buttons={buttons} />
+    </ScrollArea>
   );
 }

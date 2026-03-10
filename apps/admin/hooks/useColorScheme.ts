@@ -1,28 +1,28 @@
 import * as NavigationBar from 'expo-navigation-bar';
-import { useColorScheme as useNativewindColorScheme } from 'nativewind';
 import * as React from 'react';
-import { Platform } from 'react-native';
+import { Platform, useColorScheme as useRNColorScheme } from 'react-native';
 
 const useColorScheme = () => {
-  const { colorScheme, setColorScheme: setNativewindColorScheme } = useNativewindColorScheme();
+  const colorScheme = useRNColorScheme() ?? 'light';
+  const [currentScheme, setCurrentScheme] = React.useState<'light' | 'dark'>(colorScheme);
 
-  async function setColorScheme(colorScheme: 'light' | 'dark') {
-    setNativewindColorScheme(colorScheme);
+  async function setColorScheme(scheme: 'light' | 'dark') {
+    setCurrentScheme(scheme);
     if (Platform.OS !== 'android') return;
     try {
-      await setNavigationBar(colorScheme);
+      await setNavigationBar(scheme);
     } catch (error) {
-      console.error('useColorScheme.tsx", "setColorScheme', error);
+      console.error('useColorScheme.ts', 'setColorScheme', error);
     }
   }
 
   function toggleColorScheme() {
-    return setColorScheme(colorScheme === 'light' ? 'dark' : 'light');
+    return setColorScheme(currentScheme === 'light' ? 'dark' : 'light');
   }
 
   return {
-    colorScheme: colorScheme ?? 'light',
-    isDarkColorScheme: colorScheme === 'dark',
+    colorScheme: currentScheme,
+    isDarkColorScheme: currentScheme === 'dark',
     setColorScheme,
     toggleColorScheme,
   };
@@ -36,7 +36,7 @@ const useInitialAndroidBarSync = () => {
   React.useEffect(() => {
     if (Platform.OS !== 'android') return;
     setNavigationBar(colorScheme).catch((error) => {
-      console.error('useColorScheme.tsx", "useInitialColorScheme', error);
+      console.error('useColorScheme.ts', 'useInitialColorScheme', error);
     });
   }, []);
 };
