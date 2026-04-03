@@ -57,8 +57,8 @@
 ```
 
 **1. 현황 파악**
-- `docs/head-office/` 기존 문서를 읽어서 현재 비전/방향성 확인
-  - 초기 실행 시 `docs/head-office/`나 `vision.md`/`roadmap.md`가 없을 수 있다. 없으면 스킵하고, 결론 단계에서 초기 문서 생성을 제안한다.
+- `references/vision.md`, `references/roadmap.md`를 읽어서 현재 비전/방향성 확인
+  - 초기 실행 시 해당 파일이 없을 수 있다. 없으면 스킵하고, 결론 단계에서 초기 문서 생성을 제안한다.
 - 트리거에 따라 대상 파악:
   - `feedback`: 사용자가 제시한 기획안/명세 읽기
   - `milestone-review`: 사용자가 완료된 마일스톤을 알려주면, 해당 범위의 git log와 관련 docs를 확인
@@ -115,11 +115,22 @@
 
 **5. 모드 선언 → 결론 정리 → 문서화** (경량과 동일)
 
+## 스킬 디렉토리 구조
+
+```
+.claude/skills/ceo-review/
+├── SKILL.md
+└── references/
+    ├── history/          # 리뷰 문서 (매 실행 시 생성)
+    ├── roadmap.md        # 마일스톤/로드맵 (지속 갱신)
+    └── vision.md         # 서비스 비전 (지속 갱신)
+```
+
 ## 문서화
 
 ### 리뷰 문서 (매 실행 시 생성)
 
-**위치:** `docs/head-office/YYYY-MM-DD-{트리거}-{주제}.md`
+**위치:** `.claude/skills/ceo-review/references/history/YYYY-MM-DD-{트리거}-{주제}.md`
 
 **파일명 규칙:**
 - `{주제}`는 AI가 대화 내용에서 핵심 키워드를 추출하여 kebab-case로 생성한다.
@@ -161,8 +172,8 @@
 
 ### 지속 문서 (리뷰 시 갱신)
 
-- `docs/head-office/vision.md` — 서비스 비전
-- `docs/head-office/roadmap.md` — 마일스톤/로드맵
+- `.claude/skills/ceo-review/references/vision.md` — 서비스 비전
+- `.claude/skills/ceo-review/references/roadmap.md` — 마일스톤/로드맵
 
 **갱신 규칙:** 어떤 트리거든 결론이 비전이나 로드맵에 영향을 주면, 해당 지속 문서 갱신을 제안한다. 사용자 확인 후 갱신.
 
