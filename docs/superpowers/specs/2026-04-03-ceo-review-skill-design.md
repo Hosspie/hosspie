@@ -76,7 +76,7 @@
 
 **4. 결론 정리 + 문서화**
 - 판단 요약 (모드, 핵심 결론, 다음 액션)
-- `docs/head-office/`에 저장
+- `references/history/`에 저장
 
 ### 중량 트리거 (new-service, pivot)
 
