@@ -48,18 +48,17 @@ WebSearch와 WebFetch를 활용하여 다각도로 정보를 수집합니다:
 
 ### 4. 결과물 작성
 
-조사 결과를 `../hosspie__worktrees/` 하위의 지정된 폴더에 마크다운으로 정리합니다:
+조사 결과를 `research/{주제-slug}/` 하위에 마크다운으로 정리합니다:
 
 ```
-{research-folder}/
-├── README.md              # 조사 개요 및 핵심 발견
-├── findings/              # 상세 조사 결과
-│   ├── current-behavior.md    # 현재 사용자 행동
-│   ├── pain-points.md         # 페인 포인트
-│   ├── competitors.md         # 경쟁 환경
-│   └── opportunities.md       # 기회 영역
+research/{주제-slug}/
+├── README.md              # 조사 개요 및 핵심 발견 (TL;DR)
+├── findings/              # 상세 조사 결과 (주제에 맞게 구성)
+│   └── *.md               # 예: current-behavior.md, commission-comparison.md 등
 └── sources.md             # 출처 목록
 ```
+
+파일명은 리서치 주제에 맞게 자유롭게 정하되, `README.md`와 `sources.md`는 고정.
 
 ### 5. 인사이트 도출
 

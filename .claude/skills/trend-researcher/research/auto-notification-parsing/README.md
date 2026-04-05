@@ -31,12 +31,10 @@
 
 ## 문서 구조
 
-- `README.md` (이 문서) — 핵심 요약 및 결론
+- `README.md` (이 문서) — 핵심 요약 및 결론, Phase별 권장 로드맵
 - `findings/email-inbound.md` — 이메일 인바운드 서비스 비교, 채널별 이메일 포맷, 포워딩 UX
 - `findings/sms-inbound.md` — Android/iOS SMS 권한 제약, RN/Expo 라이브러리 현황
 - `findings/alternatives.md` — NotificationListenerService, 카카오 알림톡, 가상번호, OCR
-- `findings/recommendation.md` — Hosspie M2 권장 아키텍처 및 Phase별 구현 로드맵
-- `sources.md` — 인용 출처 전체 목록
 
 ---
 
@@ -90,8 +88,6 @@
 ---
 
 ## 최종 추천 (간략)
-
-`findings/recommendation.md`에 상세 기술.
 
 - **Phase 1 (MVP, 0~3개월)**: 이메일 인바운드 파싱(Cloudmailin 무료 티어) + LLM 파싱 + 수동 붙여넣기 폴백 UX. iOS/Android 공통.
 - **Phase 2 (3~6개월)**: Android 전용 "고급 모드"로 NotificationListenerService 옵션 추가. 네이버 앱 푸시/야놀자 앱 푸시 커버.

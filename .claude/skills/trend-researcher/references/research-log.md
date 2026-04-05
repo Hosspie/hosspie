@@ -7,6 +7,7 @@
 | 날짜 | 주제 | 핵심 발견 | 결과물 위치 |
 |------|------|----------|------------|
 | 2026-04-04 | 예약 채널별 관리 현황 및 수수료 비교 | 네이버(0~3.74%) vs OTA(10~20%) 격차 큼. 소규모 업체는 네이버+DM 조합으로 운영, 엑셀 수기 관리가 보편적 | `research/reservation-management/` |
+| 2026-04-04 | 자동 알림 수신/파싱 기술 실현 가능성 | iOS/Android SMS 읽기 불가(OS 정책), 네이버는 2023.9~앱푸시 전환. 이메일 인바운드 파싱(Cloudmailin 무료)이 가장 현실적. Android NotificationListenerService는 리스크 있는 옵션. 카카오 알림톡은 발송만, 수신 API 없음 | `research/auto-notification-parsing/` |
 | 2026-04-05 | 멀티 채널 예약 API/연동 가능성 | 야놀자·여기어때 공개 API 없음, 네이버 예약 숙박 제외, Airbnb/Booking은 Connectivity Partner 심사 필요(Booking은 신규 등록 중단). ONDA 채널매니저 파트너십이 소규모 업체의 유일한 현실적 통합 경로. iCal은 Airbnb/Booking만 지원, 3시간 지연. DM 채널은 LLM 파싱으로 반자동화 권장. 3단계 전략: Phase1 iCal+이메일/DM LLM 파싱, Phase2 ONDA 파트너십, Phase3 자체 Connectivity 자격 | `research/multi-channel-api/` |
 
 ## 계획된 리서치
