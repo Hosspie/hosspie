@@ -336,6 +336,6 @@ pnpm codegen:admin
 
 | 스킬 | 담당 영역 |
 |------|----------|
-| `publisher` | 디자인 시스템 (components, organisms, pages, tokens, Storybook) |
-| `frontend-developer` | 앱 구현 (스크린 컴포지션, GraphQL, 폼, 라우팅, 상태 관리) |
-| `backend-developer` | API + DB (NestJS, Prisma, 타입 시스템, codegen, Supabase) |
+| `publisher` | 디자인 시스템 (components, organisms, pages, tokens, Storybook, 디자인 가이드) |
+| `frontend-developer` | 앱 구현 (스크린 컴포지션, GraphQL, 폼, 라우팅, 상태 관리, RN 성능 최적화) |
+| `backend-developer` | API + DB (NestJS, Prisma, 타입 시스템, codegen, Supabase, Postgres 모범 사례) |

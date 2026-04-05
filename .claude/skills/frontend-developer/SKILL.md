@@ -1,6 +1,6 @@
 ---
 name: frontend-developer
-description: "React Native/Expo 앱 로직 구현 가이드. design-system의 pages 스토리를 참고하여 organisms만 import해 스크린을 구성하고, 서비스 로직(GraphQL, 상태 관리, 폼, 라우팅)을 연결합니다. 트리거: 앱 스크린 구현, 화면 추가/수정, GraphQL operation 작성, Apollo Client 연동, react-hook-form 폼 처리, expo-router 라우팅, 멀티 스텝 폼, 상태 관리, 성능 최적화, 앱 배포, API fetch, 인증/세션, Context API, 서버 상태, 로딩/에러 처리. apps/admin/ 내 파일 작업 시 자동 적용."
+description: "React Native/Expo 앱 로직 구현 가이드. design-system의 pages 스토리를 참고하여 organisms만 import해 스크린을 구성하고, 서비스 로직(GraphQL, 상태 관리, 폼, 라우팅)을 연결합니다. RN 성능 최적화 가이드(FPS, TTI, 번들 크기, 메모리 누수, 리렌더링, 애니메이션)도 포함. 트리거: 앱 스크린 구현, 화면 추가/수정, GraphQL operation 작성, Apollo Client 연동, react-hook-form 폼 처리, expo-router 라우팅, 멀티 스텝 폼, 상태 관리, 성능 최적화, FPS, TTI, 번들 크기, Hermes, FlashList, 리렌더링, 메모리 누수, 앱 배포, API fetch, 인증/세션, Context API, 서버 상태, 로딩/에러 처리. apps/admin/ 내 파일 작업 시 자동 적용."
 ---
 
 # Frontend Developer 가이드
@@ -214,3 +214,4 @@ const handleNavigate = useCallback(() => {
 - [React 패턴](references/react-patterns.md) - 컴포넌트, Hooks, 폼, 상태 관리
 - [앱 구조](references/app-structure.md) - 라우팅, 레이아웃, Provider
 - [Apollo Client](references/apollo-client.md) - GraphQL operations, 캐시, 에러 처리
+- [RN 성능 최적화](references/rn-performance/index.md) - FPS, TTI, 번들 크기, 메모리, 애니메이션 최적화 (하위 파일에 상세 가이드)

@@ -1,6 +1,6 @@
 ---
 name: publisher
-description: "Hosspie 디자인 시스템(packages/design-system) 전담 퍼블리셔 스킬. 컴포넌트(atom) 생성/수정, organism 생성/수정, 페이지 스토리 작성, Storybook 스토리, 디자인 토큰 추가/수정, 스타일링 작업 시 사용. 트리거 키워드: 디자인 시스템, 컴포넌트, organism, atom, page story, Storybook, 디자인 토큰, 스타일링, Button/Input/Card/Text 등 UI 컴포넌트, FormField/ButtonGroup/BackgroundLayout 등 organism, pages/ 디렉토리 작업. packages/design-system/src/ 하위 파일 작업 시 자동 적용."
+description: "Hosspie 디자인 시스템(packages/design-system) 전담 퍼블리셔 스킬. 컴포넌트(atom) 생성/수정, organism 생성/수정, 페이지 스토리 작성, Storybook 스토리, 디자인 토큰 추가/수정, 스타일링 작업 시 사용. UI 디자인 가이드(미학, 디자인 사고)도 포함. 트리거 키워드: 디자인 시스템, 컴포넌트, organism, atom, page story, Storybook, 디자인 토큰, 스타일링, Button/Input/Card/Text 등 UI 컴포넌트, FormField/ButtonGroup/BackgroundLayout 등 organism, pages/ 디렉토리 작업, 디자인 가이드, UI 미학, 프론트엔드 디자인. packages/design-system/src/ 하위 파일 작업 시 자동 적용."
 ---
 
 # Publisher 스킬 (디자이너 + 퍼블리셔)
@@ -290,6 +290,12 @@ pnpm storybook:web  # localhost:6006에서 확인
 ```
 
 Playwright MCP로 스크린샷 캡처 후 디자인 검증 가능.
+
+## 디자인 가이드
+
+차별화된 UI를 만들기 위한 디자인 사고방식과 미학 가이드라인: `references/design-guide.md` 참조
+
+새로운 컴포넌트나 페이지 디자인 시 일반적인 AI 스타일을 피하고 대담한 미학적 방향을 설정하는 데 활용.
 
 ## 스타일링 규칙
 

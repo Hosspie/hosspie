@@ -1,13 +1,6 @@
----
-name: react-native-best-practices
-description: FPS, TTI, 번들 크기, 메모리 누수, 리렌더링, 애니메이션에 대한 React Native 성능 최적화 가이드를 제공합니다. Hermes 최적화, JS 스레드 블로킹, 브릿지 오버헤드, FlashList, 네이티브 모듈 또는 jank와 프레임 드롭 디버깅과 관련된 작업에 적용됩니다.
-license: MIT
-metadata:
-  author: Callstack
-  tags: react-native, expo, performance, optimization, profiling
----
-
 # React Native 성능 최적화 가이드
+
+> 출처: Callstack의 "Ultimate Guide to React Native Optimization"
 
 ## 개요
 
@@ -107,7 +100,7 @@ npx source-map-explorer output.js --no-border-checks
 
 ## 참조 문서
 
-`references/`에 코드 예제가 포함된 전체 문서:
+같은 디렉토리(`rn-performance/`)에 코드 예제가 포함된 전체 문서:
 
 ### JavaScript/React (`js-*`)
 
