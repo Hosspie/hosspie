@@ -38,8 +38,9 @@
   ],
   "pnpm": {
     "overrides": {
-      "expo": "~53.0.23",
-      "react-native": "0.79.6",
+      "expo": "~55.0.15",
+      "react": "19.2.0",
+      "react-native": "0.83.4",
       "react-docgen-typescript": "2.2.2"
     },
     "onlyBuiltDependencies": [
