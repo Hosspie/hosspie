@@ -330,12 +330,32 @@ pnpm codegen:admin
 - 에러 메시지: 한글 사용
 - 변수명, 함수명: 영어 사용 (코드 자체는 영어)
 
+## 에이전트 가이드
+
+도메인별 작업은 **senior(opus) → junior(sonnet) 2-tier**로 운영. senior는 계획·리뷰만, junior는 구현만 담당. 메인 대화가 dispatch.
+
+| 도메인 | Senior (opus) | Junior (sonnet) | 담당 영역 |
+|-------|--------------|------------------|----------|
+| Frontend | `frontend-senior` | `frontend-junior` | apps/admin (스크린, GraphQL, 폼, 라우팅, RN 성능) |
+| Backend | `backend-senior` | `backend-junior` | apps/api + DB (NestJS, Prisma, 타입 시스템, codegen, Supabase) |
+| Design System | `publisher-senior` | `publisher-junior` | packages/design-system (atom, organism, page, 토큰) |
+
+### 위임 사이클 (필수 — 모든 작업)
+
+도메인별 작업을 받으면 **반드시** 다음 사이클을 따른다:
+
+1. **계획**: 메인 → `{도메인}-senior` 위임 → 상세 구현 계획 받음
+2. **구현**: 메인 → `{도메인}-junior`에 senior 계획 + 작업 지시 위임 → 구현 결과 받음
+3. **리뷰**: 메인 → `{도메인}-senior`에 구현 결과 첨부하여 위임 → 리뷰·피드백 받음
+4. **반복**: 리뷰 결과 수정 필요 시 2번부터 반복 (필요하면 senior에 재계획 요청)
+
+이 사이클을 건너뛰고 메인이 직접 구현하거나, junior에게 계획 없이 위임하는 것은 금지. 사이클은 작업 크기와 무관하게 적용된다.
+
 ## 스킬 가이드
 
-작업 영역별 상세 가이드는 `.claude/skills/`의 스킬 문서를 참조:
+메인 대화에서 inline 컨텍스트가 필요한 영역은 스킬로 운영 (`.claude/skills/`):
 
 | 스킬 | 담당 영역 |
 |------|----------|
-| `publisher` | 디자인 시스템 (components, organisms, pages, tokens, Storybook, 디자인 가이드) |
-| `frontend-developer` | 앱 구현 (스크린 컴포지션, GraphQL, 폼, 라우팅, 상태 관리, RN 성능 최적화) |
-| `backend-developer` | API + DB (NestJS, Prisma, 타입 시스템, codegen, Supabase, Postgres 모범 사례) |
+| `update-milestones` | 마일스톤 생성·업데이트, 비전·로드맵 정합성 점검, pivot 검토 |
+| `code-review` | 로컬 diff 코드 리뷰. 변경 영역 식별 후 영역별 가이드 라우팅 (RN → react-native-best-practices) |
