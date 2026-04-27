@@ -32,4 +32,4 @@ Hosspie의 React Native UI 컴포넌트 + 디자인 토큰 패키지.
 |---|---|
 | `@hosspie/design-system/components/<name>` | atom (디자인 시스템 내부 + 테스트용) |
 | `@hosspie/design-system/organisms/<name>` | organism (앱 스크린에서 import) |
-| `@hosspie/design-system/tokens` | 디자인 토큰 |
+| `@hosspie/design-system/tokens/<name>` | 디자인 토큰 (`colors`, `spacing` 등) |
