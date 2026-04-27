@@ -60,9 +60,17 @@ if (!isOwner) return { __typename: 'ForbiddenError', message: '권한이 없습�
 // ❌ 비즈니스 실패를 throw
 if (duplicate) throw new BadRequestException('이미 존재합니다.');
 
-// ✅ Result variant 반환
-if (duplicate) return { __typename: 'DuplicateNameError', message: '이미 사용 중인 이름입니다.' };
+// ✅ Result variant 반환 — code 필드는 ErrorCode enum
+if (duplicate) {
+  return {
+    __typename: 'DuplicateNameError',
+    code: ErrorCode.DUPLICATE_GUESTHOUSE_NAME,
+    message: '이미 사용 중인 이름입니다.',
+  };
+}
 ```
+
+`ErrorCode` enum 은 `apps/api/src/common/error-codes.ts` 에서 정의·`registerEnumType` 으로 GraphQL 등록. 자세한 정책은 `rules/docs/error-handling.md`.
 
 variant `message` 필드든 NestJS Exception 인자든 **한국어** (`'게스트하우스를 찾을 수 없습니다.'`).
 
@@ -74,8 +82,8 @@ variant `message` 필드든 NestJS Exception 인자든 **한국어** (`'게스�
 /**
  * 게스트하우스를 생성합니다.
  * @example
- * // 성공: { __typename: 'Guesthouse', id: '...', name: '...' }
- * // 중복: { __typename: 'DuplicateNameError', message: '이미 사용 중인 이름입니다.' }
+ * // 성공: { __typename: 'CreateGuesthouseSuccess', guesthouse: { id: '...', name: '...' } }
+ * // 중복: { __typename: 'DuplicateNameError', code: ErrorCode.DUPLICATE_GUESTHOUSE_NAME, message: '이미 사용 중인 이름입니다.' }
  */
 async createGuesthouse(...): Promise<typeof CreateGuesthouseResult> { ... }
 ```

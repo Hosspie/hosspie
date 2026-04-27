@@ -38,7 +38,7 @@ import { Button } from '@hosspie/design-system/components/button';
 
 ## 에러 처리
 
-mutation/query 결과의 union variant 분기로 UI 처리 (toast, inline error, navigation 등). try/catch 안 씀. 자세히는 `front/code-style.md` 의 "에러 처리" 참조.
+mutation/query 결과의 union variant 를 `code: ErrorCode` (enum) 로 분기해 UI 대응 (toast, inline error, navigation 등). string 리터럴 / `__typename` 직접 비교 금지. try/catch 안 씀. 자세히는 `rules/docs/error-handling.md` 와 `rules/front/code-style.md` 의 "에러 처리" 참조.
 
 ## 라우트 함수명 통일
 

@@ -47,7 +47,7 @@ paths:
 
 ## 에러 처리
 
-design-system 컴포넌트는 외부 API 호출이 거의 없으므로 적용 영역 작음. 외부 라이브러리 boundary 에서만 `.catch()` 체이닝 허용. wrap-and-rethrow 금지. 자세한 정책은 backend·front rules 와 동일 — Result-as-data 패턴.
+design-system 컴포넌트는 외부 API 호출이 거의 없으므로 적용 영역 작음. 외부 라이브러리 boundary 에서만 `.catch()` 체이닝 허용. wrap-and-rethrow 금지. 자세한 정책은 `rules/docs/error-handling.md` (Result-as-data + `ErrorCode` enum 패턴).
 
 ## JSDoc
 

@@ -13,17 +13,26 @@ paths:
 3. 생성된 hook ({name}.generated.ts) import 후 사용
 ```
 
-에러 variant가 있는 mutation/query는 backend에서 union type 스키마가 정의됐는지 확인 후 `__typename` 분기로 처리.
+에러 variant 가 있는 mutation/query 는 backend 에서 union type 스키마 + `code: ErrorCode` 필드가 정의됐는지 확인 후 enum 분기.
 
 ```ts
-// ✅ union 분기 예시
+// ✅ ErrorCode enum 분기 예시
+import { ErrorCode } from '@hosspie/types';
+
 const [createRoom] = useCreateRoomMutation();
 const result = await createRoom({ variables: { input } });
-if (result.data?.createRoom.__typename === 'RoomAlreadyExistsError') {
-  setError(result.data.createRoom.message);
-  return;
+const data = result.data?.createRoom;
+
+if (data?.__typename !== 'CreateRoomSuccess') {
+  switch (data?.code) {
+    case ErrorCode.ROOM_ALREADY_EXISTS:
+      setError(data.message);
+      return;
+  }
 }
 ```
+
+자세한 정책 — `rules/docs/error-handling.md`.
 
 ## 멀티 스텝 폼
 

@@ -61,20 +61,30 @@ hook이 반환하는 함수 이름은 `handle*` prefix 금지 → 동사형(`ope
 
 ## 에러 처리 (Result-as-data)
 
-비즈니스 흐름 (mutation/query 결과·상태 변경·navigation) 에서 **try/catch 금지**. result의 에러 variant/필드를 명시적으로 분기.
+비즈니스 흐름 (mutation/query 결과·상태 변경·navigation) 에서 **try/catch 금지**. result 의 에러 variant 를 `code: ErrorCode` 로 분기 — string 리터럴(`__typename` 비교) 금지.
 
 ```ts
-// ✅ GraphQL union __typename 분기
-const { data } = useCreateReservationMutation();
-if (data?.createReservation.__typename === 'ValidationError') {
-  setError(data.createReservation.message);
-  return;
+// ✅ ErrorCode enum 분기
+import { ErrorCode } from '@hosspie/types';
+
+const [createReservation] = useCreateReservationMutation();
+const result = await createReservation({ variables: { input } });
+const data = result.data?.createReservation;
+
+if (data?.__typename !== 'CreateReservationSuccess') {
+  switch (data?.code) {
+    case ErrorCode.VALIDATION_FAILED:
+      setError(data.message);
+      return;
+    // 새 ErrorCode 추가 시 exhaustive 체크
+  }
 }
 ```
 
 - **wrap-and-rethrow 금지**: `try { ... } catch (e) { throw new Error('...', { cause: e }) }` 패턴 안 씀
 - try/catch 는 외부 라이브러리 boundary (`JSON.parse`, native module 등) 에 한함
-- GraphQL 에러 variant 정의는 backend 담당 — union 스키마 확인 후 `__typename` 분기 사용
+- GraphQL 에러 variant 정의는 backend 담당 — `ErrorCode` enum 은 `@hosspie/types` 에서 import
+- 자세한 정책 — `rules/docs/error-handling.md`
 
 ## JSDoc
 

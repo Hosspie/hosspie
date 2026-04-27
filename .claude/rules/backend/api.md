@@ -17,7 +17,7 @@ paths:
 
 ## 에러 variant 모델링 (Result-as-data 핵심)
 
-성공/실패 variant 가 의미 있는 mutation/query 는 **union type** 으로 모델링.
+성공/실패 variant 가 의미 있는 mutation/query 는 **union type** 으로 모델링. 에러 variant 는 반드시 `code: ErrorCode` (enum) + `message` 를 가진다 — 클라이언트가 enum 으로 분기.
 
 ```typescript
 @ObjectType()
@@ -27,6 +27,9 @@ export class CreateGuesthouseSuccess {
 
 @ObjectType()
 export class DuplicateNameError {
+  @Field(() => ErrorCode)
+  code: ErrorCode = ErrorCode.DUPLICATE_GUESTHOUSE_NAME;
+
   @Field() message: string;
 }
 
@@ -37,7 +40,9 @@ export const CreateGuesthouseResult = createUnionType({
 });
 ```
 
-- resolver 는 `Promise<typeof CreateGuesthouseResult>` 반환. 각 variant 는 `__typename` 명시.
+- resolver 는 `Promise<typeof CreateGuesthouseResult>` 반환. 각 variant 는 `__typename` 명시 (서버 측 GraphQL 메타데이터).
+- 클라이언트 분기는 `__typename` 이 아니라 `code` enum 으로 — `rules/docs/error-handling.md` 참조.
+- `ErrorCode` enum 은 `apps/api/src/common/error-codes.ts` 에 정의. 새 에러 추가 시 enum 값 추가 후 `pnpm codegen` 으로 클라이언트 enum 자동 동기화.
 - 단순 자원 조회 (찾으면 객체, 없으면 null) 는 nullable 반환으로 충분 — variant 불필요.
 
 ## API 엔드포인트 추가 절차
