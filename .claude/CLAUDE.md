@@ -1,361 +1,88 @@
 # CLAUDE.md
 
-이 파일은 Claude Code (claude.ai/code)가 이 저장소에서 작업할 때 참고하는 가이드입니다.
+이 파일은 Claude Code가 hosspie 모노레포에서 작업할 때 참고하는 루트 가이드입니다.
 
 ## 프로젝트 개요
 
-Hosspie는 게스트하우스 관리 시스템을 위한 pnpm 워크스페이스 모노레포입니다:
+Hosspie는 게스트하우스 관리 시스템을 위한 pnpm 워크스페이스 모노레포입니다.
 
-- **Admin App**: Expo/React Native 모바일 애플리케이션 (expo-router 사용)
-- **API**: NestJS GraphQL API 서버
-- **Database**: Prisma ORM + Supabase PostgreSQL
+- **Admin**: Expo / React Native 관리자 앱 (`apps/admin`)
+- **API**: NestJS GraphQL API (`apps/api`)
+- **DB**: Prisma + Supabase (`packages/database`)
+- **디자인 시스템**: RN 컴포넌트 + 토큰 (`packages/design-system`)
+- **공통 서비스**: 클라이언트 공통 로직 (`packages/services`)
 
-Node 버전: 20 (`.nvmrc` 참고)
+각 패키지의 상세는 해당 디렉토리의 `CLAUDE.md` 참조.
 
-## 빠른 시작
+## 앱 시작하기
 
-### 초기 설정 (프로젝트 클론 후 1회)
+도메인별 tmux 패널 분리 실행 권장.
 
-```bash
-# 1. 환경 설정
-nvm use
-pnpm install
-
-# 2. 환경 변수 복사
-cp apps/api/.env.example apps/api/.env.development.local
-cp apps/admin/.env.example apps/admin/.env.development.local
-
-# 3. 데이터베이스 설정
-pnpm supabase:start
-pnpm db:push
-pnpm db:seed
-
-# 4. 개발 서버 시작 (Supabase 자동 시작 포함)
-pnpm dev:all
-
-# 5. GraphQL 타입 생성 (별도 터미널)
-pnpm codegen
-```
-
-📚 **상세 가이드**: `backend-developer` 스킬 참조
-
-### 일반 개발 시작
+**최초 1회**:
 
 ```bash
-# API 서버만 시작 (Supabase 자동 시작 포함)
-pnpm dev:api
-
-# 또는 API + Admin 서버 모두 시작 (Supabase 자동 시작 포함)
-pnpm dev:all
+nvm use && pnpm install
+pnpm supabase:start && pnpm db:push
 ```
 
-**자동화**: `dev:api`와 `dev:all` 명령어는 Supabase를 자동으로 시작합니다. Supabase가 이미 실행 중이면 빠르게 확인 후 넘어갑니다.
+**상시 실행 (각각 별도 패널)**:
 
-**권장 터미널 구성**:
-1. `pnpm dev:all` - Supabase + API + Admin 서버 (자동)
-2. `pnpm codegen:watch` - GraphQL operations 자동 재생성
-3. `pnpm db:studio` - Prisma Studio (DB 확인용)
+| 패널 | 명령 | 비고 |
+|---|---|---|
+| 앱 | `pnpm dev:admin` | Expo Metro |
+| 백엔드 | `pnpm dev:api` | NestJS — Supabase·Prisma generate 자동 트리거 |
+| 코드젠 | `pnpm codegen:watch` | GraphQL 타입 자동 재생성 |
+| DB | `pnpm db:studio` | Prisma Studio (선택) |
 
-## 주요 명령어
+**디자인 작업 시**: `pnpm --filter @hosspie/design-system storybook`
 
-### 데이터베이스
-- `pnpm db:generate` - Prisma Client 생성
-- `pnpm db:push` - 스키마 푸시 (개발)
-- `pnpm db:migrate:dev` - 마이그레이션 생성 및 적용
-- `pnpm db:studio` - Prisma Studio GUI
+도메인별 명령어·옵션은 각 sub-CLAUDE.md 참조.
 
-### GraphQL 코드 생성
-- `pnpm codegen` - 전체 코드 생성
-- `pnpm codegen:watch` - Watch 모드 (권장)
-
-**자동화**: API 서버는 `schema.gql` 자동 생성, TypeScript 타입은 `codegen` 실행 필요
-
-### 빌드 & 테스트
-- `pnpm build` - 모든 앱과 패키지 빌드
-- `pnpm test` - 테스트 실행
-- `pnpm lint` - 린트
-
-## 아키텍처
-
-### 모노레포 구조
+## 모노레포 구조
 
 ```
 apps/
-├── admin/          # Expo/React Native 앱 (Expo SDK 53, React Native 0.79)
-└── api/            # NestJS GraphQL API (NestJS 11, Apollo Server)
+├── admin/          # Expo/RN — apps/admin/CLAUDE.md
+└── api/            # NestJS GraphQL — apps/api/CLAUDE.md
 
 packages/
-├── database/       # Prisma 스키마와 클라이언트
-├── types/          # GraphQL 스키마에서 생성된 공유 TypeScript 타입
-├── design-system/  # React Native UI 컴포넌트 (RN StyleSheet + 디자인 토큰)
-├── services/       # 공유 프론트엔드 서비스 (폼 유틸리티)
-└── configs/        # 공유 ESLint, TypeScript 설정
+├── database/       # Prisma + Supabase — packages/database/CLAUDE.md
+├── design-system/  # RN UI + 토큰 — packages/design-system/CLAUDE.md
+├── types/          # GraphQL codegen 산출물
+├── services/       # 클라이언트 공통 로직 (현재 폼 유틸)
+└── configs/        # ESLint, TypeScript 공유 설정
 ```
-
-### Admin 앱 아키텍처
-
-**라우팅**: expo-router(v5)를 사용한 파일 기반 라우팅
-
-- 보호된 라우트는 세션 가드와 함께 `Stack.Protected` 사용
-- 멀티 스텝 플로우는 컨텍스트 공유를 위해 공유 레이아웃 사용 (예: onboarding)
-
-**Provider 계층 구조** (루트 `app/_layout.tsx`):
-
-```
-ApolloProvider → SessionProvider → Stack (router)
-```
-
-**스타일링**: React Native StyleSheet + 디자인 토큰
-
-- `packages/design-system/src/tokens/`의 디자인 토큰 기반 스타일링
-- `StyleSheet.create()` + `React.createElement` 패턴
-- 다크 모드 전용 시맨틱 컬러 토큰
-
-**상태 관리**:
-
-- Apollo Client: 서버 상태 관리
-- React Hook Form: 복잡한 멀티 스텝 폼
-- Context API: 인증/세션
-
-**경로 별칭**:
-
-- `@/*`는 앱 루트에 매핑
-- tsconfig paths를 통한 모노레포 패키지 직접 임포트
-
-### API 아키텍처
-
-**프레임워크**: NestJS with GraphQL Code-First 방식
-
-**모듈 구조**:
-
-```
-src/modules/
-├── prisma/        # 데이터베이스 서비스 (싱글톤 Prisma 클라이언트)
-├── guesthouse/    # 비즈니스 로직
-│   ├── *.resolver.ts    # GraphQL 리졸버
-│   ├── *.service.ts     # 비즈니스 로직
-│   ├── models/          # GraphQL 객체 타입
-│   └── inputs/          # GraphQL 입력 DTO
-└── health/        # 헬스 체크 엔드포인트
-```
-
-**주요 설정** (`src/main.ts`):
-
-- class-validator를 사용한 전역 유효성 검사 파이프
-- CORS 활성화
-- 전역 API 접두사: `/api`
-- 개발 환경에서 GraphQL Playground 활성화
-
-**인증**: 현재 임시 사용자 ID 사용 중; 인증 구현은 TODO
-
-📚 **상세 가이드**: `backend-developer` 스킬 참조
-
-### 데이터베이스 (Prisma + Supabase)
-
-**스키마 위치**: `packages/database/prisma/schema.prisma`
-
-**데이터 모델**:
-
-```
-User (1:1) → Guesthouse (1:n) → Room
-```
-
-**연결**:
-
-- 로컬 개발: Supabase CLI (`pnpm supabase:start`)
-- Supabase 설정: `supabase/config.toml`
-- PostgREST API는 비활성화 (NestJS GraphQL 사용)
-
-**패키지 익스포트**:
-
-- `@hosspie/database` - Prisma 클라이언트와 타입
-- `@hosspie/database/client` - 싱글톤 Prisma 클라이언트 인스턴스
-
-📚 **상세 가이드**: `backend-developer` 스킬 → `references/database.md`
-
-### 타입 시스템
-
-**핵심 원칙**: Prisma Schema를 단일 진실의 소스(Single Source of Truth)로 사용
-
-**타입 플로우**:
-
-```
-Prisma Schema
-  ↓
-NestJS 데코레이터 → schema.gql (자동 생성)
-  ↓
-GraphQL Code Generator
-  ↓
-TypeScript 타입 (packages/types)
-```
-
-**패키지별 사용**:
-- **API**: Enum/Model → `@hosspie/database`
-- **Client**: 모든 타입 → `@hosspie/types`
-
-📚 **상세 가이드**: `backend-developer` 스킬 → `references/type-system.md`
-
-### 디자인 시스템
-
-**위치**: `packages/design-system/src/`
-
-**구조**:
-
-- `components/` - Atom 컴포넌트 (Button, Input, Text, Card 등)
-- `organisms/` - Atom 조합 컴포넌트 (FormField, ButtonGroup, TextBlock 등)
-- `pages/` - Storybook 페이지 스토리 (Frontend Developer용 UI 설계도)
-- `tokens/` - 디자인 토큰 (colors, spacing, typography, radius, sizing, shadows)
-
-**스크린 컴포지션 규칙**: 앱 스크린에서는 organisms만 import. components(atoms) 직접 import 금지.
-
-```typescript
-// ✅ organisms만 import
-import { ButtonGroup } from '@hosspie/design-system/organisms/button-group';
-import { FormField } from '@hosspie/design-system/organisms/form-field';
-
-// ❌ components(atoms) 직접 import 금지
-import { Button } from '@hosspie/design-system/components/button';
-```
-
-📚 **상세 가이드**: `publisher` 스킬 (디자인 시스템), `frontend-developer` 스킬 (앱 구현)
-
-### 멀티 스텝 폼 패턴
-
-코드베이스는 멀티 스텝 폼을 위한 패턴을 사용합니다 (onboarding 플로우 참고):
-
-1. **레이아웃 레벨** (`app/onboarding/_layout.tsx`):
-   - react-hook-form의 `FormProvider`로 감싸기
-   - 네비게이션 간 상태 유지
-   - 라우트별 진행 상황 추적
-
-2. **Field 래퍼** (`packages/services/frontend/src/form`):
-   - `Controller`를 감싸는 타입 안전 `Field` 컴포넌트
-   - 자동 에러 핸들링이 포함된 간소화된 API
-
-3. **사용법**:
-   ```tsx
-   <Field<FormDataType, 'fieldName'>
-     name="fieldName"
-     rules={{ required: '에러 메시지' }}
-     render={({ field, fieldState }) => <YourComponent {...field} />}
-   />
-   ```
-
-## 개발 워크플로우
-
-### 데이터베이스 스키마 변경 시
-
-```bash
-pnpm db:push          # 스키마 DB 반영
-pnpm db:generate      # Prisma Client 재생성
-```
-
-### GraphQL 스키마 변경 시
-
-```bash
-# 1. schema.gql 자동 업데이트 확인 (nest start --watch)
-# 2. TypeScript 타입 재생성
-pnpm codegen
-```
-
-### GraphQL Operation 추가 시
-
-```bash
-# 1. .graphql 파일 작성 (apps/admin/lib/graphql/operations/)
-# 2. 타입과 훅 생성
-pnpm codegen:admin
-# 3. 생성된 훅 import 및 사용
-```
-
-## 중요한 컨벤션
-
-### 코드 주석
-
-- 한글 주석과 이모지 문서 참조:
-  ```typescript
-  // 📚 참고: https://docs.nestjs.com/providers
-  ```
-
-### 에러 메시지
-
-- 사용자 대면 메시지는 한글로 작성
-- GraphQL 에러는 NestJS `NotFoundException` 사용
-- 프론트엔드 필드 유효성 검사는 react-hook-form rules 사용
-
-### TypeScript
-
-- Strict 모드 활성화
-- 패키지 전체에 일관된 경로 별칭 설정
-- `@hosspie/types` 패키지의 공유 타입 사용
-
-### 인증 패턴
-
-- 현재: 임시 하드코딩된 사용자 ID (`'temp-user-id'`)
-- TODO: 세션 컨텍스트를 사용한 적절한 인증 구현
-- Apollo Client는 SecureStore에서 토큰 주입을 위한 auth link 준비됨
-
-### Turborepo 태스크 의존성
-
-**자동 의존성 관리** (turbo.json 설정):
-
-1. **API 개발 서버** (`@hosspie/api#dev`):
-   - 의존성: `@hosspie/database#db:generate`, `@hosspie/database#build`
-   - 동작: `pnpm dev:api` 실행 시 Supabase 자동 시작 → Prisma 클라이언트 생성 → NestJS 서버 시작
-
-2. **빌드 태스크** (`build`):
-   - 의존성: `^build` (모든 의존 패키지 빌드 먼저)
-   - 동작: 하위 패키지부터 순차적으로 빌드
-
-3. **데이터베이스 태스크** (`db:*`):
-   - 캐시 비활성화 (`cache: false`)
-   - 이유: 데이터베이스 상태는 항상 최신으로 반영되어야 함
-
-**주의**: Turborepo는 태스크 의존성만 자동으로 처리하며, **초기 데이터베이스 스키마 적용(`db:push`)은 수동으로 실행**해야 합니다.
-
-## 테스트
-
-- **Admin**: jest-expo preset을 사용한 Jest
-- **API**: ts-jest를 사용한 Jest
-- 테스트 실행: `pnpm test` (루트) 또는 특정 앱에서 `pnpm test`
-- Watch 모드: 앱 디렉토리에서 `pnpm test:watch`
-- 커버리지: API 앱에서 `pnpm test:cov`
-
-## 문서 작성 규칙
-
-**모든 문서, 주석, 커밋 메시지는 한글로 작성합니다.**
-
-- 코드 주석: 한글 사용
-- README, CLAUDE.md 등 문서: 한글 사용
-- Git 커밋 메시지: 한글 사용
-- 에러 메시지: 한글 사용
-- 변수명, 함수명: 영어 사용 (코드 자체는 영어)
 
 ## 에이전트 가이드
 
 도메인별 작업은 **senior(opus) → junior(sonnet) 2-tier**로 운영. senior는 계획·리뷰만, junior는 구현만 담당. 메인 대화가 dispatch.
 
-| 도메인 | Senior (opus) | Junior (sonnet) | 담당 영역 |
-|-------|--------------|------------------|----------|
-| Frontend | `frontend-senior` | `frontend-junior` | apps/admin (스크린, GraphQL, 폼, 라우팅, RN 성능) |
-| Backend | `backend-senior` | `backend-junior` | apps/api + DB (NestJS, Prisma, 타입 시스템, codegen, Supabase) |
-| Design System | `publisher-senior` | `publisher-junior` | packages/design-system (atom, organism, page, 토큰) |
+| 도메인 | Senior | Junior | 담당 영역 |
+|---|---|---|---|
+| Frontend | `frontend-senior` | `frontend-junior` | apps/admin |
+| Backend | `backend-senior` | `backend-junior` | apps/api + DB |
+| Design System | `publisher-senior` | `publisher-junior` | packages/design-system |
 
-### 위임 사이클 (필수 — 모든 작업)
+### 위임 사이클 (필수)
 
-도메인별 작업을 받으면 **반드시** 다음 사이클을 따른다:
+1. **계획**: 메인 → `{도메인}-senior` → 상세 구현 계획
+2. **구현**: 메인 → `{도메인}-junior`에 senior 계획 + 작업 지시 → 구현 결과
+3. **리뷰**: 메인 → `{도메인}-senior`에 구현 결과 첨부 → 리뷰·피드백
+4. **반복**: 리뷰 결과 수정 필요 시 2번부터
 
-1. **계획**: 메인 → `{도메인}-senior` 위임 → 상세 구현 계획 받음
-2. **구현**: 메인 → `{도메인}-junior`에 senior 계획 + 작업 지시 위임 → 구현 결과 받음
-3. **리뷰**: 메인 → `{도메인}-senior`에 구현 결과 첨부하여 위임 → 리뷰·피드백 받음
-4. **반복**: 리뷰 결과 수정 필요 시 2번부터 반복 (필요하면 senior에 재계획 요청)
-
-이 사이클을 건너뛰고 메인이 직접 구현하거나, junior에게 계획 없이 위임하는 것은 금지. 사이클은 작업 크기와 무관하게 적용된다.
+이 사이클 건너뛰기 금지. 사이클은 작업 크기 무관.
 
 ## 스킬 가이드
 
-메인 대화에서 inline 컨텍스트가 필요한 영역은 스킬로 운영 (`.claude/skills/`):
-
 | 스킬 | 담당 영역 |
-|------|----------|
-| `update-milestones` | 마일스톤 생성·업데이트, 비전·로드맵 정합성 점검, pivot 검토 |
-| `code-review` | 로컬 diff 코드 리뷰. 변경 영역 식별 후 영역별 가이드 라우팅 (RN → react-native-best-practices) |
+|---|---|
+| `update-milestones` | 마일스톤 생성·업데이트, 비전·로드맵 정합성 점검 |
+| `code-review` | 로컬 diff 코드 리뷰 (영역별 가이드 라우팅) |
+
+## Turborepo
+
+`turbo.json`이 자동으로 의존 태스크 처리 (`db:generate` → `dev:api`, `^build` → `build`). 단, 초기 `db:push`는 수동 실행 필요.
+
+## 워크플로우
+
+(후속 작업으로 정리 예정)
