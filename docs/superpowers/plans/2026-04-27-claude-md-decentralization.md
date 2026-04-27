@@ -321,7 +321,7 @@ import { Button } from '@hosspie/design-system/components/button';
 
 ```ts
 // 사용 예
-import { Field } from '@hosspie/services/frontend/form';
+import { Field } from '@hosspie/services/form';
 
 <Field<FormData, 'fieldName'>
   name="fieldName"
