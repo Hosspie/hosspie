@@ -30,8 +30,8 @@ User (1:1) → Guesthouse (1:n) → Room
 
 ## Supabase 로컬 개발
 
-- 시작: `pnpm supabase:start` (루트에서)
-- 설정: `supabase/config.toml` (루트)
+- 시작: `pnpm supabase:start` (루트 또는 이 패키지에서)
+- 설정: `supabase/config.toml` (이 패키지 내부)
 - PostgREST 비활성화 — API는 NestJS GraphQL 사용
 
 ## 패키지 export
