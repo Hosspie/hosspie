@@ -1,6 +1,7 @@
 ---
 paths:
   - "apps/admin/**/*.{ts,tsx}"
+  - "packages/services/**/*.{ts,tsx}"
 ---
 
 # 프론트엔드 코드 스타일
