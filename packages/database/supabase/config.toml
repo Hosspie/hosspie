@@ -1,6 +1,10 @@
 # Supabase Local Development Configuration
 # 📚 참고: https://supabase.com/docs/guides/cli/config
 
+# 컨테이너 이름 접두사. 명시하지 않으면 CLI 가 부모 디렉토리 이름으로 추론하므로,
+# 메인 레포·워크트리·packages/database 어느 위치에서 실행해도 동일한 컨테이너를 재사용하도록 고정.
+project_id = "hosspie"
+
 # NestJS GraphQL을 사용하므로 Supabase API (Kong + PostgREST) 비활성화
 [api]
 enabled = false
