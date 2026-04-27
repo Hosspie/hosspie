@@ -22,3 +22,6 @@ dist/
 # Claude auto-generated
 .claude/plans/
 .claude/memory/
+
+# Supabase
+packages/database/supabase/.temp/
