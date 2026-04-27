@@ -22,13 +22,13 @@
 
 설계 결정의 근거가 된 공식 docs 내용 (https://code.claude.com/docs/en):
 
-| 항목 | docs 결론 | 출처 |
-|---|---|---|
-| 하위 CLAUDE.md 자동 로드 | "subdirectories load as you work in them" — 작업 디렉토리 진입 시 추가 로드 (additive) | [features-overview](https://code.claude.com/docs/en/features-overview#understand-how-features-layer) |
-| 하위 `.claude/skills/` 자동 발견 | "automatically discovers skills from nested `.claude/skills/` directories" + monorepo 예시 명시 | [skills](https://code.claude.com/docs/en/skills#automatic-discovery-from-nested-directories) |
-| 하위 `.claude/agents/` | "not loaded from additional directories" — **루트 고정** | features-overview |
-| `.claude/rules/` paths frontmatter | 매칭 시점에만 로드 | memory |
-| CLAUDE.md 200줄 권장 | "Keep CLAUDE.md under 200 lines" | features-overview |
+| 항목                               | docs 결론                                                                                       | 출처                                                                                                 |
+| ---------------------------------- | ----------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------------- |
+| 하위 CLAUDE.md 자동 로드           | "subdirectories load as you work in them" — 작업 디렉토리 진입 시 추가 로드 (additive)          | [features-overview](https://code.claude.com/docs/en/features-overview#understand-how-features-layer) |
+| 하위 `.claude/skills/` 자동 발견   | "automatically discovers skills from nested `.claude/skills/` directories" + monorepo 예시 명시 | [skills](https://code.claude.com/docs/en/skills#automatic-discovery-from-nested-directories)         |
+| 하위 `.claude/agents/`             | "not loaded from additional directories" — **루트 고정**                                        | features-overview                                                                                    |
+| `.claude/rules/` paths frontmatter | 매칭 시점에만 로드                                                                              | memory                                                                                               |
+| CLAUDE.md 200줄 권장               | "Keep CLAUDE.md under 200 lines"                                                                | features-overview                                                                                    |
 
 핵심 통찰: **agents는 루트 고정 / CLAUDE.md·skills는 분권 가능**.
 
@@ -48,12 +48,12 @@
 
 ### 검토 후 제외한 대안
 
-| 대안 | 제외 사유 |
-|---|---|
+| 대안                                                      | 제외 사유                                                                                                         |
+| --------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
 | `.claude/rules/` 물리 이동 (apps/admin/.claude/rules/ 등) | paths frontmatter가 이미 path-scoped 로딩 보장 — 물리 이동의 functional 이득 없음. 단순 ownership 표현은 ROI 낮음 |
-| `.claude/agents/` 분권 | docs상 nested 위치 자동 로드 안 됨 |
-| `packages/services/CLAUDE.md` 즉시 신설 | 파일 1개·86줄 단일 모듈 — sub-CLAUDE.md 필요 임계점 미만. lazy graduation 정책 적용 |
-| 루트 CLAUDE.md 백지 재작성 | 일부 섹션(에이전트/스킬 가이드)은 최근 정리되어 그대로 유효 — 부분 cleanup으로 충분 |
+| `.claude/agents/` 분권                                    | docs상 nested 위치 자동 로드 안 됨                                                                                |
+| `packages/services/CLAUDE.md` 즉시 신설                   | 파일 1개·86줄 단일 모듈 — sub-CLAUDE.md 필요 임계점 미만. lazy graduation 정책 적용                               |
+| 루트 CLAUDE.md 백지 재작성                                | 일부 섹션(에이전트/스킬 가이드)은 최근 정리되어 그대로 유효 — 부분 cleanup으로 충분                               |
 
 ## 설계
 
@@ -83,7 +83,17 @@ hosspie/
 #### 루트 `.claude/CLAUDE.md` (~80-100줄)
 
 - 프로젝트 개요 (1~2문단)
-- **앱 시작하기** — 최소 5~10줄 명령 시퀀스 (`nvm use` → `pnpm install` → 최초 1회 `supabase:start && db:push` → `pnpm dev:all` + 별도 터미널 `codegen:watch`). 상세는 sub-CLAUDE.md로 위임 한 줄
+- **앱 시작하기** — 도메인별 tmux 패널 분리 실행 권장.
+  - 최초 1회: `nvm use && pnpm install && pnpm supabase:start && pnpm db:push`
+  - 상시 실행 (각각 별도 패널):
+    | 패널 | 명령 | 비고 |
+    |---|---|---|
+    | 앱 | `pnpm dev:admin` | Expo Metro |
+    | 백엔드 | `pnpm dev:api` | NestJS — Supabase·Prisma generate 자동 트리거 |
+    | 코드젠 | `pnpm codegen:watch` | GraphQL 타입 자동 재생성 |
+    | DB | `pnpm db:studio` | Prisma Studio (선택 — 데이터 확인 시) |
+  - 조건부 (디자인 작업 시): `pnpm --filter @hosspie/design-system storybook`
+  - 패널별 상세 명령어·옵션은 각 sub-CLAUDE.md 참조
 - 모노레포 디렉토리 한 장
 - 에이전트 가이드 (senior/junior 위임 사이클)
 - 스킬 가이드 (`update-milestones`, `code-review`)
@@ -91,6 +101,7 @@ hosspie/
 - **워크플로우 섹션 (placeholder — 후속 작업으로 채움)**
 
 제거 대상:
+
 - 도메인별 아키텍처 상세 (Admin/API/DB/디자인 시스템)
 - 타입 시스템 플로우 — `apps/api/CLAUDE.md`로 이전
 - rules와 중복되는 컨벤션 섹션 (코드 주석·TS·에러 메시지·문서 작성 규칙)
@@ -141,8 +152,8 @@ hosspie/
 1. `.claude/rules/front/code-style.md` paths 확장:
    ```yaml
    paths:
-     - "apps/admin/**/*.{ts,tsx}"
-     - "packages/services/**/*.{ts,tsx}"
+     - 'apps/admin/**/*.{ts,tsx}'
+     - 'packages/services/**/*.{ts,tsx}'
    ```
 2. 루트 CLAUDE.md에서 stale 스킬 참조 4건 제거 (📚 줄)
 3. 버전 stale 정보 제거 (sub-CLAUDE.md에 정확한 값으로 재기재)
