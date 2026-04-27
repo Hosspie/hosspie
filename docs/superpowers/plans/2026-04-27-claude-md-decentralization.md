@@ -442,6 +442,7 @@ packages/
 ├── design-system/  # RN UI + 토큰 — packages/design-system/CLAUDE.md
 ├── types/          # GraphQL codegen 산출물
 ├── services/       # 클라이언트 공통 로직 (현재 폼 유틸)
+├── utils/          # 공유 enum/타입 유틸리티
 └── configs/        # ESLint, TypeScript 공유 설정
 ```
 
