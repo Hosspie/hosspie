@@ -1,6 +1,13 @@
+---
+paths:
+  - "apps/**/*.{ts,tsx,graphql,prisma}"
+  - "packages/**/*.{ts,tsx,graphql,prisma}"
+  - "**/*.md"
+---
+
 # 문서·주석·커밋 작성 컨벤션
 
-hosspie 의 모든 문서·코드 주석·커밋 메시지에 적용되는 룰. (path 없이 항상 로드)
+hosspie 의 모든 문서·코드 주석·커밋 메시지에 적용되는 룰. 코드(`apps/`·`packages/`) 또는 `.md` 파일 작업 시 자동 로드.
 
 ## 언어
 
