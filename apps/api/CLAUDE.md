@@ -12,6 +12,7 @@ Hosspie의 NestJS GraphQL API 서버.
 
 ```
 src/modules/
+├── auth/          # 인증 모듈 (구현 예정 — 현재 빈 디렉토리)
 ├── prisma/        # 데이터베이스 서비스 (싱글톤 Prisma 클라이언트)
 ├── guesthouse/    # 비즈니스 로직
 │   ├── *.resolver.ts    # GraphQL 리졸버
