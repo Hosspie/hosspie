@@ -32,7 +32,7 @@ PO가 "뭘 만들까"를 결정한다면, 이 스킬은 **"왜 이 마일스톤�
 - **기술 선택**: 어떤 라이브러리, 어떤 아키텍처 패턴
 - **태스크 관리**: TODO, 체크리스트, 진행 상태 추적
 
-이 영역은 **별도 실행 에이전트**(`frontend-developer`, `backend-developer`, `publisher`)나 사용자의 태스크 관리 도구에서 다룬다. 이 스킬의 지속 문서(`vision.md`, `roadmap.md`)에는 Phase 번호, 상세 태스크, 진행 체크리스트를 기록하지 않는다.
+이 영역은 **별도 실행 에이전트**(`frontend-senior`/`frontend-junior`, `backend-senior`/`backend-junior`, `publisher-senior`/`publisher-junior` 페어)나 사용자의 태스크 관리 도구에서 다룬다. 이 스킬의 지속 문서(`vision.md`, `roadmap.md`)에는 Phase 번호, 상세 태스크, 진행 체크리스트를 기록하지 않는다.
 
 **원칙**: "마일스톤까지는 이 스킬이, 그 아래는 실행 영역이 한다."
 

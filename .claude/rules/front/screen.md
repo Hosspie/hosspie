@@ -23,7 +23,7 @@ import { Button } from '@hosspie/design-system/components/button';
 - atom 직접 import (`@hosspie/design-system/components/*`) — `Sheet` 등 overlay 성격 특수 컴포넌트만 예외
 - 인라인 `style={{...}}` 객체, 하드코딩 수치·색상
 
-비시각적 RN API (`Alert`, `Platform`) 허용. 필요한 organism 없으면 publisher 에이전트에 생성 요청 (메인 대화로 보고).
+비시각적 RN API (`Alert`, `Platform`) 허용. 필요한 organism 없으면 `publisher-senior`/`publisher-junior` 에이전트 페어에 생성 요청 (메인 대화로 보고).
 
 ## 상태 관리 매핑
 
